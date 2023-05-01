@@ -1,0 +1,20 @@
+---
+title: "Louis Teitelbaum"
+about:
+  template: jolla
+  image: images/louisprof.jpg
+  image-width: 10em
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/louisteitelbaum/
+    - icon: github
+      text: GitHub
+      href: https://github.com/rimonim
+    - icon: envelope-fill
+      text: Mail
+      href: mailto:louist@post.bgu.ac.il
+---
+
+Cognitive Psychology   |   Data Science
+---
