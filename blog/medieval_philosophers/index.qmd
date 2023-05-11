@@ -1,0 +1,360 @@
+---
+title: "Designing a Poster to Visualize the Timeline of Philosophers in the Islamic World"
+author: "Louis Teitelbaum"
+date: "May 8, 2023"
+categories: [R, ggplot2, DataViz]
+image: medieval_islamic_philosophers.svg
+---
+
+```{r setup}
+library(tidyverse)
+library(wormsplot)
+```
+
+One day when I was in 5th grade, I walked into my classroom to find a new poster on the wall. It was a visualization of the entirety of world history - I was transfixed. This is that poster. You can buy it [here](https://www.amazon.com/Super-Jumbo-World-History-Timeline/dp/0721712002). It's greatest innovation is squishing geography (which is generally two-dimensional) onto the y-axis. A lot of detail is lost, but the gained ability to visualize history all at once on a wall poster makes it worth it.
+
+![](https://m.media-amazon.com/images/I/A1QO0k+1wZL._AC_UF1000,1000_QL80_.jpg)
+
+I quickly asked my parents if I could get one for myself. When I finally did, I set it up next to my bed - as I lay there every night, I would look at all the little details. I even found a few mistakes.
+
+Fast forward a decade and a half. I've been really enjoying this podcast, [The History of Philosophy Without Any Gaps](https://historyofphilosophy.net). I'm on episode 290 at the moment. Learning about all of these philosophers is great, but they can be hard to keep track of. I need a timeline that keeps track of geography too.
+
+This is exactly the kind of problem for which I developed the [wormsplot](https://github.com/rimonim/wormsplot) package in R, inspired by that wonderful poster from my childhood. In this post, I'll walk through the process of designing a wall poster to visualize the major philosophers of the Islamic world in the Middle Ages.
+
+Code and data for this project can be found [here](https://github.com/rimonim/rimonim.github.io/blog/medieval_philosophers).
+
+### Step 1: The Data
+
+I gathered this data myself from wherever I could find it - mostly Wikipedia and [The Stanford Encyclopedia of Philosophy](https://plato.stanford.edu). It includes one row for each new stop along the way of a biography (starting with the birth date - usually an educated guess), plus one extra for the death date. I'm no historian, so don't rely too heavily on the accuracy of these data. Actually even if I were a historian this would take a lot of guesswork - that's how medieval history goes. Anyhow, here's what it looks like: one column for name, one for city, one for date, and one for the philosopher's religion (Muslim, Jewish, or Christian). For cities that no longer exist or are called something different now, I wrote the closest modern equivalent and made a note of it on the side.
+
+```{r}
+#| echo: false
+
+# load preprocessed data
+load("medieval_philosophers.RData")
+
+data %>% select(-short_name) %>% head(10)
+```
+
+### Step 2: Fitting Geography Onto One Axis
+
+The biggest challenge here is that y-axis. The first step: Find the latitude and longitude of each city in the data by calling the [Open Street Map API](https://nominatim.org/release-docs/develop/api/Overview/). This worked very smoothly for everything except the city of Alexandria, which it identified at Alexandria, Virginia. After fixing that problem, I could plot a map of all the cities in the data:
+
+```{r}
+#| echo: false
+#| eval: false
+
+library(httr)
+library(jsonlite)
+
+get_coordinates <- function(search) {
+  # Replace spaces with +
+  search <- str_replace_all(search, ' ', '+')
+  
+  # Specify the API endpoint
+  api_endpoint <- paste0("https://nominatim.openstreetmap.org/search?city=",search,"&limit=1&format=json")
+  
+  # Make an HTTP GET request to the API endpoint
+  response <- GET(api_endpoint, user_agent("coordinate_finder/0.0.1"))
+  
+  # Parse the response content as JSON
+  content <- content(response, "text")
+  parsed_content <- fromJSON(content)
+  
+  # Return latitude and longitude as data.frame columns
+  out <- data.frame(lat = parsed_content$lat, lon = parsed_content$lon)
+    # If search failed, return NA
+  if(length(out) < 2){
+    data.frame(lat = NA, lon = NA)
+  }else{
+    out
+  }
+}
+
+# Get coordinates for each unique city
+places <- cbind(city = unique(data$city), do.call(rbind, lapply(unique(data$city), get_coordinates))) %>% 
+  mutate(across(lon:lat, as.numeric))
+
+places %>% 
+  ggplot(aes(lon, lat, label = city)) +
+    geom_text(size = 2)
+
+# No, not Alexandria, Virginia
+places$lat[places$city == "Alexandria"] <- 31.1991806
+places$lon[places$city == "Alexandria"] <- 29.8951716
+
+world_shapes <- map_data("world")
+```
+
+```{r}
+#| echo: false
+places %>% 
+  ggplot() +
+    geom_map(aes(map_id = region), 
+             fill = "lightgrey", color = "grey",
+             data = world_shapes, map = world_shapes) +
+    geom_text(aes(lon, lat, label = city), size = 2) +
+    theme_void()
+```
+
+There are many ways to reduce two-dimensional data to one dimension, and the best choice depends on the task at hand. If my places were grouped into distinct regions, I might consider t-SNE or UMAP. If they were generally aligned along some diagonal axis, I might use Principle Component Analysis. As it stands though, I know exactly how I want my y-axis to be organized: It should go East to West along the coast of North Africa and then West to East within Western Europe. This makes sense both geographically and historically: Since Andalusia (Muslim Spain) was the main point of contact between the Islamic world and Christian Europe, Southern France should be 'farther' from Tunisia than Spain.
+
+So I split the cities into Europe and Non-Europe and lined them up by longitude accordingly. After a few manual adjustments (going through all of Turkey before moving South along the Mediterranean coast, and moving Northern France and London to the far end of the axis), I ended up with this ordering:
+
+```{r}
+#| echo: false
+#| warning: false
+
+# label non-europe
+places <- places %>% 
+  mutate(not_europe = lon >= 15,
+         not_europe = case_when(city == 'Tunis' ~ TRUE,
+                                city == 'Kairouan' ~ TRUE,
+                                city == 'Gabes' ~ TRUE,
+                                city == 'Tlemcen' ~ TRUE,
+                                city == 'Tiaret' ~ TRUE,
+                                city == 'Mellala' ~ TRUE,
+                                city == 'Tripoli' ~ TRUE,
+                                city == 'Tangier' ~ TRUE,
+                                city == 'Ceuta' ~ TRUE,
+                                city == 'Fez' ~ TRUE,
+                                city == 'Salé' ~ TRUE,
+                                city == 'Marrakesh' ~ TRUE,
+                                city == 'Tinmel' ~ TRUE,
+                                city == 'Taroudant' ~ TRUE,
+                                .default = not_europe))
+
+places <- places %>% 
+  mutate(y = if_else(not_europe, lon,
+                     min(.$lon[.$not_europe]) - (lon + 10))) %>%
+  arrange(y) %>% 
+  mutate(y_order = 1:n())
+
+# I want northern France and England should be farthest rather than splitting up Spain
+# Also make sure Turkey is all together before moving on to Syria->Egypt
+# I'm actually quite happy with the location of Mecca and Medina between Turkey and Iraq
+places$y_order[places$city == "London"] <- -1
+places$y_order[places$city == "Rouen"] <- 0
+
+places$y_order[places$city == "Adana"] <- 64.9
+places$y_order[places$city == "Karaman"] <- 64.8
+places$y_order[places$city == "Konya"] <- 64.7
+places$y_order[places$city == "Antalya"] <- 64.6
+
+places$y_order[places$city == "Antakya"] <- 62.5
+
+
+places %>% 
+  arrange(y_order) %>% 
+  ggplot(aes(lon, lat, fill = y)) +
+    geom_map(aes(x = NA, y = NA, fill = NA, map_id = region), 
+               fill = "lightgrey", color = "grey",
+               data = world_shapes, map = world_shapes) +
+    geom_path() +
+    geom_label(aes(label = city), size = 2, color = 'white') +
+    theme_void() +
+    coord_cartesian(xlim = c(-15, 75), ylim = c(20, 55))
+```
+
+The final step was to make up for the fact that certain cities that are very close to each other in longitude are actually quite far away on the North-South axis. I achieved this by scaling the distance between each city on the axis by the true Euclidean distance between them. This obviously stretches out certain parts of the axis disproportionately, but it means that adjacent locations are the right relative distances away from each other. With that, here are all the cities arranged along the new y-axis:
+
+```{r}
+#| echo: false
+#| fig.height: 5
+#| fig.width: 3
+
+# Now that I have a sensical order, I'll scale gaps by true euclidean distance
+place <- places %>% 
+  arrange(y_order) %>% 
+  mutate(across(lat:lon, ~diff(c(NA, .x)), .names = '{.col}_diff')) %>% 
+  mutate(across(lat_diff:lon_diff, ~.x^2)) %>% 
+  rowwise() %>% 
+  mutate(euc_dist = sqrt(lat_diff+lon_diff)) %>% 
+  ungroup() %>% 
+  replace_na(list(euc_dist = 0)) %>% 
+  mutate(y = cumsum(euc_dist))
+
+place %>% 
+  ggplot(aes(0, y, label = city)) +
+    geom_label(size = 2, position = ggbeeswarm::position_quasirandom(width = 1)) +
+    theme_void()
+```
+
+### Step 3: Layout
+
+With the y-axis defined, it's time for some graphic design. I originally toyed with a gradient background along the y-axis, but settled on dividing it up into larger regions. Here's the resulting blank plot:
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig.height: 12
+#| fig.width: 18
+
+library(ggborderline)
+library(colorspace)
+library(ggnewscale)
+
+data <- data %>% arrange(name, date) %>% 
+  left_join(place, by = join_by(city))
+
+regions <- data.frame(name = c("N. Europe", "Italy", "Provence", "Catalonia", "Andalusia", "North Africa", "Levant", "", "Iraq", "Iran", "Khorasan", "Transoxiana"),
+                      ymax = c(15, 25, 36, 49, 75, 120, 175, 188, 218, 240, 311, 340)) %>% mutate(ymin = c(-5, head(ymax, -1)),
+                      mid = ymin + (ymax-ymin)/2)
+
+region_fills <- c("#FF6666", "#BD3E3E", "#9B3634",
+                  "#BE8A60", "#C5D86D",
+                  "#61AD55", "#56AE96",
+                  "#805D93", 
+                  "#5E8463", "#3F6246",
+                  "#61A0AF", "#96C9DC")
+
+big_cities <- c("Bukhara", "Herat", "Nishapur", "Gorgan", "Isfahan", "Rey", "Baghdad", "Mecca", "Harran", "Damascus", "Konya", "Cairo", "Tunis", "Marrakesh", "Córdoba", "Tudela", "Barcelona", "Marseille", "Rome", "London")
+
+# Manually define layering order for worms
+data$name <- factor(as.character(data$name),
+                    levels = c("Moses Ibn Tibbon",
+                               "Samuel Ibn Tibbon", 
+                               "Moses ben Naḥman (Naḥmanides)",
+                               "Abraham ben David (Rabad)", 
+                               "Abū Bakr al-Rāzī (Rhazes)", 
+                               "Abū Ya'qūb al-Sijistānī", 
+                               "Abū Zayd al-Balkhī", 
+                               "Abū Ḥāmid al-Ghazālī", 
+                               "Fakhr al-Dīn al-Rāzī", 
+                               "Ibn Khaldūn", 
+                               "Ibn Sīnā (Avicenna)", 
+                               "Ibn Tūmart", 
+                               "Ibn al-Haytham", 
+                               "Ibn Ḥazm", 
+                               "Isaac Abravanel", 
+                               "Isaac Israeli", 
+                               "Joseph Albo", 
+                               "Levi Ben Gershom (Gersonides)", 
+                               "Miskawayh", 
+                               "Quṭb al-Dīn al-Shīrāzī", 
+                               "Sa'ādia Gaon", 
+                               "Solomon Ibn Gabirol", 
+                               "Suhrawardī", 
+                               "al-Fārābī", 
+                               "al-Juwaynī", 
+                               "al-Kindī", 
+                               "al-Shahrastānī", 
+                               "al-Taftazānī", 
+                               "Ḥasdai Crescas", 
+                               "Ḥunayn ibn Isḥāq", 
+                               "Ṣadr al-Dīn Dashtakī", 
+                               "Yaḥya ibn 'Adī", 
+                               "al-Ash'arī", 
+                               "Abū Bishr Mattā", 
+                               "Isḥāq ibn Ḥunayn",
+                               "al-'Āmirī", 
+                               "al-Bīrūnī", 
+                               "Abū l-Barakāt al-Baghdādī", 
+                               "Abd al-Laṭīf al-Baghdādī", 
+                               "Judah haLevi", 
+                               "Ibn Bājja (Avempace)", 
+                               "Abraham Ibn Ezra", 
+                               "Ibn Rushd (Averroes)", 
+                               "Moses Ibn Ezra", 
+                               "Abraham Ibn Daud", 
+                               "Baḥya Ibn Paqūdā", 
+                               "Isaac the Blind",
+                               "Naṣīr al-Dīn al-Ṭūsī",
+                               "Ibn Kammūna", 
+                               "Bar Hebraeus", 
+                               "Ibn Taymiyya", 
+                               "Ibn ‘Arabī", 
+                               "Moses Ibn Maymun (Maimonides)", 
+                               "Ibn Ṭufayl", 
+                               "Ṣadr al-Dīn al-Qūnawī",
+                               "Jalāl al-Dīn al-Rūmī"
+                               ))
+
+p <- data %>% 
+  ggplot(aes(date, y)) +
+    geom_rect(aes(x = NA, y = NA, xmin = -Inf, xmax = Inf, ymin = ymin, ymax = ymax, fill = name), data = regions) + 
+    scale_fill_manual(breaks = regions$name,
+                      values = lighten(desaturate(region_fills, .5), .8)) +
+    guides(fill = "none") +
+    geom_vline(xintercept = seq(800, 1450, 100), color="white", size=1) +
+    geom_vline(xintercept = seq(750, 1450, 50), color="white", size=.5) +
+    geom_vline(xintercept = seq(750, 1450, 10), color="white", size=.2) +
+    new_scale_fill() +
+    geom_rect(aes(x = NA, y = NA, xmin = -Inf, xmax = 775, ymin = ymin, ymax = ymax, fill = name), data = regions) + 
+    scale_fill_manual(breaks = regions$name,
+                      values = darken(region_fills)) +
+    geom_text(aes(695, mid, label = name), size = 7, fontface = 'bold', color = 'white', family = "Avenir Next",
+              data = regions) +
+    geom_text(aes(770, label = city), hjust = 1, color = 'white', family = "Avenir Next",
+              data = place %>% filter(city %in% big_cities)) +
+    guides(fill = "none") +
+    geom_rect(xmin = -Inf, xmax = Inf, ymin = -15, ymax = -5, fill = "#01264E") +
+    geom_rect(xmin = -Inf, xmax = Inf, ymin = 340, ymax = 350, fill = "#01264E") +
+    geom_text(aes(x,y,label = x), size = 7, color = 'white', family = "Avenir Next", 
+              data = data.frame(y = rep(c(-10, 345), times = length(seq(800, 1400, 100))),
+                                x = rep(seq(800, 1400, 100), each = 2))) +
+    geom_text(aes(x,y,label = x), size = 5, color = 'white', family = "Avenir Next", 
+              data = data.frame(y = rep(c(-10, 345), times = length(seq(850, 1400, 100))),
+                                x = rep(seq(850, 1400, 100), each = 2))) +
+    annotate('rect', xmin = -Inf, ymin = -Inf, xmax = Inf, ymax = -15,
+             fill = 'white') +
+    annotate('text', 660, -25, hjust = 0,
+             size = 10, color = "#01264E", 
+             family = "Avenir Next", fontface = 'bold',
+             label = "Great Philosophers of the Medieval Islamic World") +
+    coord_cartesian(xlim = c(650, 1450), ylim = c(-35, 350), clip = 'on') +
+    labs(x = NULL, y = NULL) +
+    theme(panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          axis.text.y = element_blank(),
+          panel.background = element_rect(fill = NULL),
+          plot.margin = margin(-1, 0, -15, -3))
+
+p
+```
+
+### Step 4: Plot!
+
+Now that we have a suitable background, all that remains to represent the data. This is done using the `wormsplot` function `stat_worm()`. Labels are added with the aid of the `label_worms()` function. The worms are colored by their religion: Muslims in green, Jews in blue, and Christians in red.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig.height: 12
+#| fig.width: 18
+
+# Find the widest segment of each worm for use in labeling
+worm_labels <- data %>% 
+  arrange(name) %>% 
+  mutate(short_name = factor(short_name, levels = unique(short_name))) %>% 
+  label_worms(x = 'date', id = 'short_name', dodge = 5) %>% 
+  mutate(size = width/(nchar(as.character(group))*1.2),
+         size = if_else(size > 7, 7, size))
+
+p <- p + stat_worm(aes(date, y, group = name, 
+                  color = religion, 
+                  bordercolor = after_scale(darken(colour, .3))), 
+              linewidth = 3.8, borderwidth = 1, lineend = 'square', 
+              dodge = 5, geom = 'borderline', n = 20) +
+    guides(color = 'none') +
+    scale_color_manual(values = darken(c("#BD3E3E", "#7D90B5", "#5E8463"),.01)) +
+    geom_text(aes(x, y, label = group, 
+                  size = size), 
+              data = worm_labels, 
+              family = "Avenir Next", color = 'white') +
+    scale_size_continuous(range = c(2, 4)) +
+    guides(size = 'none')
+
+p
+```
+I think it looks quite nice! Even without squinting at the individual names, big trends in the history of philosophy are immediately evident, like the Baghdad school starting with al-Kindī and running for about 150 years, or the explosion of philosophical activity in Andalusia in the 12th century. 
+
+At the moment, this is just a proof of concept. The labeling of the worms especially needs some work. If I were to produce a finished poster, I would also include a timeline of important events along the bottom, and a legend to explain the format. I might also want to simplify the data somewhat - a few of these figures moved around a lot in their lifetimes (Ibn `Arabi, I'm looking at you) and are making it a bit difficult to follow the lines. 
+
+```{r}
+#| eval: false
+#| include: false
+ggsave('medieval_islamic_philosophers.svg', p,
+       'svg', width = 18, height = 12, units = 'in')
+
+```
