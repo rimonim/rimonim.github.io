@@ -3,7 +3,7 @@ title: "Louis Teitelbaum"
 about:
   template: jolla
   image: CV/images/louisprof.jpg
-  image-width: 10em
+  image-width: 12em
   links:
     - icon: linkedin
       text: LinkedIn
@@ -18,8 +18,6 @@ about:
 
 ```{r}
 #| echo: false
-#| out-width: 12%
+#| out-width: 15%
 knitr::include_graphics("images/rimonim.svg")
 ```
-
-seeds of wisdom
