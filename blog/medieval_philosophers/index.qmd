@@ -21,7 +21,7 @@ Fast forward a decade and a half. I've been really enjoying this podcast, [The H
 
 This is exactly the kind of problem for which I developed the [wormsplot](https://github.com/rimonim/wormsplot) package in R, inspired by that wonderful poster from my childhood. In this post, I'll walk through the process of designing a wall poster to visualize the major philosophers of the Islamic world in the Middle Ages.
 
-Code and data for this project can be found [here](https://github.com/rimonim/rimonim.github.io/blog/medieval_philosophers).
+Code and data for this project can be found [here](https://github.com/rimonim/rimonim.github.io/blob/main/blog/medieval_philosophers/index.qmd).
 
 ### Step 1: The Data
 
