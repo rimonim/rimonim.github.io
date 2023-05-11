@@ -2,7 +2,7 @@
 title: "Louis Teitelbaum"
 about:
   template: jolla
-  image: images/louisprof.jpg
+  image: CV/images/louisprof.jpg
   image-width: 10em
   links:
     - icon: linkedin
@@ -16,5 +16,10 @@ about:
       href: mailto:louist@post.bgu.ac.il
 ---
 
-Cognitive Psychology   |   Data Science
----
+```{r}
+#| echo: false
+#| out-width: 12%
+knitr::include_graphics("images/rimonim.svg")
+```
+
+seeds of wisdom

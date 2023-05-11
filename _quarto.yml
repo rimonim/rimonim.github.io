@@ -3,8 +3,11 @@ project:
   output-dir: docs
 
 website:
+  site-url: https://rimonim.github.io/
+  favicon: images/rimonim.svg
   title: "Louis Teitelbaum"
   navbar: 
+    logo: images/rimonim.svg
     background: light
     foreground: dark
     left:
@@ -14,7 +17,8 @@ website:
         text: Projects
       - href: blog.qmd
         text: Blog
-
+      - href: CV/CV.pdf
+        text: CV
 format:
   html:
     theme: lumen
