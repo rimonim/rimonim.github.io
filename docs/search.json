@@ -1,17 +1,52 @@
 [
   {
+    "objectID": "projects/wormsplot.html",
+    "href": "projects/wormsplot.html",
+    "title": "wormsplot",
+    "section": "",
+    "text": "A worms plot is an elegant way to visualize historical (or fictional!) characters as they move from place to place. Expanding on ggplot2, this package provides a new geom, geom_worm, which allows for an arbitrary number of moves within each worm, and takes intuitively structured data input. The package also includes a convenience function, wormsplot, for generating aesthetic plots with minimal effort."
+  },
+  {
+    "objectID": "projects/wormsplot.html#installation",
+    "href": "projects/wormsplot.html#installation",
+    "title": "wormsplot",
+    "section": "Installation",
+    "text": "Installation\nYou can install the development version of wormsplot from GitHub with:\n\n# install.packages(\"devtools\")\ndevtools::install_github(\"rimonim/wormsplot\")"
+  },
+  {
+    "objectID": "projects/wormsplot.html#example",
+    "href": "projects/wormsplot.html#example",
+    "title": "wormsplot",
+    "section": "Example",
+    "text": "Example\nHere is a plot of the lives of scientists who won the Nobel Prize for physics between 1901 and 1907.\n\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(ggplot2)\nlibrary(wormsplot)\n\ndata(nobel_physicists)\n\nnobel_physicists %>%\n  filter(name %in% head(unique(name), 10)) %>%\n  mutate(country = forcats::fct_drop(country)) %>%\n  wormsplot('year', 'country', 'name', worm.color = 'initial',\n            worm.args = list(linewidth = 5.1, lineend = 'round'), region.label.width = 22, label.args = list(size = 3.6)) +\n  labs(title = \"The Lives of Winners of the Nobel Prize in Physics 1901-1907\")\n\n\n\n\nPlots can also be built from scratch using geom_worm() or stat_worm():\n\nlibrary(colorspace)\nlibrary(ggborderline)\n\ndata <- data.frame(\n  x = c(5, 10, 25, 30, 15, 20, 25),\n  y = c(1, 2, 1.5, 1.5, 2.2, 1.2, 1.2),\n  person = c('Me', 'Me', 'Me', 'Me', 'You', 'You', 'You')\n  )\n\nggplot(data, aes(x, y, group = person, color = person, bordercolor = after_scale(darken(colour, .2)))) +\n  stat_worm(linewidth = 10, shorten_lines = 10, geom = 'borderline', lineend = 'round') +\n  theme_minimal() +\n  scale_y_continuous(limits = c(0, 3))"
+  },
+  {
+    "objectID": "projects/paper_provenance.html",
+    "href": "projects/paper_provenance.html",
+    "title": "paper_provenance",
+    "section": "",
+    "text": "An interactive web app for visualizing the history of a field leading up to a paper.\nThe app is now deployed at https://rimonim-paper-provenance-paper-provenance-qo5yhn.streamlit.app"
+  },
+  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Louis Teitelbaum",
     "section": "",
-    "text": "No matching items"
+    "text": "wormsplot\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nApr 16, 2023\n\n\n\n\n\n\n\n\n\n\n\npaper_provenance\n\n\n\nPython\n\n\nMeta-Science\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nMar 28, 2023\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Louis Teitelbaum",
     "section": "",
-    "text": "COGNITIVE PSYCHOLOGY | DATA SCIENCE"
+    "text": "seeds of wisdom"
+  },
+  {
+    "objectID": "blog/medieval_philosophers/index.html",
+    "href": "blog/medieval_philosophers/index.html",
+    "title": "Designing a Poster to Visualize the Timeline of Philosophers in the Islamic World",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n\nlibrary(wormsplot)\n\nOne day when I was in 5th grade, I walked into my classroom to find a new poster on the wall. It was a visualization of the entirety of world history - I was transfixed. This is that poster. You can buy it here. It’s greatest innovation is squishing geography (which is generally two-dimensional) onto the y-axis. A lot of detail is lost, but the gained ability to visualize history all at once on a wall poster makes it worth it.\n\nI quickly asked my parents if I could get one for myself. When I finally did, I set it up next to my bed - as I lay there every night, I would look at all the little details. I even found a few mistakes.\nFast forward a decade and a half. I’ve been really enjoying this podcast, The History of Philosophy Without Any Gaps. I’m on episode 290 at the moment. Learning about all of these philosophers is great, but they can be hard to keep track of. I need a timeline that keeps track of geography too.\nThis is exactly the kind of problem for which I developed the wormsplot package in R, inspired by that wonderful poster from my childhood. In this post, I’ll walk through the process of designing a wall poster to visualize the major philosophers of the Islamic world in the Middle Ages.\nCode and data for this project can be found here.\n\nStep 1: The Data\nI gathered this data myself from wherever I could find it - mostly Wikipedia and The Stanford Encyclopedia of Philosophy. It includes one row for each new stop along the way of a biography (starting with the birth date - usually an educated guess), plus one extra for the death date. I’m no historian, so don’t rely too heavily on the accuracy of these data. Actually even if I were a historian this would take a lot of guesswork - that’s how medieval history goes. Anyhow, here’s what it looks like: one column for name, one for city, one for date, and one for the philosopher’s religion (Muslim, Jewish, or Christian). For cities that no longer exist or are called something different now, I wrote the closest modern equivalent and made a note of it on the side.\n\n\n# A tibble: 10 × 5\n   name                      city     date religion  notes   \n   <chr>                     <chr>   <dbl> <chr>     <chr>   \n 1 al-Kindī                  Kufa      801 Muslim    <NA>    \n 2 al-Kindī                  Baghdad   820 Muslim    <NA>    \n 3 al-Kindī                  Baghdad   871 Muslim    <NA>    \n 4 Ḥunayn ibn Isḥāq          Kufa      809 Christian al-Ḥīrah\n 5 Ḥunayn ibn Isḥāq          Baghdad   828 Christian <NA>    \n 6 Ḥunayn ibn Isḥāq          Baghdad   873 Christian <NA>    \n 7 Isḥāq ibn Ḥunayn          Baghdad   830 Christian <NA>    \n 8 Isḥāq ibn Ḥunayn          Baghdad   910 Christian <NA>    \n 9 Abū Bakr al-Rāzī (Rhazes) Rey       864 Muslim    <NA>    \n10 Abū Bakr al-Rāzī (Rhazes) Baghdad   880 Muslim    <NA>    \n\n\n\n\nStep 2: Fitting Geography Onto One Axis\nThe biggest challenge here is that y-axis. The first step: Find the latitude and longitude of each city in the data by calling the Open Street Map API. This worked very smoothly for everything except the city of Alexandria, which it identified at Alexandria, Virginia. After fixing that problem, I could plot a map of all the cities in the data:\n\n\n\n\n\n\n\n\nThere are many ways to reduce two-dimensional data to one dimension, and the best choice depends on the task at hand. If my places were grouped into distinct regions, I might consider t-SNE or UMAP. If they were generally aligned along some diagonal axis, I might use Principle Component Analysis. As it stands though, I know exactly how I want my y-axis to be organized: It should go East to West along the coast of North Africa and then West to East within Western Europe. This makes sense both geographically and historically: Since Andalusia (Muslim Spain) was the main point of contact between the Islamic world and Christian Europe, Southern France should be ‘farther’ from Tunisia than Spain.\nSo I split the cities into Europe and Non-Europe and lined them up by longitude accordingly. After a few manual adjustments (going through all of Turkey before moving South along the Mediterranean coast, and moving Northern France and London to the far end of the axis), I ended up with this ordering:\n\n\n\n\n\nThe final step was to make up for the fact that certain cities that are very close to each other in longitude are actually quite far away on the North-South axis. I achieved this by scaling the distance between each city on the axis by the true Euclidean distance between them. This obviously stretches out certain parts of the axis disproportionately, but it means that adjacent locations are the right relative distances away from each other. With that, here are all the cities arranged along the new y-axis:\n\n\n\n\n\n\n\nStep 3: Layout\nWith the y-axis defined, it’s time for some graphic design. I originally toyed with a gradient background along the y-axis, but settled on dividing it up into larger regions. Here’s the resulting blank plot:\n\n\n\n\n\n\n\nStep 4: Plot!\nNow that we have a suitable background, all that remains to represent the data. This is done using the wormsplot function stat_worm(). Labels are added with the aid of the label_worms() function. The worms are colored by their religion: Muslims in green, Jews in blue, and Christians in red.\n\n\n\n\n\nI think it looks quite nice! Even without squinting at the individual names, big trends in the history of philosophy are immediately evident, like the Baghdad school starting with al-Kindī and running for about 150 years, or the explosion of philosophical activity in Andalusia in the 12th century.\nAt the moment, this is just a proof of concept. The labeling of the worms especially needs some work. If I were to produce a finished poster, I would also include a timeline of important events along the bottom, and a legend to explain the format. I might also want to simplify the data somewhat - a few of these figures moved around a lot in their lifetimes (Ibn `Arabi, I’m looking at you) and are making it a bit difficult to follow the lines."
   },
   {
     "objectID": "about.html",
@@ -21,10 +56,52 @@
     "text": "MS in Neurocognitive Experimental Psychology and Data Science, 2022-Present\nBen Gurion University of the Negev\nBA in Psychology and Biology, 2018-2021\nYeshiva University"
   },
   {
+    "objectID": "CV/index.html",
+    "href": "CV/index.html",
+    "title": "Louis Teitelbaum’s CV",
+    "section": "",
+    "text": "louist@post.bgu.ac.il\n Home Page |  Blog\n GitHub |  LinkedIn\n\n\n\nEnglish - native\nHebrew - fluent\n\n\n\nProgramming: R, Python, SQL, Git(Hub), SPSS.\nDocumentation: (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets.\nDesign: ggplot2, Gimp, Photoshop, Inkscape\nDeployment: Shiny, Streamlit\n\n\n\nLast updated on 2023-05-11."
+  },
+  {
+    "objectID": "CV/index.html#title",
+    "href": "CV/index.html#title",
+    "title": "Louis Teitelbaum’s CV",
+    "section": "Louis Teitelbaum",
+    "text": "Louis Teitelbaum"
+  },
+  {
+    "objectID": "CV/index.html#professional-experience",
+    "href": "CV/index.html#professional-experience",
+    "title": "Louis Teitelbaum’s CV",
+    "section": "Professional Experience",
+    "text": "Professional Experience\n\nNeurocognitive Psychology Researcher\nN/A\nN/A\nSince 2020\nWorking Memory and Predictive Processing: - Thesis work under supervision of Prof. Yoav Kessler, Ben Gurion University\nLanguage and Communication: - Thesis work under supervision of Prof. Bruno Galantucci, Yeshiva University Psychology Department - Developed novel Natural Language Processing (NLP) based metrics for diadic conversations using Python and R. - Wrote peer review - Designed research agenda and experimental paradigm for the continuation of research post-COVID-19 - Read over 100 scholarly articles in the field of Language and Communication\nPower Dynamics in Long-Term Romantic Relationships: - Research Assistant for Dr. Jenny Isaacs, Yeshiva University Psychology Department - Researched and designed survey for data collection. - Analyzed data in SPSS and R; finalized analysis for publication. - Logged over 200 hours as a primary contributor to project.\n\n\nR Developer\nN/A\nN/A\nSince 2021\n\nDeveloper of wormsplot for visualizing the movements of historical figures; Read the blog post."
+  },
+  {
+    "objectID": "CV/index.html#education",
+    "href": "CV/index.html#education",
+    "title": "Louis Teitelbaum’s CV",
+    "section": "Education",
+    "text": "Education\n\nM.A. in Experimental Cognitive Psychology\nBen-Gurion University\nBe’er Sheva, Israel\n2022 - Present\nSupervisor: Prof. Yoav Kessler\n\n\nB.A. in Psychology with Minor in Biology\nYeshiva University Honors\nNew York, NY\n2018 - 2021\nGraduated Magna Cum Laude\nActivities and societies: Neuroscience Club President"
+  },
+  {
+    "objectID": "CV/index.html#awards",
+    "href": "CV/index.html#awards",
+    "title": "Louis Teitelbaum’s CV",
+    "section": "Awards and Scholarships",
+    "text": "Awards and Scholarships\n\nChaplain Joseph Hoenig Memorial Award for Excellence in the Study of Psychology\nYeshiva University Psychology Department\nNew York, NY\nSep 2021\n\n\nAmerican Psychology-Law Society Grant for Undergraduate Research, $1,000\nAmerican Psychological Association Division 41: American Psychology-Law Society\nN/A\nJan 2021\nFor research in marital power dynamics in divorce mediation.\n\n\nThree funding awards from the Yeshiva University Honors Program\nYeshiva University Honors Program\nNew York, NY\n2021\n\n\nProfessor Michael Bernstein Award for Excellence in Biblical Studies\nYeshiva University\nN/A\nSep 2021"
+  },
+  {
+    "objectID": "CV/index.html#pubs",
+    "href": "CV/index.html#pubs",
+    "title": "Louis Teitelbaum’s CV",
+    "section": "Scientific Publications and Presentations",
+    "text": "Scientific Publications and Presentations\n\nTheses\nN/A\nN/A\nN/A\n\nTeitelbaum, L. (2021). When faithful informational exchange is just not worth it: Reformulation ability as a predictor of other-initiated repair [Honors thesis, Yeshiva University]. Yeshiva Academic Institutional Repository.\n\n\n\nPoster Presentations\nN/A\nN/A\nN/A\n\nTeitelbaum, L. & Galantucci, B. (2021). When faithful informational Exchanges are just too much work: Repair avoidance and reformulation cost. Poster presented at the 2021 Association for Psychological Science (APS) Virtual Convention.\nTeitelbaum, L., Isaacs, J., & Pittinsky, N. (2021). Is power all bad? Marital power imbalances and effective role division. Poster presented at the 2021 Association for Psychological Science (APS) Virtual Convention."
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Louis Teitelbaum",
     "section": "",
-    "text": "No matching items"
+    "text": "Designing a Poster to Visualize the Timeline of Philosophers in the Islamic World\n\n\n\n\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\n\n\n\n\nMay 8, 2023\n\n\nLouis Teitelbaum\n\n\n\n\n\n\nNo matching items"
   }
 ]
