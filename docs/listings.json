@@ -1,10 +1,15 @@
 [
   {
     "listing": "/projects.html",
-    "items": []
+    "items": [
+      "/projects/wormsplot.html",
+      "/projects/paper_provenance.html"
+    ]
   },
   {
     "listing": "/blog.html",
-    "items": []
+    "items": [
+      "/blog/medieval_philosophers/index.html"
+    ]
   }
 ]
