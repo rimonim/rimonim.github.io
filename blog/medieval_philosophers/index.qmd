@@ -157,7 +157,6 @@ places %>%
     coord_cartesian(xlim = c(-15, 75), ylim = c(20, 55))
 ```
 
-The final step was to make up for the fact that certain cities that are very close to each other in longitude are actually quite far away on the North-South axis. I achieved this by scaling the distance between each city on the axis by the true Euclidean distance between them. This obviously stretches out certain parts of the axis disproportionately, but it means that adjacent locations are the right relative distances away from each other. With that, here are all the cities arranged along the new y-axis:
 The final step was to make up for the fact that certain cities that are very close to each other in longitude are actually quite far away on the North-South axis. I achieved this by scaling the distance between each city on the axis by the true Euclidean distance between them. This stretches out certain parts of the axis disproportionately, but it means that adjacent locations are the right relative distances away from each other. With that, here are all the cities arranged along the new y-axis:
 
 ```{r}
