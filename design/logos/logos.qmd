@@ -1,0 +1,26 @@
+---
+title: "Logos"
+image: /images/rimonim.svg
+---
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("../../images/rimonim.svg")
+```
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("../../projects/wormsplot.svg")
+```
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("dovidmecharker.jpg")
+knitr::include_graphics("dovidmecharkerblue.jpg")
+```
+```{r}
+#| echo: false
+#| out-width: 75%
+knitr::include_graphics("neurosciencelogo.svg")
+```
