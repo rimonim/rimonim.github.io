@@ -7,11 +7,12 @@ image: medieval_islamic_philosophers.svg
 ---
 
 ```{r setup}
+#| include: false
 library(tidyverse)
 library(wormsplot)
 ```
 
-One day when I was in 5th grade, I walked into my classroom to find a new poster on the wall. It was a visualization of the entirety of world history - I was transfixed. This is that poster. You can buy it [here](https://www.amazon.com/Super-Jumbo-World-History-Timeline/dp/0721712002). It's greatest innovation is squishing geography (which is generally two-dimensional) onto the y-axis. A lot of detail is lost, but the gained ability to visualize history all at once on a wall poster makes it worth it.
+One day when I was in 5th grade, I walked into my classroom to find a new poster on the wall. It was a visualization of the entirety of world history - I was transfixed. This is that poster below. You can buy it [here](https://www.amazon.com/Super-Jumbo-World-History-Timeline/dp/0721712002). It's greatest innovation is squishing geography (which is generally two-dimensional) onto the y-axis. A lot of detail is lost, but the gained ability to visualize history all at once on a wall poster makes it worth it.
 
 ![](https://m.media-amazon.com/images/I/A1QO0k+1wZL._AC_UF1000,1000_QL80_.jpg)
 
@@ -157,6 +158,7 @@ places %>%
 ```
 
 The final step was to make up for the fact that certain cities that are very close to each other in longitude are actually quite far away on the North-South axis. I achieved this by scaling the distance between each city on the axis by the true Euclidean distance between them. This obviously stretches out certain parts of the axis disproportionately, but it means that adjacent locations are the right relative distances away from each other. With that, here are all the cities arranged along the new y-axis:
+The final step was to make up for the fact that certain cities that are very close to each other in longitude are actually quite far away on the North-South axis. I achieved this by scaling the distance between each city on the axis by the true Euclidean distance between them. This stretches out certain parts of the axis disproportionately, but it means that adjacent locations are the right relative distances away from each other. With that, here are all the cities arranged along the new y-axis:
 
 ```{r}
 #| echo: false
@@ -347,9 +349,10 @@ p <- p + stat_worm(aes(date, y, group = name,
 
 p
 ```
-I think it looks quite nice! Even without squinting at the individual names, big trends in the history of philosophy are immediately evident, like the Baghdad school starting with al-Kindī and running for about 150 years, or the explosion of philosophical activity in Andalusia in the 12th century. 
 
-At the moment, this is just a proof of concept. The labeling of the worms especially needs some work. If I were to produce a finished poster, I would also include a timeline of important events along the bottom, and a legend to explain the format. I might also want to simplify the data somewhat - a few of these figures moved around a lot in their lifetimes (Ibn `Arabi, I'm looking at you) and are making it a bit difficult to follow the lines. 
+I think it looks quite nice! Even without squinting at the individual names, big trends in the history of philosophy are immediately evident, like the Baghdad school starting with al-Kindī and running for about 150 years, or the explosion of philosophical activity in Andalusia in the 12th century.
+
+At the moment, this is just a proof of concept. The labeling of the worms especially needs some work. If I were to produce a finished poster, I would also include a timeline of important events along the bottom, and a legend to explain the format. I might also want to simplify the data somewhat - a few of these figures moved around a lot in their lifetimes (Ibn \`Arabi, I'm looking at you) and are making it a bit difficult to follow the lines.
 
 ```{r}
 #| eval: false
