@@ -1,0 +1,17 @@
+---
+title: "Fliers"
+image: traumaticbraininjuries.png
+---
+
+```{r}
+#| echo: false
+#| out-width: 75%
+knitr::include_graphics("traumaticbraininjuries.png")
+```
+
+```{r}
+#| echo: false
+#| out-width: 75%
+knitr::include_graphics("bayomhahucover.png")
+knitr::include_graphics("bayomhahusquare.png")
+```
