@@ -17,6 +17,8 @@ website:
         text: Projects
       - href: blog.qmd
         text: Blog
+      - href: design.qmd
+        text: Art and Design
       - href: CV/CV.pdf
         text: CV
 format:

@@ -1,0 +1,14 @@
+---
+listing:
+  contents: design
+  type: grid
+  grid-columns: 3
+  image-height: 75%
+  grid-item-border: false
+  grid-item-align: left
+  max-description-length: 0
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---

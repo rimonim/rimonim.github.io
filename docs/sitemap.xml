@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://rimonim.github.io/design/fliers/fliers.html</loc>
+    <lastmod>2023-05-12T09:31:46.999Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rimonim.github.io/design/art/art.html</loc>
+    <lastmod>2023-05-12T09:29:58.089Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rimonim.github.io/design/logos/logos.html</loc>
+    <lastmod>2023-05-12T09:30:50.491Z</lastmod>
+  </url>
+  <url>
     <loc>https://rimonim.github.io/projects/wormsplot.html</loc>
-    <lastmod>2023-05-12T05:50:25.154Z</lastmod>
+    <lastmod>2023-05-12T09:26:41.153Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/projects/paper_provenance.html</loc>
-    <lastmod>2023-05-12T05:50:25.423Z</lastmod>
+    <lastmod>2023-05-12T09:26:41.440Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rimonim.github.io/design.html</loc>
+    <lastmod>2023-05-12T09:31:40.913Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/projects.html</loc>
-    <lastmod>2023-05-12T05:50:25.687Z</lastmod>
+    <lastmod>2023-05-12T09:26:42.050Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/index.html</loc>
-    <lastmod>2023-05-12T05:50:26.452Z</lastmod>
+    <lastmod>2023-05-12T09:26:42.880Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/blog/medieval_philosophers/index.html</loc>
-    <lastmod>2023-05-12T05:58:34.047Z</lastmod>
+    <lastmod>2023-05-12T09:26:52.791Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/about.html</loc>
-    <lastmod>2023-05-12T05:50:35.410Z</lastmod>
+    <lastmod>2023-05-12T09:26:53.071Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/CV/index.html</loc>
-    <lastmod>2023-05-12T05:50:36.204Z</lastmod>
+    <lastmod>2023-05-12T09:26:53.975Z</lastmod>
   </url>
   <url>
     <loc>https://rimonim.github.io/blog.html</loc>
-    <lastmod>2023-05-12T05:58:33.194Z</lastmod>
+    <lastmod>2023-05-12T09:26:54.283Z</lastmod>
   </url>
 </urlset>
