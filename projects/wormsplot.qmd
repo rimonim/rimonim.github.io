@@ -5,6 +5,8 @@ date: "April 16, 2023"
 categories: [R, ggplot2, DataViz]
 ---
 
+<img src="wormsplot.svg" align="right" width=200/>
+
 A worms plot is an elegant way to visualize historical (or fictional!) characters as they move from place to place. Expanding on `ggplot2`, this package provides a new geom, `geom_worm`, which allows for an arbitrary number of moves within each worm, and takes intuitively structured data input. The package also includes a convenience function, `wormsplot`, for generating aesthetic plots with minimal effort.
 
 ## Installation
