@@ -1,0 +1,34 @@
+---
+title: "Art"
+image: ushpizin.jpg
+---
+
+```{r}
+#| echo: false
+#| out-width: 80%
+knitr::include_graphics("ushpizin.jpg")
+```
+
+```{r}
+#| echo: false
+#| out-width: 80%
+knitr::include_graphics("bereishit.jpg")
+```
+
+```{r}
+#| echo: false
+#| out-width: 80%
+knitr::include_graphics("noach.jpg")
+```
+
+```{r}
+#| echo: false
+#| out-width: 80%
+knitr::include_graphics("shemot.jpg")
+```
+
+```{r}
+#| echo: false
+#| out-width: 80%
+knitr::include_graphics("naso.jpg")
+```
