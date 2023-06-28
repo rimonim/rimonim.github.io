@@ -1,5 +1,6 @@
 ---
 title: "Art"
+description: "In design, form follows function. In art..."
 image: ushpizin.jpg
 ---
 

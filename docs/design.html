@@ -71,9 +71,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -145,11 +145,11 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 
 
@@ -159,9 +159,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1683883589595" data-listing-reading-time-sort="0.095">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1687975590406" data-listing-reading-time-sort="0.095">
 <a href="./design/art/art.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
+<div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img src="./design/art/ushpizin.jpg" class="thumbnail-image card-img" style="height: 75%;">
 </p>
@@ -170,20 +170,15 @@ ul.task-list li input[type="checkbox"] {
 Art
 </h5>
 <div class="card-text listing-description">
-
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
+In design, form follows function. In art…
 </div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1683883567702" data-listing-reading-time-sort="0.035">
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1687975589551" data-listing-reading-time-sort="0.035">
 <a href="./design/fliers/fliers.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
+<div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img src="./design/fliers/traumaticbraininjuries.png" class="thumbnail-image card-img" style="height: 75%;">
 </p>
@@ -192,20 +187,15 @@ Art
 Fliers
 </h5>
 <div class="card-text listing-description">
-
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
+Invitations to events, designed to be attention-grabbing, beautiful, and informative.
 </div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1683883841279" data-listing-reading-time-sort="0.075">
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1687975588213" data-listing-reading-time-sort="0.075">
 <a href="./design/logos/logos.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
+<div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img src="./images/rimonim.svg" class="thumbnail-image card-img" style="height: 75%;">
 </p>
@@ -214,12 +204,7 @@ Fliers
 Logos
 </h5>
 <div class="card-text listing-description">
-
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
+Brand logos for products, people, companies, or clubs.
 </div>
 </div>
 </div>

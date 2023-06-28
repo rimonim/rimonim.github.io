@@ -1,5 +1,6 @@
 ---
 title: "Fliers"
+description: "Invitations to events, designed to be attention-grabbing, beautiful, and informative."
 image: traumaticbraininjuries.png
 ---
 

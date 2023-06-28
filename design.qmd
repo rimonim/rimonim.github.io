@@ -4,10 +4,11 @@ listing:
   type: grid
   grid-columns: 3
   image-height: 75%
-  grid-item-border: false
+  grid-item-border: true
   grid-item-align: left
   max-description-length: 0
-  categories: false
+  categories: true
+  fields: [image, title, description]
   sort-ui: false
   filter-ui: false
 page-layout: full
