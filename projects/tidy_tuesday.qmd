@@ -4,7 +4,6 @@ author: "Louis Teitelbaum"
 date: "March 28, 2023"
 categories: [R, ggplot2, DataViz]
 ---
-================
 
 \#TidyTuesday is a data visualization weekly challenge. Every week, the organizers post a raw dataset and challenge the community to tell a story with it. 
 

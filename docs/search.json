@@ -200,7 +200,7 @@
     "href": "projects/tidy_tuesday.html",
     "title": "My #TidyTuesday contributions",
     "section": "",
-    "text": "================\n#TidyTuesday is a data visualization weekly challenge. Every week, the organizers post a raw dataset and challenge the community to tell a story with it.\nFind out more\nClick on a plot to see the code I used to make it."
+    "text": "#TidyTuesday is a data visualization weekly challenge. Every week, the organizers post a raw dataset and challenge the community to tell a story with it.\nFind out more\nClick on a plot to see the code I used to make it."
   },
   {
     "objectID": "projects/tidy_tuesday.html#time-zones",
