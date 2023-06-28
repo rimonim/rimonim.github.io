@@ -2,7 +2,7 @@
 title: "Predicting Questions in Dialogue"
 author: "Louis Teitelbaum"
 date: "March 29, 2022"
-categories: [R, Bayesian Statistics, Dialogue, Cognitive Science, Cognitive Linguistics, Multilevel Modeling]
+categories: [R, Bayesian Statistics, Dialogue, Cognitive Science, Cognitive Linguistics, Multilevel Modeling, ggplot2]
 image: figures/minecraft5.png
 ---
 

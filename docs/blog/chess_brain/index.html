@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Louis Teitelbaum">
+<meta name="dcterms.date" content="2022-03-15">
+
+<title>Louis Teitelbaum - Tracking Cognitive Performance with Online Chess</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/rimonim.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Louis Teitelbaum</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../design.html">
+ <span class="menu-text">Art and Design</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../CV/CV.pdf">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#is-online-chess-a-good-psychometric-tool" id="toc-is-online-chess-a-good-psychometric-tool" class="nav-link active" data-scroll-target="#is-online-chess-a-good-psychometric-tool">Is Online Chess a Good Psychometric Tool?</a></li>
+  <li><a href="#how-does-the-amount-of-sleep-i-get-at-night-affect-my-chess-performance" id="toc-how-does-the-amount-of-sleep-i-get-at-night-affect-my-chess-performance" class="nav-link" data-scroll-target="#how-does-the-amount-of-sleep-i-get-at-night-affect-my-chess-performance">How does the amount of sleep I get at night affect my chess performance?</a></li>
+  <li><a href="#how-do-my-affect-and-anxiety-affect-the-amount-of-chess-i-play" id="toc-how-do-my-affect-and-anxiety-affect-the-amount-of-chess-i-play" class="nav-link" data-scroll-target="#how-do-my-affect-and-anxiety-affect-the-amount-of-chess-i-play">How do my affect and anxiety affect the amount of chess I play?</a></li>
+  <li><a href="#how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games" id="toc-how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games" class="nav-link" data-scroll-target="#how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games">How do all these things affect the <em>way</em> in which I lose/win my games?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tracking Cognitive Performance with Online Chess</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Cognitive Science</div>
+    <div class="quarto-category">Chess</div>
+    <div class="quarto-category">ggplot2</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Louis Teitelbaum </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 15, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>The tragedy of an undergraduate psychology degree: I sit in lecture after lecture, learning about human mind/brain/behavior. It’s all fascinating of course, but I didn’t come here to learn about human mind/brain/behavior. I came here to learn about <em>my</em> mind/brain/behavior. Or at least those of people I interact with. Unfortunately, interesting psychology research tends to be conducted in laboratories with trained researchers. Even after the research stage, good psychometric evaluations are preformed by good clinicians in controlled environments. I don’t have access to those things at this stage of my life.</p>
+<p>Like, for example, I’ve read lots of interesting papers about sleep and circadian rhythms, but have no more than anecdotal evidence about my own cognitive performance throughout the day, or the amount of sleep I really need per night.</p>
+<p>It felt silly to do so much learning about quantified psychology without even trying to quantify my own psychology, so I made myself a daily survey. I kept it short–no room for multi-item measures–but it has questions for measuring how stressed I am, how happy I am, and how much sleep I got the previous night, among other things. At this point I’ve been filling it out for a few months.</p>
+<p>This is, of course, terrible science. The samples are non-independent, I’m biased in my answers by whatever hypotheses I might be thinking about, and I’m not even consistent about the time of exact time of day at which I take the survey. My stress and mood obviously fluctuate a lot throughout the day. I try to think through the whole day when I fill out the survey, but the measures are rough at best.</p>
+<p>One thing my survey doesn’t measure is cognitive performance. I don’t even ask myself how tired I’m feeling. I don’t ask about this because I think I have a better way to measure it: Chess.</p>
+<section id="is-online-chess-a-good-psychometric-tool" class="level2">
+<h2 class="anchored" data-anchor-id="is-online-chess-a-good-psychometric-tool">Is Online Chess a Good Psychometric Tool?</h2>
+<p>I play online chess almost every day. I also like to play super-fast timed games, so I tend to play a lot of games per day. The site I play on, lichess.org, automatically records game and rating statistics.</p>
+<p>Chess performance is closely tied to general cognitive capabilities, as is evident from <a href="https://www.sciencedirect.com/science/article/abs/pii/S0160289616301593">this paper</a>, <a href="https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueab094/6445994">this paper</a>, and <a href="https://www.reddit.com/r/chess/comments/4tuz19/does_magnus_have_exceptional_intelligence/">common sense</a>. Can I use my chess performance to measure how cognitively capable I am day to day? How about hour to hour?</p>
+<p>Let’s start with the basics: How do we measure chess performance? I could get a really good AI chess algorithm to evaluate every individual move I make, but the easier option is just to look at rating. Lichess uses the <a href="http://www.glicko.net/glicko/glicko.pdf">Glicko</a> <a href="http://www.glicko.net/glicko/glicko2.pdf">2</a> rating sytem, which uses all sorts of statistical tricks to estimate how good a player is at chess. At the conclusion of each game, both players’ ratings are updated. The winner gains some points and the loser loses some. The amount that they are updated depends on both their previous ratings and how certain it is that those ratings are accurate. So if I gain a lot of points after a game, that means that I did exceptionally well (by my own standards) by beating my opponent. Since I often play many games per day, the average change in my rating per game I play in a day should be a decent measure of how good my chess playing is that day.</p>
+<p>Before we get to days, let’s start with hours in the day. <a href="https://www.dovepress.com/circadian-rhythms-in-cognitive-performance-implications-for-neuropsych-peer-reviewed-fulltext-article-CPT">Circadian rhythms–the body’s clock–have been found to modulate many basic cognitive processes</a>. Since my current occupation allows me to play chess at various hours of the day, we can see if I tend to do better or worse at certain times.</p>
+<p>For context, here are results from <a href="https://journals.physiology.org/doi/pdf/10.1152/ajplegacy.1933.104.2.449?casa_token=lL4RF2ntiMcAAAAA:d2tuBiL0ST3Uk4Fkkc_7tB_oEjE-RIJem3lfYAZdoqYr11r2ltIr6WmD6WyPFpX4hXJ72u1GPh0">this study</a> showing one person’s performance on a variety of cognitive tasks at various times throughout the day.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/cognitivecircadian.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Diurnal Variation in Cognitive Performance</figcaption><p></p>
+</figure>
+</div>
+<p>Here is my chess performance over the past few months.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/chessbyhour.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">My Chess Performance by Hour of the Day</figcaption><p></p>
+</figure>
+</div>
+<p>Looks about right! I bet if I stayed up later than usual and played chess into the night, there would be a gradual dropoff in performance, just like in subject H. K.’s multiplication speed above.</p>
+<p>The results so far lend some initial validation to my measure. Let’s bring in the data from my survey and ask some more questions.</p>
+</section>
+<section id="how-does-the-amount-of-sleep-i-get-at-night-affect-my-chess-performance" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-the-amount-of-sleep-i-get-at-night-affect-my-chess-performance">How does the amount of sleep I get at night affect my chess performance?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/chesssleep.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">My Chess Performance by Hours of Sleep the Previous Night</figcaption><p></p>
+</figure>
+</div>
+<p>Remember, this represents my rough recolection in late afternoon/evening of when I went to sleep the last night and woke up in the morning.</p>
+<p>The effect looks to be mildy positive, with a peak around 8 hours. Does this mean I’m at my best when I get 8 hours of sleep? Unclear. I’m surprised at how weak this relationship seems to be. For some reason, the curve looks much more like what I expected when I limit it to data from my updated survey version, which I’ve been using only since December.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/sleepchess.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">My Chess Performance by Hours of Sleep the Previous Night</figcaption><p></p>
+</figure>
+</div>
+<p>This difference could be due to chance, or some pitfall of my measurement system, or something about my schedule since December as opposed to before.</p>
+</section>
+<section id="how-do-my-affect-and-anxiety-affect-the-amount-of-chess-i-play" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-my-affect-and-anxiety-affect-the-amount-of-chess-i-play">How do my affect and anxiety affect the amount of chess I play?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/chesshappiness.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">My Chess Performance by Affect</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/chessanxiety.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">My Chess Performance by Anxiety</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games">How do all these things affect the <em>way</em> in which I lose/win my games?</h2>
+<p><img src="figures/chessoutcomesleep.png" class="img-fluid" alt="My Chess Game Outcomes by Hours of Sleep"> <img src="figures/chessoutcomehappiness.png" class="img-fluid" alt="My Chess Game Outcomes by Affect"> <img src="figures/chessoutcomeanxiety.png" class="img-fluid" alt="My Chess Game Outcomes by Anxiety"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
