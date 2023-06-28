@@ -2,7 +2,7 @@
 title: "Predicting Questions in Dialogue"
 author: "Louis Teitelbaum"
 date: "March 29, 2022"
-categories: [R, Bayesian Statistics, Dialogue, Cognitive Science, Cognitive Linguistics, Multilevel Modeling, ggplot2]
+categories: [R, Bayesian Statistics, Dialogue, Cognitive Science, Cognitive Linguistics, Multilevel Modeling, ggplot2, NLP]
 image: figures/minecraft5.png
 ---
 
@@ -12,7 +12,7 @@ For now, I am using this corpus as practice to learn Bayesian statistics as I go
 
 Code and data for this project can be found [here](https://github.com/rimonim/nlp_for_cognitive_science/tree/main/MineCraft).
 
--------------------
+------------------------------------------------------------------------
 
 A sample dialogue from the [Minecraft Corpus](https://github.com/rimonim/nlp_for_cognitive_science/tree/main/MineCraft):
 

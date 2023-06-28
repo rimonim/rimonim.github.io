@@ -1,8 +1,8 @@
 ---
 title: "Tracking Cognitive Performance with Online Chess"
 author: "Louis Teitelbaum"
-date: "March 15, 2022"
-categories: [R, Cognitive Science, Chess, ggplot2]
+date: "January 12, 2023"
+categories: [Python, History, Linguistics, DataViz]
 image: figures/cognitivecircadian.jpg
 ---
 
