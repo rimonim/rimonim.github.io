@@ -14,50 +14,40 @@ output:
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-Aside
-================================================================================
+# Aside
 
-<center>
-<img src="images/louisprof.jpg" style="width:100%; border-radius: 40%;"/>
-</center>
+<center><img src="images/louisprof.jpg" style="width:100%; border-radius: 40%;"/></center>
 
-Contact Info {#contact}
---------------------------------------------------------------------------------
+## Contact Info {#contact}
 
-<i class="fa fa-envelope"></i> louist@post.bgu.ac.il  
-<i class="fa fa-globe"></i> [Home Page](https://rimonim.github.io) | <i class="fa fa-rss"></i> [Blog](https://rimonim.github.io/blog)  
-<i class="fa fa-github"></i> [GitHub](https://github.com/rimonim) | <i class="fa fa-linkedin"></i> [LinkedIn](https://www.linkedin.com/in/louisteitelbaum/)   
+<i class="fa fa-envelope"></i> [louist\@post.bgu.ac.il](mailto:louist@post.bgu.ac.il){.email}\
+<i class="fa fa-globe"></i> [Home Page](https://rimonim.github.io) \| <i class="fa fa-rss"></i> [Blog](https://rimonim.github.io/blog)\
+<i class="fa fa-github"></i> [GitHub](https://github.com/rimonim) \| <i class="fa fa-linkedin"></i> [LinkedIn](https://www.linkedin.com/in/louisteitelbaum/)
 
-Languages {#languages}
---------------------------------------------------------------------------------
+## Languages {#languages}
 
-English - native  
-Hebrew - fluent  
+English - native\
+Hebrew - fluent
 
-Technical Skills
---------------------------------------------------------------------------------
+## Technical Skills
 
-**Programming:** R, Python, SQL, Git(Hub), SPSS.
+**Programming:** R, Python, SQL, Git(Hub), SPSS, Excel
 
-**Documentation:** (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets.  
+**Documentation:** (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets
 
 **Design:** ggplot2, Gimp, Photoshop, Inkscape
 
 **Deployment:** Shiny, Streamlit
 
-Disclaimer {#disclaimer}
---------------------------------------------------------------------------------
+## Disclaimer {#disclaimer}
 
 Last updated on `r Sys.Date()`.
 
-Main
-================================================================================
+# Main
 
-Louis Teitelbaum {#title}
---------------------------------------------------------------------------------
+## Louis Teitelbaum {#title}
 
-Professional Experience {data-icon=laptop}
---------------------------------------------------------------------------------
+## Professional Experience {data-icon="laptop"}
 
 ### Neurocognitive Psychology Researcher
 
@@ -67,21 +57,11 @@ N/A
 
 Since 2020
 
-***Working Memory and Predictive Processing***: 
-- Thesis work under supervision of Prof. Yoav Kessler, Ben Gurion University
+***Working Memory and Predictive Processing***: - Thesis work under supervision of Prof. Yoav Kessler, Ben Gurion University
 
-***Language and Communication***: 
-- Thesis work under supervision of Prof. Bruno Galantucci, Yeshiva University Psychology Department
-- Developed novel Natural Language Processing (NLP) based metrics for diadic conversations using Python and R.
-- Wrote peer review
-- Designed research agenda and experimental paradigm for the continuation of research post-COVID-19
-- Read over 100 scholarly articles in the field of Language and Communication
+***Language and Communication***: - Thesis work under supervision of Prof. Bruno Galantucci, Yeshiva University Psychology Department - Developed novel Natural Language Processing (NLP) based metrics for diadic conversations using Python and R. - Wrote peer review - Designed research agenda and experimental paradigm for the continuation of research post-COVID-19 - Read over 100 scholarly articles in the field of Language and Communication
 
-***Power Dynamics in Long-Term Romantic Relationships***:
-- Research Assistant for Dr. Jenny Isaacs, Yeshiva University Psychology Department
-- Researched and designed survey for data collection.
-- Analyzed data in SPSS and R; finalized analysis for publication.
-- Logged over 200 hours as a primary contributor to project.
+***Power Dynamics in Long-Term Romantic Relationships***: - Research Assistant for Dr. Jenny Isaacs, Yeshiva University Psychology Department - Researched and designed survey for data collection. - Analyzed data in SPSS and R; finalized analysis for publication. - Logged over 200 hours as a primary contributor to project.
 
 ### R Developer
 
@@ -91,11 +71,9 @@ N/A
 
 Since 2021
 
-- Developer of [*wormsplot*](https://github.com/rimonim/wormsplot) for 
-visualizing the movements of historical figures; Read the [blog post](https://rimonim.github.io/blog/medieval_philosophers).  
+-   Developer of [*wormsplot*](https://github.com/rimonim/wormsplot) for visualizing the movements of historical figures; Read the [blog post](https://rimonim.github.io/blog/medieval_philosophers).
 
-Education {data-icon=graduation-cap data-concise=true #education}
---------------------------------------------------------------------------------
+## Education {#education data-icon="graduation-cap" data-concise="true"}
 
 ### M.A. in Experimental Cognitive Psychology
 
@@ -119,8 +97,7 @@ Graduated *Magna Cum Laude*
 
 **Activities and societies:** Neuroscience Club President
 
-Awards and Scholarships {data-icon=star-o #awards}
---------------------------------------------------------------------------------
+## Awards and Scholarships {#awards data-icon="star-o"}
 
 ### Chaplain Joseph Hoenig Memorial Award for Excellence in the Study of Psychology
 
@@ -130,7 +107,7 @@ New York, NY
 
 Sep 2021
 
-### American Psychology-Law Society Grant for Undergraduate Research, $1,000
+### American Psychology-Law Society Grant for Undergraduate Research
 
 American Psychological Association Division 41: American Psychology-Law Society
 
@@ -148,16 +125,7 @@ New York, NY
 
 2021
 
-### Professor Michael Bernstein Award for Excellence in Biblical Studies
-
-Yeshiva University
-
-N/A
-
-Sep 2021
-
-Scientific Publications and Presentations {data-icon=file #pubs}
---------------------------------------------------------------------------------
+## Scientific Publications and Presentations {#pubs data-icon="file"}
 
 ### Theses
 
@@ -167,7 +135,7 @@ N/A
 
 N/A
 
-- **Teitelbaum, L.** (2021). [*When faithful informational exchange is just not worth it: Reformulation ability as a predictor of other-initiated repair* [Honors thesis, Yeshiva University]. Yeshiva Academic Institutional Repository.](https://repository.yu.edu/handle/20.500.12202/7148)
+-   **Teitelbaum, L.** (2021). [*When faithful informational exchange is just not worth it: Reformulation ability as a predictor of other-initiated repair* [Honors thesis, Yeshiva University]. Yeshiva Academic Institutional Repository.](https://repository.yu.edu/handle/20.500.12202/7148)
 
 ### Poster Presentations
 
@@ -177,7 +145,5 @@ N/A
 
 N/A
 
-- **Teitelbaum, L.** & Galantucci, B. (2021). When faithful informational Exchanges are just too much work: Repair avoidance and reformulation cost. *Poster presented at the 2021 Association for Psychological Science (APS) Virtual Convention*.
-- **Teitelbaum, L.**, Isaacs, J., & Pittinsky, N. (2021). Is power all bad? Marital power imbalances and effective role division. *Poster presented at the 2021 Association for Psychological Science (APS) Virtual Convention*.
-
-
+-   **Teitelbaum, L.** & Galantucci, B. (2021). When faithful informational Exchanges are just too much work: Repair avoidance and reformulation cost. *Poster presented at the 2021 Association for Psychological Science (APS) Virtual Convention*.
+-   **Teitelbaum, L.**, Isaacs, J., & Pittinsky, N. (2021). Is power all bad? Marital power imbalances and effective role division. *Poster presented at the 2021 Association for Psychological Science (APS) Virtual Convention*.
