@@ -1,14 +1,6 @@
 ---
 listing:
-  contents: 
-    - blog
-    - title: "The History of Semantic Spaces"
-      href: blog/semantic_history/SemanticHistory.html
-      author: "Louis Teitelbaum"
-      date: "January 12, 2023"
-      description: "What you always wished Google Ngram Viewer did."
-      categories: [Python, History, DataViz, NLP]
-      image: blog/semantic_history/figures/semantic_history_sample.png
+  contents: blog
   sort: "date desc"
   type: default
   image-align: left
