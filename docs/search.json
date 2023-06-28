@@ -46,7 +46,7 @@
     "href": "projects.html",
     "title": "Louis Teitelbaum",
     "section": "",
-    "text": "wormsplot\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nApr 16, 2023\n\n\n\n\n\n\n\n\n\n\n\npaper_provenance\n\n\n\nPython\n\n\nMeta-Science\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nMar 28, 2023\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "wormsplot\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nApr 16, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMy #TidyTuesday contributions\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nMar 28, 2023\n\n\n\n\n\n\n\n\n\n\n \n\n\n\npaper_provenance\n\n\n\nPython\n\n\nMeta-Science\n\n\nDataViz\n\n\n\n\n\n\n\nLouis Teitelbaum\n\n\nMar 28, 2023\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/police_exploratory/index.html",
@@ -194,5 +194,26 @@
     "title": "Tracking Cognitive Performance with Online Chess",
     "section": "How do all these things affect the way in which I lose/win my games?",
     "text": "How do all these things affect the way in which I lose/win my games?"
+  },
+  {
+    "objectID": "projects/tidy_tuesday.html",
+    "href": "projects/tidy_tuesday.html",
+    "title": "My #TidyTuesday contributions",
+    "section": "",
+    "text": "================\n#TidyTuesday is a data visualization weekly challenge. Every week, the organizers post a raw dataset and challenge the community to tell a story with it.\nFind out more\nClick on a plot to see the code I used to make it."
+  },
+  {
+    "objectID": "projects/tidy_tuesday.html#time-zones",
+    "href": "projects/tidy_tuesday.html#time-zones",
+    "title": "My #TidyTuesday contributions",
+    "section": "2023-04 - Time Zones",
+    "text": "2023-04 - Time Zones"
+  },
+  {
+    "objectID": "projects/tidy_tuesday.html#baby-names",
+    "href": "projects/tidy_tuesday.html#baby-names",
+    "title": "My #TidyTuesday contributions",
+    "section": "2022-12 - Baby Names",
+    "text": "2022-12 - Baby Names"
   }
 ]

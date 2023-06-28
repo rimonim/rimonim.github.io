@@ -11,6 +11,7 @@
     "listing": "/projects.html",
     "items": [
       "/projects/wormsplot.html",
+      "/projects/tidy_tuesday.html",
       "/projects/paper_provenance.html"
     ]
   },
