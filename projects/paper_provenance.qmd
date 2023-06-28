@@ -2,7 +2,8 @@
 title: "paper_provenance"
 author: "Louis Teitelbaum"
 date: "March 28, 2023"
-categories: [Python, Meta-Science, DataViz]
+categories: [Python, Meta-Science, DataViz, Streamlit]
+image: paper_provenance_sample.png
 ---
 
 An interactive web app for visualizing the history of a field leading up to a paper.
