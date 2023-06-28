@@ -17,7 +17,9 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/medieval_philosophers/index.html"
+      "/blog/medieval_philosophers/index.html",
+      "/blog/police_exploratory/index.html",
+      "/blog/wordle/index.html"
     ]
   }
 ]
