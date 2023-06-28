@@ -15,9 +15,3 @@ about:
       text: Mail
       href: mailto:louist@post.bgu.ac.il
 ---
-
-```{r}
-#| echo: false
-#| out-width: 15%
-knitr::include_graphics("images/rimonim.svg")
-```
