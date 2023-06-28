@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Louis Teitelbaum">
+<meta name="dcterms.date" content="2022-02-03">
+
+<title>Louis Teitelbaum - Statistically Optimal Wordle</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/rimonim.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Louis Teitelbaum</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../design.html">
+ <span class="menu-text">Art and Design</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../CV/CV.pdf">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#disclaimer-a-few-days-after-i-posted-this-my-favorite-math-youtuber-3blue1brown-came-out-with-his-own-treatment-of-optimal-wordle.-his-treatment-is-much-better-informed-and-more-elegantly-presented-than-mine." id="toc-disclaimer-a-few-days-after-i-posted-this-my-favorite-math-youtuber-3blue1brown-came-out-with-his-own-treatment-of-optimal-wordle.-his-treatment-is-much-better-informed-and-more-elegantly-presented-than-mine." class="nav-link active" data-scroll-target="#disclaimer-a-few-days-after-i-posted-this-my-favorite-math-youtuber-3blue1brown-came-out-with-his-own-treatment-of-optimal-wordle.-his-treatment-is-much-better-informed-and-more-elegantly-presented-than-mine.">DISCLAIMER: A few days after I posted this, my favorite math YouTuber, 3Blue1Brown, came out with his own treatment of optimal Wordle. His treatment is much better informed and more elegantly presented than mine.</a></li>
+  <li><a href="#whats-the-best-starting-word" id="toc-whats-the-best-starting-word" class="nav-link" data-scroll-target="#whats-the-best-starting-word">What’s the Best Starting Word?</a></li>
+  <li><a href="#cmon-i-wanna-see-the-optimal-wordle-playing-bot" id="toc-cmon-i-wanna-see-the-optimal-wordle-playing-bot" class="nav-link" data-scroll-target="#cmon-i-wanna-see-the-optimal-wordle-playing-bot">Cmon, I wanna see the optimal Wordle playing Bot!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Statistically Optimal Wordle</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">probability theory</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Louis Teitelbaum </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 3, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="disclaimer-a-few-days-after-i-posted-this-my-favorite-math-youtuber-3blue1brown-came-out-with-his-own-treatment-of-optimal-wordle.-his-treatment-is-much-better-informed-and-more-elegantly-presented-than-mine." class="level3">
+<h3 class="anchored" data-anchor-id="disclaimer-a-few-days-after-i-posted-this-my-favorite-math-youtuber-3blue1brown-came-out-with-his-own-treatment-of-optimal-wordle.-his-treatment-is-much-better-informed-and-more-elegantly-presented-than-mine.">DISCLAIMER: A few days after I posted this, my favorite math YouTuber, 3Blue1Brown, came out with <a href="https://youtu.be/v68zYyaEmEA">his own treatment of optimal Wordle</a>. His treatment is much better informed and more elegantly presented than mine.</h3>
+<p><a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> is all the rage these days. If you’re reading this, you probably already know the rules of the game. You get six guesses at a hidden five-letter word randomly selected each day. Each guess must itself be a legitimate five-letter word, and as feedback, you learn whether each letter in your guess is 1. in the target word and in the correct location (<code>green</code>), 2. in the target word but not in the correct location (<code>yellow</code>), or 3. not in the target word at all (<code>black</code>).</p>
+<p>This is my Wordle game from yesterday:</p>
+<p><img src="figures/fig1.png"></p>
+<p>Around the Internet, strategy articles abound with titles like <a href="https://www.inverse.com/gaming/wordle-starting-words-best-using-math">“THE 20 BEST WORDLE STARTING WORDS ACCORDING TO SCIENCE”</a>, <a href="https://www.polygon.com/gaming/22884031/wordle-game-tips-best-first-guess-5-letter-words">“How to crack Wordle: 5-letter words to use first”</a>, and <a href="https://www.tomsguide.com/news/best-wordle-start-words-to-help-you-win-every-time">“Best Wordle start words to help you win at Wordle”</a>.</p>
+<p>Pretty much all of these articles are thinking about letter frequency; the best starting word is the one that has all the highest frequency letters in the dictionary. This is a pretty tempting way to go. In fact, if Wordle only told you whether or not each letter was in the target word, it might be pretty close to optimal. The thing is, Wordle also tells you about placement. If a letter is green, you know it’s in that place. If it’s yellow, you know it’s not in that place. This is really valuable information and it would be a shame to throw it out. Unfortunately, it also makes the whole thing a lot more complicated. For example, I bet words with <code>t</code>s in the fifth place are better guesses than words with <code>t</code>s in the third place. Since more words in the dictionary have <code>t</code> in the fifth place, you’ll rule out a lot more if it’s not there, plus you’re more likely to hit the jackpot with a green tile.</p>
+<p>So let’s start by looking at some letter frequencies in the Wordle dictionary of possible answers (as scraped from their website and represented below as “answer_dictionary_vec”). This time though, let’s pay attention to where the letters are in the word.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>places <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letter =</span> answer_dictionary_vec) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(letter, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"blank"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>), <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">names_to =</span> <span class="st">"place"</span>, <span class="at">values_to =</span> <span class="st">"letter"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(place, letter)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>places <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(place) <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n), <span class="at">.by_group =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, n) <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">letter =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(letter, place, <span class="at">sep =</span> <span class="st">"__"</span>), <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">paste</span>(letter, place, <span class="at">sep =</span> <span class="st">"__"</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(letter, n)) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>place, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">"__.+$"</span>, <span class="st">""</span>, x)) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Letter Frequencies by Place"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Occurences"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The top ten most common letters in each letter-place: <img src="figures/fig24.png"></p>
+<p>This is interesting. <code>e</code> is the most common (and therefore most useful in a guess) for the last two letters of the word. For the first letter though, we should prefer a consonant like <code>s</code>. <code>s</code> is almost never at the end because Wordle answers are never plurals (even though plurals are allowed in guesses). We could start developing a scoring system to find the words with the most common letters in their rightful places, but I have a better idea. As long as we’re allowing computers to help us with this guessing game, let’s try to get straight to the probabilities involved instead of stopping at frequencies and saying “good enough”.</p>
+<p>I went on a lot of long roadtrips as a kid, and the most popular game in our family car was “20 Questions”. One person thinks of a specific thing–a species of animal, a place, a household appliance–and everyone else has to ask yes-or-no questions to try to guess what that person is thinking of. If they can’t get it after 20 questions, the thinker wins. Anyone who has spent any time as a guesser in 20 Questions knows that you shouldn’t actually start thinking about what the specific thing is until there are only two possible options of what it could be. Before that, your goal is to narrow down the possibilities as much as possible.</p>
+<p>Since Wordle doesn’t allow you to guess categories–only individual five-letter words–the narrowing-down game is much trickier than in 20 Questions. On the other hand, Wordle gives you a whole lot more feedback than a yes-or-no answer. Wheras in 20 Questions the optimal question narrows the possibilities by a half, in Wordle we should be able to do much better than that.</p>
+<p>How much better?</p>
+<p>How good a guess is (i.e.&nbsp;how much does it narrow down the remaining possibilities) depends on what the actual answer is. For example, if your first guess is <code>treat</code> and the true answer is <code>tread</code>, you’re only left with one possibility. There is only one word that begins with <code>trea-</code>and does not end in <code>t</code>, and it’s <code>tread</code>. But it your first guess is <code>treat</code> and the true answer is <code>boozy</code>, all you know is that the word doesn’t include <code>a</code>, <code>e</code>, <code>r</code>, or <code>t</code>.</p>
+<p>Here’s a little function that, for a given guess, true answer, and list of currently possible answers, will give you a narrowed-down list of possible answers based on Wordle’s feedback on your guess.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># input guess (5 item vector), answer (5 item vector), and prior dictionary (list of 5 item vectors)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dictionary_update <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, answer, dictionary) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (guess[n] <span class="sc">%in%</span> answer){</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (guess[n] <span class="sc">==</span> answer[n]) {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> dictionary[<span class="fu">sapply</span>(dictionary, <span class="st">"["</span>, n) <span class="sc">==</span> guess[n]]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      }<span class="cf">else</span>{</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> dictionary[<span class="fu">sapply</span>(dictionary, <span class="st">"["</span>, n) <span class="sc">!=</span> guess[n]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="sc">&amp;</span> <span class="fu">sapply</span>(dictionary, <span class="cf">function</span>(x) <span class="fu">any</span>(guess[n] <span class="sc">%in%</span> x))]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      dictionary <span class="ot">&lt;-</span> dictionary[<span class="fu">sapply</span>(dictionary, <span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">any</span>(guess[n] <span class="sc">%in%</span> x))]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  dictionary</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So now we can give exact numbers. How many possibilities are left if your first guess is <code>treat</code> and the true answer is <code>boozy</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dictionary_update</span>(<span class="at">guess =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"treat"</span>, <span class="st">""</span>)), <span class="at">answer =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"boozy"</span>, <span class="st">""</span>)), <span class="at">dictionary =</span> answer_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The output list is 332 words long, beginning with <code>sissy</code>, <code>humph</code>, and <code>blush</code>. That’s actually not too bad, given that Wordle’s list of possible answers has 2,315 words. Going from 2,315 possible answers before you start to 332 possible answers after the first guess is an 85.6% reduction!</p>
+<p>This is all fine and lovely, but when we’re playing Wordle, we don’t know what the solution is. It could be <code>boozy</code> or <code>tread</code> or any of 2,313 others. So without knowing ahead of time what the solution is, how good of a guess is <code>treat</code>?</p>
+<p>It’s time to look at some probability density plots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a dataframe with how much the given guess would narrow the possibilities for each possible answer.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>guess_quality <span class="ot">&lt;-</span> <span class="cf">function</span>(guess) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(guess, <span class="st">""</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  distribution_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">answer =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(answer_dictionary)),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">posterior_dictionary_length =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(answer_dictionary)))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(answer_dictionary)) {</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    answer <span class="ot">&lt;-</span> answer_dictionary[[n]]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    posterior_dictionary_length <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">dictionary_update</span>(guess, answer, answer_dictionary))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    distribution_table[n, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(answer, <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    distribution_table[n, <span class="dv">2</span>] <span class="ot">&lt;-</span> posterior_dictionary_length</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  distribution_table</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's graph it!</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">guess_quality</span>(<span class="st">"treat"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">dictionary_reduction =</span> <span class="dv">100</span><span class="sc">-</span>(<span class="dv">100</span><span class="sc">*</span>(posterior_dictionary_length<span class="sc">/</span><span class="fu">length</span>(answer_dictionary)))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dictionary_reduction)) <span class="sc">+</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Expected Reduction in Possible Answers for First Guess 'treat'"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Percent Reduction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>Side note: The fact that all 2,315 possible answers are equally likely to be the true one makes this a whole lot easier. Some might say it means this endeavor is not technically “statistics”. That’s ok with me.</em></p>
+<p><img src="figures/fig2.png"></p>
+<p>Think of “density” here as the probability that, after your guess, you’ll get a particular percent decrease in remaining possibilities. On the whole, <code>treat</code> is clearly a good first guess, with the highest density of possible outcomes up toward 98% reduction, and the worst possible outcome around 85%. Either way, you’re ruling out the vast majority of possibilities. Presumably that’s because about 85% of words in the Wordle dictionary include the letters <code>a</code>, <code>e</code>, <code>r</code>, or <code>t</code> and are therefore ruled out if the correct answer turns out not to include any of them. In between the extremes though, it looks like you’re very unlikely to get an 87% reduction, much more likely to get a 92% reduction, and then less likely again to get a 95% reduction.</p>
+<p>That curve is so irregular that it makes me curious to see some more.</p>
+<p><a href="https://edition.cnn.com/2022/02/01/us/wordle-top-strategies-winning-words-cec/index.html">This article</a> recommends starting with <code>adieu</code>.</p>
+<p><img src="figures/fig3.png"></p>
+<p>Huh. Two peaks. Looks like you have about equal chances of adieu being either a super super helpful guess or a measly very helpful guess. Your worst outcome is less likely, and is still not bad at 87.5%.</p>
+<p>What about a really terrible first guess?</p>
+<p><img src="figures/fig4.png"></p>
+<p>That about checks out. Your most likely single outcome here is that none of the letters of <code>boozy</code> are in the answer, in which case you’ve ruled out about half. But it’s a coin flip, because there are some possible answers that are super similar to <code>boozy</code>, and if one of those is the answer you’ve made a lot of progress with your risky first guess.</p>
+<p>I think the most interesting thing about these charts is the spread. Some guesses have a worst-case scenario that’s actually pretty good, but above that it’s a bit of a tossup. That’s what we saw with <code>adieu</code>. On the other hand we saw <code>treat</code>, which is on the whole worse than <code>adieu</code> (and has a worse worst-case scenario) but which carries a greater probability of getting really close, with possibility reduction in the 98% range. Ok, maybe these aren’t the best examples ever, but the point is: Are you playing for the best Wordle batting average or are you playing for a few really, spectacularly good games? In a few cases, it’s possible that there’s a high-stakes Wordle player would opt for the guess with the biggest mound all the way to the right of the graph, regardless of how long the tail is in the other direction.</p>
+<p>Before moving on to real recommendations, I want to play with these graphs a little bit more. I claimed earlier that letter order matters a lot and that it’s a mistake to reduce the best-first-guess problem to a letter frequency contest. Let’s test that claim now.</p>
+<p><img src="figures/fig5.png" width="400"> <img src="figures/fig6.png" width="400"> <img src="figures/fig9.png" width="400"> <img src="figures/fig8.png" width="400"></p>
+<p><code>rates</code>, <code>stare</code>, <code>resat</code>, and <code>taser</code> all have the same five letters. We can see that their worst-case scenarios are all identical. This makes sense - the worst case scenario is that none of those letters are anywhere in the word. But the curves above that worst-case scenario are different. Which is the best? A conservative Wordle player might wish to know which has the highest average reduction. In other words, how much does each guess narrow our possibilities down, on average? Let’s see.</p>
+<ul>
+<li>rates: 96.83%</li>
+<li>stare: 96.92%</li>
+<li>resat: 96.72%</li>
+<li>taser: 96.92%</li>
+</ul>
+<p>We could even add couple more obscure anagrams:</p>
+<ul>
+<li>aster: 96.63%</li>
+<li>tares: 96.91%</li>
+</ul>
+<p>Ok fine, they’re all pretty similar. But there is a difference! I think <code>e</code> in the fifth place is a big bonus–especially combined with <code>t</code>, <code>r</code>, and <code>s</code>– since so many words end in -se, -te, or -re.</p>
+</section>
+<section id="whats-the-best-starting-word" class="level1">
+<h1>What’s the Best Starting Word?</h1>
+<p>Now we have our metric: What percentage of possible answers do we expect to rule out with this guess? All we have to do is apply this to every one of 12,972 legal guesses! (Yes, there are way more legal guesses than there are possible answers).</p>
+<p>The problem here is that for each one of those 12,972 legal guesses, the computer will have to test out 2,315 possible answers to see how helpful the guess is in each instance. 12,972 * 2,315 = 30,030,180. Combined with my lack of CS skills and my five-year-old computer, this amounts to a more waiting than I’d like. To speed this up a bit, let’s only look at a random sample of 100 possible answers for each of the 12,972 guesses. It’ll introduce a bit of randomness into the results, but we can fix that later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Faster guess assessment</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>guess_quality_minimal_fast <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, <span class="at">dictionary =</span> answer_dictionary) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(guess, <span class="st">""</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  answer_sample <span class="ot">&lt;-</span> answer_dictionary[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(answer_dictionary), <span class="dv">100</span>)]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  distribution <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(answer_sample))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(answer_sample)) {</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    answer <span class="ot">&lt;-</span> answer_sample[[n]]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    distribution[n] <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">dictionary_update</span>(guess, answer, dictionary))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(distribution)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Make dataframe of expected answer narrowing</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>expected_reduction_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">guess =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(guess_dictionary)),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">expected_reduction =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(guess_dictionary)))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(guess_dictionary)) {</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">paste</span>(guess_dictionary[[n]], <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  expected_reduction_table<span class="sc">$</span>guess[n] <span class="ot">&lt;-</span> guess</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  expected_reduction_table<span class="sc">$</span>expected_reduction[n] <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">-</span>(<span class="dv">100</span><span class="sc">*</span>(guess_quality_minimal_fast<span class="sc">/</span><span class="fu">length</span>(answer_dictionary)))</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here are the worst first guesses:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>expected_reduction_table <span class="ot">&lt;-</span> expected_reduction_table <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(expected_reduction))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(expected_reduction_table)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       guess           expected_reduction</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12967 yuppy           61.77192</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12968 immix           60.55162</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12969 kudzu           60.28942</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12970 fuffy           57.36328</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12971 jugum           56.97495</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12972 qajaq           56.40821</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here are the best first guesses:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expected_reduction_table)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   guess           expected_reduction</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 roate           97.78920</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 irate           97.73002</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 soare           97.62505</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 later           97.47257</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 ariel           97.42851</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 arise           97.42462</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Before we discuss these results, though, let’s get rid of that randomness. I’m going to take just the top 200 results of our semi-randomized analysis and rerun it with the full set of possible answers. Unless the very best first guess somehow made it out of the top 200, this should give us the true, statistically optimal best guess.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>guess_dictionary_top <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="fu">head</span>(expected_reduction_table<span class="sc">$</span>guess, <span class="at">n =</span> <span class="dv">200</span>), <span class="st">""</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>expected_reductions_exact <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">guess =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">200</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">expected_reduction =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">200</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">paste</span>(guess_dictionary_top[[n]], <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  expected_reductions_exact<span class="sc">$</span>guess[n] <span class="ot">&lt;-</span> guess</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  distribution_table <span class="ot">&lt;-</span> <span class="fu">guess_quality</span>(guess) <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">dictionary_reduction =</span> <span class="dv">100</span><span class="sc">-</span>(<span class="dv">100</span><span class="sc">*</span>(posterior_dictionary_length<span class="sc">/</span><span class="fu">length</span>(answer_dictionary))))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  expected_reductions_exact<span class="sc">$</span>expected_reduction[n] <span class="ot">&lt;-</span> <span class="fu">mean</span>(distribution_table<span class="sc">$</span>dictionary_reduction)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>expected_reductions_exact <span class="ot">&lt;-</span> expected_reductions_exact <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(expected_reduction))</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expected_reductions_exact, <span class="dv">10</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     guess           expected_reduction</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1  roate           97.38987</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2  raise           97.36497</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3  raile           97.35072</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4  soare           97.30881</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5  arise           97.24727</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6  irate           97.24496</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7  orate           97.24014</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8  ariel           97.17980</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9  arose           97.14811</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  10 raine           97.10341</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There’s been quite a bit of shifting around, but <code>roate</code> is still on top! <a href="https://www.lawinsider.com/dictionary/roate">Roate</a>, the cumulative net earnings after taxes available to common shareholders, adjusted for tax-affected amortization of intangibles, for the calendar quarters in each calendar year in a specified period of time divided by average shareholder’s tangible common equity! Notice also that roate’s expected reduction has gone down since our randomly-sampled round, from 97.79% to 97.39%. This makes sense and is similar to regression toward the mean–the first set had some randomness and the most extreme results of that randomness were selected to be on top. The second set had no randomness and therefore no boost on the top end.</p>
+<p>There you have it. The statistically optimal Wordle starting word is <code>roate</code>.</p>
+</section>
+<section id="cmon-i-wanna-see-the-optimal-wordle-playing-bot" class="level1">
+<h1>Cmon, I wanna see the optimal Wordle playing Bot!</h1>
+<p>Ok fine. Here it is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is the same as dictionary_update, but it prints the outcome of the guess with nice colors</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dictionary_update_printed <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, answer, dictionary) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (guess[n] <span class="sc">%in%</span> answer){</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (guess[n] <span class="sc">==</span> answer[n]) {</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> dictionary[<span class="fu">sapply</span>(dictionary, <span class="st">"["</span>, n) <span class="sc">==</span> guess[n]]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\033</span><span class="st">[48;5;46m"</span>, guess[n]))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      }<span class="cf">else</span>{</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> dictionary[<span class="fu">sapply</span>(dictionary, <span class="st">"["</span>, n) <span class="sc">!=</span> guess[n]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="sc">&amp;</span> <span class="fu">sapply</span>(dictionary, <span class="cf">function</span>(x) <span class="fu">any</span>(guess[n] <span class="sc">%in%</span> x))]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\033</span><span class="st">[48;5;226m"</span>, guess[n]))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      dictionary <span class="ot">&lt;-</span> dictionary[<span class="fu">sapply</span>(dictionary, <span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">any</span>(guess[n] <span class="sc">%in%</span> x))]</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\033</span><span class="st">[48;5;249m"</span>, guess[n]))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  dictionary</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Returns average posterior dictionary length</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>guess_quality_minimal <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, <span class="at">dictionary =</span> answer_dictionary) {</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(guess, <span class="st">""</span>))</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  distribution <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(dictionary))</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(distribution)) {</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    answer <span class="ot">&lt;-</span> dictionary[[n]]</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    distribution[n] <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">dictionary_update</span>(guess, answer, dictionary))</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(distribution)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># THE BOT</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>play <span class="ot">&lt;-</span> <span class="cf">function</span>(answer){</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(answer) <span class="sc">==</span> <span class="dv">5</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make the first guess (always "roate") and update the dictionary</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  dictionary <span class="ot">&lt;-</span> <span class="fu">dictionary_update_printed</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"roate"</span>, <span class="st">""</span>)), answer, answer_dictionary)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Loop for the other 5 guesses</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (try <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there's only one option left, guess it and end the game.</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(dictionary) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\033</span><span class="st">[48;5;46m"</span>, <span class="fu">paste</span>(dictionary[[<span class="dv">1</span>]], <span class="at">collapse =</span> <span class="st">""</span>)))</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there are two options left, guess the first. If that's the answer, end the game. If not, guess the next one and end the game.</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(dictionary) <span class="sc">==</span> <span class="dv">2</span>) {</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">paste</span>(dictionary[[<span class="dv">1</span>]], <span class="at">collapse =</span> <span class="st">""</span>) <span class="sc">==</span> <span class="fu">paste</span>(answer, <span class="at">collapse =</span> <span class="st">""</span>)){</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> <span class="fu">dictionary_update_printed</span>(dictionary[[<span class="dv">1</span>]], answer, dictionary)</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>      }<span class="cf">else</span>{</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> <span class="fu">dictionary_update_printed</span>(dictionary[[<span class="dv">1</span>]], answer, dictionary)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>        dictionary <span class="ot">&lt;-</span> <span class="fu">dictionary_update_printed</span>(dictionary[[<span class="dv">1</span>]], answer, dictionary)</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop through possible guesses and evaluate how many possible answers we would expected to have after guessing them. Then pick the lowest one and guess it.</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>    guess_remainders <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(guess_dictionary))</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(guess_dictionary)) {</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>      guess <span class="ot">&lt;-</span> <span class="fu">paste</span>(guess_dictionary[[n]], <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>      guess_remainders[n] <span class="ot">&lt;-</span> <span class="fu">guess_quality_minimal</span>(guess, dictionary)</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>    dictionary <span class="ot">&lt;-</span> <span class="fu">dictionary_update_printed</span>(guess_dictionary[[<span class="fu">which.min</span>(guess_remainders)]], answer, dictionary)</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">paste</span>(guess_dictionary[[<span class="fu">which.min</span>(guess_remainders)]], <span class="at">collapse =</span> <span class="st">""</span>) <span class="sc">==</span> <span class="fu">paste</span>(answer, <span class="at">collapse =</span> <span class="st">""</span>)) {</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Obviously the bot always starts by guessing “roate”. After each new guess, the expected helpfulness of each possible next guess is reassessed based on the shortened list of answer possibilities. Other than that, the whole process is the same one I’ve been working with all along; each guess is the one that is expected to narrow down the remaining possibilities the most.</p>
+<p>Let’s see it play a few games!</p>
+<p><img src="figures/fig10.png" width="150"> <img src="figures/fig11.png" width="150"> <img src="figures/fig12.png" width="150"> <img src="figures/fig13.png" width="150"> <img src="figures/fig14.png" width="150"> <img src="figures/fig15.png" width="150"> <img src="figures/fig16.png" width="150"> <img src="figures/fig17.png" width="150"> <img src="figures/fig18.png" width="150"> <img src="figures/fig19.png" width="150"> <img src="figures/fig20.png" width="150"> <img src="figures/fig21.png" width="150"></p>
+<p>Can we learn any sage advice from this digital Wordle master? Just by looking at the games, it’s hard to say. I’m surprised by its willingness to use rarish letters in the second guess, but that doesn’t amount to a general statement about what kind of words make good second guesses. If we really want to learn some grandmaster-level Wordle skills, we’ll have to return to our probability density plots.</p>
+<p>Here’s one for our champion first guess:</p>
+<p><img src="figures/fig22.jpeg"></p>
+<p>Looks pretty good, but still not clear how to squeeze strategy from this. The problem is that I have no idea how those peaks and valleys correspond to actual situations we might face in the Wordle battlefield. I don’t want to know what by what percentages I’m likely to narrow the search–I want to know what second guesses I’m likely to need after <code>roate</code>! It’s time to reveal the ugly monster lurking behind the density plot: the bar chart.</p>
+<p><img src="figures/fig23.jpeg"></p>
+<p>Yup. There are a few discrete outcomes that are more likely than the other ones. Well what are they? And what does the bot say to do in those situations?</p>
+<p>As I’ve mentioned before, the tallest bar all the way to the left (i.e.&nbsp;the single most likely outcome) is definitely the case in which none of the letters in <code>roate</code> are in the target word - you turn up with all black squares. In that case, the computer says that the optimal next guess is <code>slimy</code>.</p>
+<p>Here are the top 5 most likely outcomes of the first guess <code>roate</code>, along with the optimal second guess:</p>
+<ol type="1">
+<li><img src="figures/sissy.png" width="100"> (8.4% chance). Optimal second guess: <code>slimy</code></li>
+<li><img src="figures/colon.png" width="100"> (6.1% chance). Optimal second guess: <code>bludy</code></li>
+<li><img src="figures/stink.png" width="100"> (5.4% chance). Optimal second guess: <code>shunt</code></li>
+<li><img src="figures/naval.png" width="100"> (4.8% chance). Optimal second guess: <code>lysin</code></li>
+<li><img src="figures/bench.png" width="100"> (4.6% chance). Optimal second guess: <code>silen</code></li>
+</ol>
+<p>So there you are. If you’ve ever looked longingly at a chess grandmaster and thought, “I wish <strong>I</strong> could just memorize all the best openings instead of playing like a normal person”, your wish has come true.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
