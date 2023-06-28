@@ -17,7 +17,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/minecraft_cogsci/predicting_questions_README.html",
       "/blog/medieval_philosophers/index.html",
+      "/blog/minecraft_cogsci/index.html",
       "/blog/police_exploratory/index.html",
       "/blog/wordle/index.html"
     ]
