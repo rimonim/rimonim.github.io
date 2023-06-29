@@ -33,15 +33,13 @@ Hebrew - fluent
 
 **Programming:** R, Python, SQL, Git(Hub), SPSS, Excel
 
-**Documentation:** (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets
+**Documentation:** (R)Markdown/Quarto, JupyterLab, Google Colab, Google Docs/Sheets
 
 **Design:** ggplot2, Gimp, Photoshop, Inkscape
 
 **Deployment:** Shiny, Streamlit
 
-## Disclaimer {#disclaimer}
-
-Last updated on `r Sys.Date()`.
+**Machine Learning:** Bayesian inference, multilevel modeling, logistic and binomial regression, PCA, random forest, elastic-net regression, k-means clustering, t-SNE, word/document embeddings, sentiment analysis
 
 # Main
 

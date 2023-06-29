@@ -172,7 +172,7 @@
     "href": "CV/index.html",
     "title": "Louis Teitelbaum’s CV",
     "section": "",
-    "text": "louist@post.bgu.ac.il\n Home Page |  Blog\n GitHub |  LinkedIn\n\n\n\nEnglish - native\nHebrew - fluent\n\n\n\nProgramming: R, Python, SQL, Git(Hub), SPSS, Excel\nDocumentation: (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets\nDesign: ggplot2, Gimp, Photoshop, Inkscape\nDeployment: Shiny, Streamlit\n\n\n\nLast updated on 2023-06-29."
+    "text": "louist@post.bgu.ac.il\n Home Page |  Blog\n GitHub |  LinkedIn\n\n\n\nEnglish - native\nHebrew - fluent\n\n\n\nProgramming: R, Python, SQL, Git(Hub), SPSS, Excel\nDocumentation: (R)Markdown/Quarto, JupyterLab, Google Colab, Google Docs/Sheets\nDesign: ggplot2, Gimp, Photoshop, Inkscape\nDeployment: Shiny, Streamlit\nMachine Learning: Bayesian inference, multilevel modeling, logistic and binomial regression, PCA, random forest, elastic-net regression, k-means clustering, t-SNE, word/document embeddings, sentiment analysis"
   },
   {
     "objectID": "CV/index.html#title",
