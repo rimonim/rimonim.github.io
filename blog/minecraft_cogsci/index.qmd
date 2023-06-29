@@ -3,7 +3,7 @@ title: "Predicting Questions in Dialogue"
 author: "Louis Teitelbaum"
 date: "March 29, 2022"
 categories: [R, Bayesian Statistics, Dialogue, Cognitive Science, Cognitive Linguistics, Multilevel Modeling, ggplot2, NLP]
-image: figures/minecraft5.png
+image: figures/minecraft6.png
 ---
 
 The Minecraft Dialogue Corpus [(Narayan-Chen et al., 2019)](http://dx.doi.org/10.18653/v1/P19-1537) is a collection of 509 text-based conversations between players collaborating to build structures. The "Architect" is shown a target structure and needs to explain to the "Builder" how to build it. The Architect can observe the Builder but cannot place blocks.

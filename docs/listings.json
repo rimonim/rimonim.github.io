@@ -19,9 +19,9 @@
     "listing": "/blog.html",
     "items": [
       "/blog/medieval_philosophers/index.html",
-      "/blog/chess_brain/index.html",
       "/blog/semantic_history/index.html",
       "/blog/minecraft_cogsci/index.html",
+      "/blog/chess_brain/index.html",
       "/blog/police_exploratory/index.html",
       "/blog/wordle/index.html"
     ]

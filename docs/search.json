@@ -95,14 +95,14 @@
     "href": "blog/chess_brain/index.html#how-do-my-affect-and-anxiety-affect-the-amount-of-chess-i-play",
     "title": "Tracking Cognitive Performance with Online Chess",
     "section": "How do my affect and anxiety affect the amount of chess I play?",
-    "text": "How do my affect and anxiety affect the amount of chess I play?\n\n\n\nMy Chess Performance by Affect\n\n\n\n\n\nMy Chess Performance by Anxiety"
+    "text": "How do my affect and anxiety affect the amount of chess I play?\n\n\n\nMy Chess Performance by Affect\n\n\nI play less chess when I’m feeling good.\n\n\n\nMy Chess Performance by Anxiety"
   },
   {
-    "objectID": "blog/chess_brain/index.html#how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games",
-    "href": "blog/chess_brain/index.html#how-do-all-these-things-affect-the-way-in-which-i-losewin-my-games",
+    "objectID": "blog/chess_brain/index.html#how-these-things-affect-the-way-in-which-i-losewin-my-games",
+    "href": "blog/chess_brain/index.html#how-these-things-affect-the-way-in-which-i-losewin-my-games",
     "title": "Tracking Cognitive Performance with Online Chess",
-    "section": "How do all these things affect the way in which I lose/win my games?",
-    "text": "How do all these things affect the way in which I lose/win my games?"
+    "section": "How these things affect the way in which I lose/win my games?",
+    "text": "How these things affect the way in which I lose/win my games?\n \nIt looks like I’m a bit faster when I’m feeling happy and less anxious. That translates to winning more games on timeout (i.e. my opponent runs out of time) and losing fewer on timeout. It’s a small effect though. For now, I think chess should remain a fun game and not a diagnostic tool."
   },
   {
     "objectID": "blog/semantic_history/index.html",
@@ -172,7 +172,7 @@
     "href": "CV/index.html",
     "title": "Louis Teitelbaum’s CV",
     "section": "",
-    "text": "louist@post.bgu.ac.il\n Home Page |  Blog\n GitHub |  LinkedIn\n\n\n\nEnglish - native\nHebrew - fluent\n\n\n\nProgramming: R, Python, SQL, Git(Hub), SPSS, Excel\nDocumentation: (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets\nDesign: ggplot2, Gimp, Photoshop, Inkscape\nDeployment: Shiny, Streamlit\n\n\n\nLast updated on 2023-06-28."
+    "text": "louist@post.bgu.ac.il\n Home Page |  Blog\n GitHub |  LinkedIn\n\n\n\nEnglish - native\nHebrew - fluent\n\n\n\nProgramming: R, Python, SQL, Git(Hub), SPSS, Excel\nDocumentation: (R)Markdown/Quarto, JupyterLab, Google Docs/Sheets\nDesign: ggplot2, Gimp, Photoshop, Inkscape\nDeployment: Shiny, Streamlit\n\n\n\nLast updated on 2023-06-29."
   },
   {
     "objectID": "CV/index.html#title",
@@ -214,6 +214,6 @@
     "href": "blog.html",
     "title": "Louis Teitelbaum",
     "section": "",
-    "text": "Designing a Poster to Visualize the Timeline of Philosophers in the Islamic World\n\n\n\n\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\n\n\n\n\nMay 8, 2023\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nTracking Cognitive Performance with Online Chess\n\n\n\n\n\n\n\nPython\n\n\nHistory\n\n\nLinguistics\n\n\nDataViz\n\n\n\n\n\n\n\n\n\n\n\nJan 12, 2023\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nThe History of Semantic Spaces\n\n\n\n\n\n\n\nPython\n\n\nHistory\n\n\nDataViz\n\n\nNLP\n\n\n\n\n\n\n\n\n\n\n\nJan 12, 2023\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nPredicting Questions in Dialogue\n\n\n\n\n\n\n\nR\n\n\nBayesian Statistics\n\n\nDialogue\n\n\nCognitive Science\n\n\nCognitive Linguistics\n\n\nMultilevel Modeling\n\n\nggplot2\n\n\nNLP\n\n\n\n\n\n\n\n\n\n\n\nMar 29, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nתכלית מוקד 100 להציל חיים\n\n\n\n\n\n\n\nR\n\n\nData Mining\n\n\nScraping\n\n\nGovernment\n\n\nעברית\n\n\n\n\n\n\n\n\n\n\n\nFeb 15, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nStatistically Optimal Wordle\n\n\n\n\n\n\n\nR\n\n\nprobability theory\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\nNo matching items"
+    "text": "Designing a Poster to Visualize the Timeline of Philosophers in the Islamic World\n\n\n\n\n\n\n\nR\n\n\nggplot2\n\n\nDataViz\n\n\n\n\n\n\n\n\n\n\n\nMay 8, 2023\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nThe History of Semantic Spaces\n\n\n\n\n\n\n\nPython\n\n\nHistory\n\n\nDataViz\n\n\nNLP\n\n\n\n\n\n\n\n\n\n\n\nJan 12, 2023\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nPredicting Questions in Dialogue\n\n\n\n\n\n\n\nR\n\n\nBayesian Statistics\n\n\nDialogue\n\n\nCognitive Science\n\n\nCognitive Linguistics\n\n\nMultilevel Modeling\n\n\nggplot2\n\n\nNLP\n\n\n\n\n\n\n\n\n\n\n\nMar 29, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nTracking Cognitive Performance with Online Chess\n\n\n\n\n\n\n\nR\n\n\nCognitive Science\n\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\nMar 15, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nתכלית מוקד 100 להציל חיים\n\n\n\n\n\n\n\nR\n\n\nData Mining\n\n\nScraping\n\n\nGovernment\n\n\nעברית\n\n\n\n\n\n\n\n\n\n\n\nFeb 15, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\n  \n\n\n\n\nStatistically Optimal Wordle\n\n\n\n\n\n\n\nR\n\n\nprobability theory\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2022\n\n\nLouis Teitelbaum\n\n\n\n\n\n\nNo matching items"
   }
 ]

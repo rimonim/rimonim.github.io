@@ -1,8 +1,8 @@
 ---
 title: "Tracking Cognitive Performance with Online Chess"
 author: "Louis Teitelbaum"
-date: "January 12, 2023"
-categories: [Python, History, Linguistics, DataViz]
+date: "March 15, 2022"
+categories: [R, Cognitive Science, ggplot2]
 image: figures/cognitivecircadian.jpg
 ---
 
@@ -54,8 +54,12 @@ This difference could be due to chance, or some pitfall of my measurement system
 
 ![My Chess Performance by Affect](figures/chesshappiness.png)
 
+I play less chess when I'm feeling good.
+
 ![My Chess Performance by Anxiety](figures/chessanxiety.png)
 
-## How do all these things affect the *way* in which I lose/win my games?
+## How these things affect the *way* in which I lose/win my games?
 
-![My Chess Game Outcomes by Hours of Sleep](figures/chessoutcomesleep.png) ![My Chess Game Outcomes by Affect](figures/chessoutcomehappiness.png) ![My Chess Game Outcomes by Anxiety](figures/chessoutcomeanxiety.png)
+![My Chess Game Outcomes by Affect](figures/chessoutcomehappiness.png) ![My Chess Game Outcomes by Anxiety](figures/chessoutcomeanxiety.png)
+
+It looks like I'm a bit *faster* when I'm feeling happy and less anxious. That translates to winning more games on timeout (i.e. my opponent runs out of time) and losing fewer on timeout. It's a small effect though. For now, I think chess should remain a fun game and not a diagnostic tool.
