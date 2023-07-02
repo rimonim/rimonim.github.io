@@ -10,6 +10,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/projects/hire_your_clone.html",
       "/projects/wormsplot.html",
       "/projects/tidy_tuesday.html",
       "/projects/paper_provenance.html"
@@ -18,6 +19,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/hire_your_clone/index.html",
       "/blog/medieval_philosophers/index.html",
       "/blog/semantic_history/index.html",
       "/blog/minecraft_cogsci/index.html",

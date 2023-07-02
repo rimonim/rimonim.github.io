@@ -1,0 +1,12 @@
+---
+title: "hire_your_clone"
+author: "Louis Teitelbaum"
+date: "July 2, 2023"
+categories: [DataViz, Shiny, Web Apps]
+image: you_yourboss.png
+---
+
+An interactive web app for exploring patterns in boss-employee pairings among high-level executives.
+
+The app is now deployed at <https://rimonim.shinyapps.io/hire_your_clone/>
+

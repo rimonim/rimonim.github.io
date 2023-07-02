@@ -2,7 +2,7 @@
 title: "paper_provenance"
 author: "Louis Teitelbaum"
 date: "March 28, 2023"
-categories: [Python, Meta-Science, DataViz, Streamlit]
+categories: [Python, Meta-Science, DataViz, Streamlit, Web Apps]
 image: paper_provenance_sample.png
 ---
 

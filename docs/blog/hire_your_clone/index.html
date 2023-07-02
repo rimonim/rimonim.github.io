@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Louis Teitelbaum">
+<meta name="dcterms.date" content="2023-06-28">
+
+<title>Louis Teitelbaum - Do Employees Tend to Have the Same First Name as Their Bosses?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/rimonim.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Louis Teitelbaum</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../design.html">
+ <span class="menu-text">Art and Design</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../CV/CV.pdf">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#results" id="toc-results" class="nav-link active" data-scroll-target="#results">Results</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Do Employees Tend to Have the Same First Name as Their Bosses?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">brms</div>
+    <div class="quarto-category">Bayesian Statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Louis Teitelbaum </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 28, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>I was talking to my dad on the phone a few weeks ago, and he brought up a question: Do employers have a bias against hiring employees who have the same first name as they do? Surely, bosses must try to protect their unique name in the same way that fashionable dressers might be annoyed when another party-goer shows up with an identical outfit to their own. And that’s not to mention the opportunity for confusion: How will members of the team distinguish them in conversation? For these reasons, my dad figured there must be some bias against same-name hiring.</p>
+<p>But how can we check this empirically?</p>
+<p>The first step was to find some data. The best I could find came from <a href="www.theofficialboard.com">The Official Board</a>, which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 13,589 employee/boss pairs across 912 US companies. Here’s an example of the data after some cleaning:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 5
+   first_name last_name   boss_first_name boss_last_name company                
+   &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;                  
+ 1 Christina  Peter       Jeffrey         Bezos          American Benefits Cons…
+ 2 Daniel     Rosensweig  Jeffrey         Bezos          American Benefits Cons…
+ 3 Eduardo    Loss        Jeffrey         Bezos          American Benefits Cons…
+ 4 Monica     Fisher-King Jeffrey         Bezos          NBCUniversal Local     
+ 5 Melayne    Cohen       Jeffrey         Bezos          National Geographic Co…
+ 6 Alan       Dye         Jeffrey         Bezos          JLL Hotels &amp; Hospitali…
+ 7 Dave       Fildes      Jeffrey         Bezos          Duke Realty New Jersey 
+ 8 Dave       Fildes      Jeffrey         Bezos          Duke Realty Pennsylvan…
+ 9 Kym        Hadzick     Jeffrey         Bezos          Sony Pictures Animation
+10 Alba       Da Virgi    Jeffrey         Bezos          Sony Pictures Distribu…
+11 Nicola     Shaw        Jeffrey         Bezos          Universal Music Group  </code></pre>
+</div>
+</div>
+<p>Now we arrive at the first two problems:</p>
+<ol type="1">
+<li>The data only reflect people who <strong>did</strong> get hired, not people who did not. This means that we are blind to the true probabilities behind the hiring process.</li>
+<li>Employees were not always hired by their current bosses. Sometimes bosses are hired after their employees, and sometimes hiring is managed by other people in the organizational structure. So the boss-employee name match-up we’re looking at might not always be the relevant one.</li>
+</ol>
+<p>Problem 1 is not solvable with the data I have here, but that’s OK. It just means that we can’t answer any questions about, say, whether having a particular name makes you more or less likely to get hired <em>in general</em>. We can only compare the dataset to itself: Do same-name matchups occur more or less often than they would if the same set of bosses and employees were matched up randomly?</p>
+<p>Problem 2 is also not solvable. It means we have to be a bit careful, and remember that the analysis is about the probability of certain boss-employee matches <em>existing</em>. This is probably mostly a result of certain kinds of bosses hiring certain kinds of employees, but not necessarily.</p>
+<p>This brings us to the final problem - one that I can, at least partially, solve: Gender and ethnicity will confound the results: Male bosses might be more likely to have male employees. Since names tend to be gendered, this will make them that much more likely to have the same same, even if there is no bias at all for the names themselves. The same goes for ethnicity: White bosses might be more likely to have white employees, making them more likely to both have common white names. We need to account for these other biases before we can know anything about the one we’re interested in.</p>
+<p>This is a tricky problem to solve, since the data do not include the gender and ethnicity of each employee and boss. Thankfully, it’s usually not too hard to guess someone’s gender and ethnicity from on their name. After some shopping, I found <a href="https://www3.cs.stonybrook.edu/~skiena/lydia/names.pdf">this tool for predicting ethnic background</a>, which is available through the <a href="https://ethnicolr.readthedocs.io"><code>ethnicolr</code> python module</a>. This is a decision tree classifier trained on about 130,000 names from Wikipedia. It’s categorization strategy is a bit strange - for example, African American names are considered “British”. This is presumably because many African Americans have names of British origin (as do many white Americans) and are therefore hard to tell apart from those of white people of British ancestry. For my purposes, I further lumped some of the categories together, to get eight: African, Chinese or Korean, Eastern European, Hispanic, Indian, Jewish, Muslim, and Western European or African American. The model outputs probabilities of each ethnic category, I can easily combine categories using the sum rule from probability theory. When I incorporate these probabilities into my model, I can use the product rule to generate, for example, the probability that both the employee and the boss are African.</p>
+<p>For gender, I used the <a href="https://cran.r-project.org/web/packages/predictrace/vignettes/Predict-race-of-surname.html"><code>predictrace</code> R package</a>, which uses a much more straightforward approach (first names only) based on data from the US census. All of this is of course not perfect, but it should be good enough to account for most of the effects of gender and ethnicity.</p>
+<p>While I was at it, I decided to throw in one more possible confounder: name popularity. I know some people with very uncommon names, and they often profess solidarity with other bearers of rare names, having to constantly correct others on pronunciation and spelling. I calculated name popularity based on <a href="https://cran.r-project.org/web/packages/babynames/babynames.pdf">data from the US Social Security Administration</a> and cutoff at 1 in 1000 to bin names into either “common” or “uncommon”.</p>
+<p>Before building the model, there is one more problem to tackle: differences between bosses, and differences between companies. This is important, since companies might have different cultures or priorities that cause them to vary on how they hire vis-a-vis gender and ethnicity. Since bosses often have multiple employees, and companies generally have multiple bosses, this is a job for multilevel modeling.</p>
+<p>Now it’s time to build the model. This takes some creativity, for two reasons: First, the dataset is enormous. Second, as noted above, I need to analyze the difference between the true data and a randomly shuffled version, but I can’t include ALL possible random combinations of bosses and employees, since that would make the dataset really really enormous.</p>
+<p>Here’s my stategy:</p>
+<ol type="1">
+<li>Choose 250 companies from the real dataset at random. Take the data from those companies and label it <code>real</code> = 1.</li>
+<li>Subset the chosen companies, shuffle the boss-employee pairings randomly (company labels stick with bosses, not necessarily employees), and sample as many rows as are in the <code>real</code> data. Label these rows <code>real</code> = 0.</li>
+<li>Run a Bayesian multilevel logistic regression (predicting log odds that a pairing is real) with 8000 iterations of Markov Chain Monte Carlo sampling, and skeptical priors.</li>
+<li>Repeat steps 1-3 ten times.</li>
+<li>Combine all samples of the posterior distributions for each fixed effect (I don’t care about the individual differences between bosses or companies).</li>
+</ol>
+<p>Full code for all of this can be found <a href="https://github.com/rimonim/hire_your_clone/blob/main/analysis.R">here</a>.</p>
+<p>The model itself looks like this, as formulated in <code>brms</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mod_america_bayes1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(real <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">+</span> both_uncommon_names <span class="sc">+</span> both_men <span class="sc">+</span> boss_man <span class="sc">+</span> boss_woman <span class="sc">+</span> both_women <span class="sc">+</span> both_EastAsian <span class="sc">+</span> both_EastEuropean <span class="sc">+</span> both_Japanese <span class="sc">+</span> both_Indian <span class="sc">+</span> both_African <span class="sc">+</span> both_Muslim <span class="sc">+</span> both_WestEuropean <span class="sc">+</span> both_Jewish <span class="sc">+</span> both_Hispanic <span class="sc">+</span> both_Italian <span class="sc">+</span> WE_Asian <span class="sc">+</span> WE_Indian <span class="sc">+</span> WE_Muslim <span class="sc">+</span> WE_Hispanic <span class="sc">+</span> WE_Jewish <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">|</span> boss_ID) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">+</span> both_uncommon_names <span class="sc">+</span> both_male <span class="sc">+</span> boss_male <span class="sc">+</span> boss_female <span class="sc">+</span> both_female <span class="sc">+</span> both_EastAsian <span class="sc">+</span> both_EastEuropean <span class="sc">+</span> both_Japanese <span class="sc">+</span> both_Indian <span class="sc">+</span> both_African <span class="sc">+</span> both_Muslim <span class="sc">+</span> both_WestEuropean <span class="sc">+</span> both_Jewish <span class="sc">+</span> both_Hispanic <span class="sc">+</span> both_Italian <span class="sc">+</span> WE_Asian <span class="sc">+</span> WE_Indian <span class="sc">+</span> WE_Muslim <span class="sc">+</span> WE_Hispanic <span class="sc">+</span> WE_Jewish <span class="sc">|</span> company_ID),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> d_america_train,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family =</span> <span class="fu">bernoulli</span>(),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> <span class="st">"b"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">prior</span>(<span class="fu">student_t</span>(<span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> <span class="st">"sd"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                         ),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">iter =</span> <span class="dv">8000</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">warmup =</span> <span class="dv">2000</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cores =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>both_EastAsian</code> is the probability that both boss and employee are East Asian, based on their full names. <code>WE_Asian</code> is the probability that the boss is Western European or African American and the employee is East Asian or Japanese.</p>
+<p>Notice that there are no intercepts, fixed or random. This is because the dataset is balanced - there is a 50% baseline chance that any pairing will be real, since half of the pairings are real. Similarly, there is a known 50% chance that any given boss or company will be in a real or fake pairing, because of the random sampling process. In log odds, 50% is 0, so the model should be run without intercepts at all.</p>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>After waiting for all this to run overnight, we have results!</p>
+<p>Below are the posterior parameter estimates for the first six fixed effect parameters. The dark blue lines represent 95% credible intervals.</p>
+<p><img src="posteriors1.png" class="img-fluid"></p>
+<p>The model is very unsure about the effect of sharing the same name. This makes sense, since it only happens very rarely. Nevertheless, the model thinks that it’s more likely than not that the effect is <em>positive</em>! In other words, these data constitute evidence that bosses are more likely than chance to have employees that share their first name exactly, even when accounting for name popularity, gender, and ethnicity. In particular, the model’s median estimate for the <code>same_first_name</code> parameter is 0.186. Translating from log odds, this means that, <strong>according to the model, having the same name as your boss increases your odds of working together by more than 20%</strong>.</p>
+<p>It is still possible that this is due to confounding effects of gender or ethnicity, either because the AI-based guessing was not good enough, the categories were not specific enough, or because I did not account for interactions between gender and ethnicity.</p>
+<p>But what about the other parameters?</p>
+<p>The effect of both having an uncommon name is tiny, but does look to be slightly positive. The same goes for both boss and employee being men. Both being women, on the other hand, looks to be a huge advantage. The median estimate for that parameter is 0.28, which translates to a 32% odds increase. Conversely, bosses who are women are less likely than chance to have male employees. <strong>Note:</strong> Since there are more men than women in top executive positions overall, this does not mean that bosses who are women have mostly women as employees.</p>
+<p>And ethnicity?</p>
+<p><img src="posteriors2.png" class="img-fluid"> The model is understandably unsure about most of these, again because it is so rare for a boss and employee to be members of the same minority group. Nevertheless, some things do seem fairly clear: both being Hispanic looks to be a fairly large advantage. Both being Jewish seems to be a relatively small advantage. Being Asian with a Western European or African American boss seems to be a slight advantage, and being Jewish a slight disadvantage.</p>
+<p>I will leave it to the reader to make of all this whatever she wants.</p>
+<p>If you are interested in playing interactively with the results, check out <a href="https://rimonim.shinyapps.io/hire_your_clone/">the interactive web app</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

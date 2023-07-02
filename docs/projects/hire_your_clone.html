@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Louis Teitelbaum">
-<meta name="dcterms.date" content="2023-06-28">
+<meta name="dcterms.date" content="2023-07-02">
 
-<title>Louis Teitelbaum - Do Employees Tend to Have the Same First Name as Their Bosses?</title>
+<title>Louis Teitelbaum - hire_your_clone</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,11 +123,11 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Do Employees Tend to Have the Same First Name as Their Bosses?</h1>
+<h1 class="title">hire_your_clone</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">R</div>
-    <div class="quarto-category">brms</div>
-    <div class="quarto-category">Bayesian Statistics</div>
+    <div class="quarto-category">DataViz</div>
+    <div class="quarto-category">Shiny</div>
+    <div class="quarto-category">Web Apps</div>
   </div>
   </div>
 
@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 28, 2023</p>
+      <p class="date">July 2, 2023</p>
     </div>
   </div>
   
@@ -155,31 +155,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>I was talking to my dad on the phone a few weeks ago, and he brought up a question: Do employers have a bias against hiring employees who have the same first name as they do? Surely, bosses must try to protect their unique name in the same way that fashionable dressers might be annoyed when another party-goer shows up with an identical outfit to their own. And that’s not to mention the opportunity for confusion: How will members of the team distinguish them in conversation? For these reasons, my dad figured there must be some bias against same-name hiring.</p>
-<p>But how can we check this empirically?</p>
-<p>The first step was to find some data. The best I could find came from <a href="www.theofficialboard.com">The Official Board</a>, which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 11,702 employee/boss pairs across 779 US companies. Here’s an example of the data after some cleaning:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 53
-  ID     first_name boss_ID boss_first_name company_ID company             level
-  &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;               &lt;chr&gt;
-1 ryyj5m Monica     jp7nxq  Jeffrey         joy01      NBCUniversal Local  N-2  
-2 r27e5m Melayne    5vlnro  Jeffrey         lwr96      National Geographi… N-2  
-3 rwmv07 Alan       p4md4r  Jeffrey         xw4d0      JLL Hotels &amp; Hospi… N-2  
-4 561pvo Kym        ez6744  Jeffrey         9lqn4      Sony Pictures Anim… N-2  
-5 z0452d Alba       6qv6r2  Jeffrey         4e0ww      Sony Pictures Dist… N-2  
-6 7ej1vn Nicola     09rz0w  Jeffrey         9lox0      Universal Music Gr… N-2  
-# ℹ 46 more variables: same_first_name &lt;int&gt;, gender &lt;int&gt;, boss_gender &lt;int&gt;,
-#   dyad_gender &lt;chr&gt;, last_name &lt;chr&gt;, EastAsian &lt;dbl&gt;, Japanese &lt;dbl&gt;,
-#   Indian &lt;dbl&gt;, African &lt;dbl&gt;, Muslim &lt;dbl&gt;, EastEuropean &lt;dbl&gt;,
-#   Jewish &lt;dbl&gt;, Hispanic &lt;dbl&gt;, Italian &lt;dbl&gt;, WestEuropean &lt;dbl&gt;,
-#   ethnicity &lt;chr&gt;, boss_last_name &lt;chr&gt;, boss_EastAsian &lt;dbl&gt;,
-#   boss_Japanese &lt;dbl&gt;, boss_Indian &lt;dbl&gt;, boss_African &lt;dbl&gt;,
-#   boss_Muslim &lt;dbl&gt;, boss_EastEuropean &lt;dbl&gt;, boss_Jewish &lt;dbl&gt;, …</code></pre>
-</div>
-</div>
-<p>At first glance, this seems easy: we’ll find names of bosses and their employees, check how often they are identical, and check that against the expected rate assuming no bias. If the real rate is much lower than could be expected with random pairings, we’ll conclude that the bias is real.</p>
-<p>There are three problems with this approach: 1. Gender and ethnicity will confound the results: Male bosses might be more likely to hire male employees. Since names tend to be gendered, this will make them that much more likely to have the same same, even if there is no bias at all for the names themselves. The same goes for ethnicity: White bosses might be more likely to hire white employees, making them more likely to both have common white names. We need to account for these other biases before we can know anything about the one we’re interested in. 2.</p>
+<p>An interactive web app for exploring patterns in boss-employee pairings among high-level executives.</p>
+<p>The app is now deployed at <a href="https://rimonim.shinyapps.io/hire_your_clone/" class="uri">https://rimonim.shinyapps.io/hire_your_clone/</a></p>
 
 
 
