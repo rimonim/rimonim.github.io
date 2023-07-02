@@ -229,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The first step was to find some data. The best I could find came from <a href="www.theofficialboard.com">The Official Board</a>, which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 13,589 employee/boss pairs across 912 US companies. Here’s an example of the data after some cleaning:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 11 × 5
+<pre><code># A tibble: 10 × 5
    first_name last_name   boss_first_name boss_last_name company                
    &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;                  
  1 Christina  Peter       Jeffrey         Bezos          American Benefits Cons…
@@ -239,10 +239,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  5 Melayne    Cohen       Jeffrey         Bezos          National Geographic Co…
  6 Alan       Dye         Jeffrey         Bezos          JLL Hotels &amp; Hospitali…
  7 Dave       Fildes      Jeffrey         Bezos          Duke Realty New Jersey 
- 8 Dave       Fildes      Jeffrey         Bezos          Duke Realty Pennsylvan…
- 9 Kym        Hadzick     Jeffrey         Bezos          Sony Pictures Animation
-10 Alba       Da Virgi    Jeffrey         Bezos          Sony Pictures Distribu…
-11 Nicola     Shaw        Jeffrey         Bezos          Universal Music Group  </code></pre>
+ 8 Kym        Hadzick     Jeffrey         Bezos          Sony Pictures Animation
+ 9 Alba       Da Virgi    Jeffrey         Bezos          Sony Pictures Distribu…
+10 Nicola     Shaw        Jeffrey         Bezos          Universal Music Group  </code></pre>
 </div>
 </div>
 <p>Now we arrive at the first two problems:</p>

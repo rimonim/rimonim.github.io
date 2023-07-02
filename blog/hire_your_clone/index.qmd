@@ -21,7 +21,9 @@ The first step was to find some data. The best I could find came from [The Offic
 ```{r}
 #| echo: false
 
-d_america_allvars %>% filter(boss_last_name == "Bezos") %>% select(first_name, last_name, boss_first_name, boss_last_name, company)
+d_america_allvars %>% filter(boss_last_name == "Bezos") %>% 
+  select(first_name, last_name, boss_first_name, boss_last_name, company) %>% 
+  distinct(first_name, last_name, boss_first_name, boss_last_name, .keep_all = TRUE)
 ```
 
 Now we arrive at the first two problems:
