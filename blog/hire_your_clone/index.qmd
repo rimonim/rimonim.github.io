@@ -52,8 +52,8 @@ Here's my stategy:
 1.  Choose 250 companies from the real dataset at random. Take the data from those companies and label it `real` = 1.
 2.  Subset the chosen companies, shuffle the boss-employee pairings randomly (company labels stick with bosses, not necessarily employees), and sample as many rows as are in the `real` data. Label these rows `real` = 0.
 3.  Run a Bayesian multilevel logistic regression (predicting log odds that a pairing is real) with 8000 iterations of Markov Chain Monte Carlo sampling, and skeptical priors.
-4.  Repeat steps 1-3 ten times.
-5.  Combine all samples of the posterior distributions for each fixed effect (I don't care about the individual differences between bosses or companies).
+4.  Repeat steps 1-3 ten times. This iterative resampling process will ward off overfitting (an important concern with so many parameters) and make training more efficient as a bonus.
+5.  Combine all samples of the posterior distributions for each fixed effect (I don't care about the individual differences between bosses or companies). The ability to combine resampled models like this is [a huge advantage of Bayesian methods](https://cran.r-project.org/web/packages/brms/vignettes/brms_missings.html).
 
 Full code for all of this can be found [here](https://github.com/rimonim/hire_your_clone/blob/main/analysis.R).
 
