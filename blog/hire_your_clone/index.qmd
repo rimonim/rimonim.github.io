@@ -43,6 +43,8 @@ For gender, I used the [`predictrace` R package](https://cran.r-project.org/web/
 
 While I was at it, I decided to throw in one more possible confounder: name popularity. I know some people with very uncommon names, and they often profess solidarity with other bearers of rare names, having to constantly correct others on pronunciation and spelling. I calculated name popularity based on [data from the US Social Security Administration](https://cran.r-project.org/web/packages/babynames/babynames.pdf) and cutoff at 1 in 1000 to bin names into either "common" or "uncommon".
 
+![Proportions of Common and Uncommon Names in the Raw Data](namepop_alluvial.png)
+
 Before building the model, there is one more problem to tackle: differences between bosses, and differences between companies. This is important, since companies might have different cultures or priorities that cause them to vary on how they hire vis-a-vis gender and ethnicity. Since bosses often have multiple employees, and companies generally have multiple bosses, this is a job for multilevel modeling.
 
 Now it's time to build the model. This takes some creativity, for two reasons: First, the dataset is enormous. Second, as noted above, I need to analyze the difference between the true data and a randomly shuffled version, but I can't include ALL possible random combinations of bosses and employees, since that would make the dataset really really enormous.
@@ -93,7 +95,9 @@ It is still possible that this is due to confounding effects of gender or ethnic
 
 But what about the other parameters? 
 
-The effect of both having an uncommon name is tiny, but does look to be slightly positive. The same goes for both boss and employee being men. Both being women, on the other hand, looks to be a huge advantage. The median estimate for that parameter is 0.28, which translates to a 32% odds increase. Conversely, bosses who are women are less likely than chance to have male employees. **Note:** Since there are more men than women in top executive positions overall, this does not mean that bosses who are women have mostly women as employees.
+The effect of both having an uncommon name is tiny, but does look to be slightly positive. The same goes for both boss and employee being men. Both being women, on the other hand, looks to be a huge advantage. The median estimate for that parameter is 0.28, which translates to a 32% odds increase. Conversely, bosses who are women are less likely than chance to have male employees. **Note:** Since there are more men than women in top executive positions overall, this does necessarily not mean that bosses who are women have mostly women as employees.
+
+![Proportions of Men and Women in the Raw Data](gender_alluvial.png)
 
 And ethnicity?
 
