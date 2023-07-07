@@ -8,7 +8,7 @@ image: you_yourboss.png
 
 ```{r setup}
 #| include: false
-load("~/Projects/hire_your_clone_app/data/show.RData")
+load("~/Projects/hire_your_clone/data/show.RData")
 library(tidyverse)
 ```
 
@@ -16,7 +16,7 @@ I was talking to my dad on the phone a few weeks ago, and he brought up a questi
 
 But how can we check this empirically?
 
-The first step was to find some data. The best I could find came from [The Official Board](www.theofficialboard.com), which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 13,589 employee/boss pairs across 912 US companies. Here's an example of the data after some cleaning:
+The first step was to find some data. The best I could find came from [The Official Board](www.theofficialboard.com), which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 23,698 employee/boss pairs across 1,601 US companies. This includes 70 instances of bosses and employees with the exact same first name. Here's an example of the data after some cleaning:
 
 ```{r}
 #| echo: false
@@ -41,6 +41,8 @@ This is a tricky problem to solve, since the data do not include the gender and 
 
 For gender, I used the [`predictrace` R package](https://cran.r-project.org/web/packages/predictrace/vignettes/Predict-race-of-surname.html), which uses a much more straightforward approach (first names only) based on data from the US census. All of this is of course not perfect, but it should be good enough to account for most of the effects of gender and ethnicity.
 
+![Proportions of Men and Women in the Raw Data](gender_alluvial.png)
+
 While I was at it, I decided to throw in one more possible confounder: name popularity. I know some people with very uncommon names, and they often profess solidarity with other bearers of rare names, having to constantly correct others on pronunciation and spelling. I calculated name popularity based on [data from the US Social Security Administration](https://cran.r-project.org/web/packages/babynames/babynames.pdf) and cutoff at 1 in 1000 to bin names into either "common" or "uncommon".
 
 ![Proportions of Common and Uncommon Names in the Raw Data](namepop_alluvial.png)
@@ -64,21 +66,29 @@ The model itself looks like this, as formulated in `brms`:
 ```{r}
 #| eval: false
 
-mod_america_bayes1 <- brm(real ~ 0 + same_first_name + both_uncommon_names + both_men + boss_man + boss_woman + both_women + both_EastAsian + both_EastEuropean + both_Japanese + both_Indian + both_African + both_Muslim + both_WestEuropean + both_Jewish + both_Hispanic + both_Italian + WE_Asian + WE_Indian + WE_Muslim + WE_Hispanic + WE_Jewish + (0 + same_first_name | boss_ID) + (0 + same_first_name + both_uncommon_names + both_male + boss_male + boss_female + both_female + both_EastAsian + both_EastEuropean + both_Japanese + both_Indian + both_African + both_Muslim + both_WestEuropean + both_Jewish + both_Hispanic + both_Italian + WE_Asian + WE_Indian + WE_Muslim + WE_Hispanic + WE_Jewish | company_ID),
-                         data = d_america_train,
-                         family = bernoulli(),
-                         prior = c(
-                           prior(normal(0, 1), class = "b"),
-                           prior(student_t(4, 0, 1), class = "sd")
-                         ),
-                         iter = 8000,
-                         warmup = 2000,
-                         cores = 4)
+mod_america_bayes1 <- brm(real ~ 0 + same_first_name + both_uncommon_names + both_male + boss_male + boss_female + both_female + both_EastAsian + both_EastEuropean + both_Japanese + both_Indian + both_African + both_Muslim + both_WestEuropean + WE_Asian + WE_Indian + WE_Muslim + WE_Hispanic + WE_Jewish + boss_female:both_WestEuropean + both_Jewish + both_Hispanic + both_Italian + boss_female:WE_Asian + boss_female:WE_Indian + boss_female:WE_Muslim + boss_female:WE_Hispanic + boss_female:WE_Jewish + both_female:both_WestEuropean + both_female:WE_Asian + both_female:WE_Indian + both_female:WE_Muslim + both_female:WE_Hispanic + both_female:WE_Jewish + both_male:both_WestEuropean + both_male:WE_Asian + both_male:WE_Indian + both_male:WE_Muslim + both_male:WE_Hispanic + both_male:WE_Jewish + boss_male:both_WestEuropean + boss_male:WE_Asian + boss_male:WE_Indian + boss_male:WE_Muslim + boss_male:WE_Hispanic + boss_male:WE_Jewish + (0 + same_first_name + both_uncommon_names + both_male + boss_male + boss_female + both_female + both_EastAsian + both_EastEuropean + both_Japanese + both_Indian + both_African + both_Muslim + both_WestEuropean + both_Jewish + both_Hispanic + both_Italian + WE_Asian + WE_Indian + WE_Muslim + WE_Hispanic + WE_Jewish | company_ID),
+                           data = d_america_train,
+                           family = bernoulli(),
+                           prior = c(
+                             prior(normal(0, 1), class = "b"),
+                             prior(student_t(4, 0, 1), class = "sd")
+                           ),
+                           iter = 6000,
+                           warmup = 2000,
+                           cores = 4)
 ```
 
 `both_EastAsian` is the probability that both boss and employee are East Asian, based on their full names. `WE_Asian` is the probability that the boss is Western European or African American and the employee is East Asian or Japanese.
 
-Notice that there are no intercepts, fixed or random. This is because the dataset is balanced - there is a 50% baseline chance that any pairing will be real, since half of the pairings are real. Similarly, there is a known 50% chance that any given boss or company will be in a real or fake pairing, because of the random sampling process. In log odds, 50% is 0, so the model should be run without intercepts at all. 
+In total there are 45 fixed effects: 
+1.  same first name (binary) 
+2.  both uncommon names (binary)
+3-6.  gender of boss and employee (four categories, one-hot coded) 
+7-14.  both the same ethnicity (7 ethnic categories, continuous probabilities)
+15-19.  boss is Western European or African American and the employee is a minority (5 minority groups, continuous probabilities)
+20-45.  interactions between gender and pairs involving Western European or African American bosses
+
+Notice that there are no intercepts, fixed or random. This is because the dataset is balanced - there is a 50% baseline chance that any pairing will be real, since half of the pairings are real. Similarly, there is a known 50% chance that any given boss or company will be in a real or fake pairing, because of the random sampling process. In log odds, 50% is 0, so the model should be run without intercepts at all.
 
 # Results
 
@@ -88,22 +98,14 @@ Below are the posterior parameter estimates for the first six fixed effect param
 
 ![](posteriors1.png)
 
-The model is very unsure about the effect of sharing the same name. This makes sense, since it only happens very rarely. Nevertheless, the model thinks that it's more likely than not that the effect is _positive_! In other words, these data constitute evidence that bosses are more likely than chance to have employees that share their first name exactly, even when accounting for name popularity, gender, and ethnicity. 
-In particular, the model's median estimate for the `same_first_name` parameter is 0.186. Translating from log odds, this means that, **according to the model, having the same name as your boss increases your odds of working together by more than 20%**. 
+The model is very unsure about the effect of sharing the same name. This makes sense, since it only happens very rarely. Nevertheless, the model thinks that it's more likely than not that the effect is *positive*! In other words, these data constitute evidence that bosses are more likely than chance to have employees that share their first name exactly, even when accounting for name popularity, gender, and ethnicity. In particular, the model's median estimate for the `same_first_name` parameter is 0.173. Translating from log odds, this means that, **according to the model, having the same name as your boss increases your odds of working together by about 19%**.
 
-It is still possible that this is due to confounding effects of gender or ethnicity, either because the AI-based guessing was not good enough, the categories were not specific enough, or because I did not account for interactions between gender and ethnicity. 
+It is still possible that this is due to confounding effects of gender or ethnicity, either because the AI-based guessing was not good enough, the categories were not specific enough, or because I did not account for interactions between gender and ethnicity.
 
-But what about the other parameters? 
+But what about the other parameters?
 
-The effect of both having an uncommon name is tiny, but does look to be slightly positive. The same goes for both boss and employee being men. Both being women, on the other hand, looks to be a huge advantage. The median estimate for that parameter is 0.28, which translates to a 32% odds increase. Conversely, bosses who are women are less likely than chance to have male employees. **Note:** Since there are more men than women in top executive positions overall, this does necessarily not mean that bosses who are women have mostly women as employees.
+The effect of both having an uncommon name is eminently positive, amounting to an odds increase of more that 500%. The parameters for gender and ethnicity are much more difficult to interpret, since 1. they are essentially categorical but not coded in relation to a particular reference group, and 2. they are involved in various interactions. The best way to understand a model like this is to consider particular counterfactuals. For this purpose, I designed [an interactive web app](https://rimonim.shinyapps.io/hire_your_clone/). You can play with it right here:
 
-![Proportions of Men and Women in the Raw Data](gender_alluvial.png)
-
-And ethnicity?
-
-![](posteriors2.png)
-The model is understandably unsure about most of these, again because it is so rare for a boss and employee to be members of the same minority group. Nevertheless, some things do seem fairly clear: both being Hispanic looks to be a fairly large advantage. Both being Jewish seems to be a relatively small advantage. Being Asian with a Western European or African American boss seems to be a slight advantage, and being Jewish a slight disadvantage.
-
-I will leave it to the reader to make of all this whatever she wants.
-
-If you are interested in playing interactively with the results, check out [the interactive web app](https://rimonim.shinyapps.io/hire_your_clone/). 
+```{=html}
+<iframe id="shinyapp" src="https://rimonim.shinyapps.io/hire_your_clone/" style="border: none; width: 100%; height: 850px" frameborder="0"></iframe>
+```
