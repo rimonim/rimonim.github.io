@@ -12,7 +12,6 @@ image: mental_health_wordcloud.svg
 library(tidyverse)
 library(quanteda) 
 library(quanteda.sentiment)
-library(quanteda.textstats)
 library(text)
 library(effectsize)
 
@@ -229,4 +228,4 @@ The results are in! Traditional sentiment analysis worked all right (d = 0.11), 
 
 This was not quite a fair match, since the dictionary used for DDR was much larger than the questionnaire used for CCR. With a longer depression/anxiety questionnaire, the corrected CCR method might surpass DDR.
 
-The moral of the story: Always think twice about what exactly you are measuring. You might be measuring something else entirely.
+The moral of the story: Always think twice about what exactly you are measuring. Even if you carefully designed the method to measure one thing, you just might be measuring something else entirely.
