@@ -1,0 +1,603 @@
+---
+title: "Shockingly, Most Reddit Environmentalists are not Greta Thunberg"
+author: "Louis Teitelbaum"
+date: "July 12, 2023"
+categories: [R, Data Mining, API, NLP, Large Language Models, Document Embeddings, Sentiment Analysis, Social Media, Multilevel Modeling]
+image: greta_thunberg.jpeg
+---
+
+```{r setup}
+#| include: false
+load("preprocessed_datasets.RData")
+```
+
+Greta Thunberg may be the most well-known climate activist today. Along with her climate activism, she is known for her psychiatric diagnoses. In fact, these two aspects of her public persona often go together - autism and anxiety disorders are the superpowers that allow her to take a principled stand.
+
+> I was diagnosed with Asperger's syndrome, OCD, and selective mutism... I think that in many ways, we autistic are the normal ones, and the rest of the people are pretty strange, especially when it comes to the sustainability crisis, where everyone keeps saying that climate change is an existential threat and the most important issue of all and yet they just carry on like before. [^1]
+
+[^1]: [Thunberg, Greta (24 November 2018). School strike for climate -- save the world by changing the rules. TEDxStockholm. Event occurs at 1:46.](https://www.youtube.com/watch?v=EAmmUIEsN9A&t=106s)
+
+Told by Thunberg herself, this is an inspiring and compelling claim. But is it true in general that autistic and/or anxious thought patterns cause people to take the sustainability crisis more seriously? Is this true even when it comes to smaller-scale activism than Thunberg's - say, involvement with environmentalist groups on Reddit?
+
+# Gathering Data
+
+Using the `RedditExtractoR` package in R, I gathered data on all threads over the last month from seven environmentalist communities on Reddit: r/Environmentalism, r/sustainability, r/ZeroWaste, r/climate, r/environment, r/SustainabilityPorn, and r/Green.
+
+```{r}
+library(tidyverse)
+library(quanteda) 
+library(quanteda.sentiment)
+library(text)
+library(RedditExtractoR)
+```
+
+```{r}
+env_communities <- c("Environmentalism", "sustainability", "ZeroWaste", "climate", "environment", "SustainabilityPorn", "Green")
+```
+
+```{r}
+#| eval: false
+
+env_threads <- bind_rows(lapply(env_communities, function(community){find_thread_urls(subreddit = community)}))
+
+env_threadcontent <- get_thread_content(env_threads$url)
+env_threads <- env_threadcontent$threads
+env_threadcontent <- env_threadcontent$comments
+```
+
+As a control group, I chose seven communities with broadly similar themes, but without any sustainability-specific agenda: r/worldnews, r/makerspace, r/NoStupidQuestions, r/gardening, r/politics, r/relationship_advice, and r/news.
+
+```{r}
+#| eval: false
+control_communities <- c("worldnews", "makerspace", "NoStupidQuestions", "gardening", "politics", "relationship_advice", "news")
+
+control_threads <- bind_rows(lapply(control_communities, function(community){find_thread_urls(subreddit = community)}))
+
+control_threadcontent <- get_thread_content(sample(control_threads$url, 500))
+control_threads <- control_threadcontent$threads
+control_threadcontent <- control_threadcontent$comments
+```
+
+All texts went through a simple preprocessing step to remove links, email addresses, and punctuation.
+
+```{r}
+#| eval: false
+# preprocessing - using stringr
+preprocess <- function(text_vec){
+  text_vec <- str_replace_all(text_vec, "\\b[:alnum:]+@[:alnum:]+\\.[:lower:]+\\b", "") # email addresses
+  text_vec <- str_replace_all(text_vec, 'http://[^"\\s]+|https://[^"\\s]+', " ")  # links
+  text_vec <- str_replace_all(text_vec, '\\\031|&gt;', "")      # remove punctuation
+  text_vec <- str_replace_all(text_vec, '\\\n|\\\t', " ")      # remove punctuation
+  text_vec <- str_replace_all(text_vec, '[:punct:]', "")      # remove punctuation
+  text_vec <- str_replace_all(text_vec, '[.+]', " ")      # remove removed/deleted tags
+  str_to_lower(text_vec)   # to lowercase
+}
+
+control_threads$title_preprocessed <- preprocess(control_threads$title)
+control_threads$text_preprocessed <- preprocess(control_threads$text)
+control_threadcontent$comment_preprocessed <- preprocess(control_threadcontent$comment)
+env_threads$title_preprocessed <- preprocess(env_threads$title)
+env_threads$text_preprocessed <- preprocess(env_threads$text)
+env_threadcontent$comment_preprocessed <- preprocess(env_threadcontent$comment)
+```
+
+# Measuring Autism in Text
+
+## Neutralized CCR
+
+In [my last post](https://rimonim.github.io/blog/text_comparison/), I explored various methods of quantifying psychological content in text, including contextualized construct representation (CCR)[^2], which leverages the power of large language models to turn established psychiatric questionnaires into embeddings - lists of activations of neurons in the model - that can be compared to the same model's embeddings of other texts.
+
+[^2]: Atari, M., Omrani, A., & Dehghani, M. (2023, February 24). Contextualized construct representation: Leveraging psychometric scales to advance theory-driven text analysis. https://doi.org/10.31234/osf.io/m93pd
+
+Toward the end of that post, I raised a potential difficulty with this method: How can I be sure that I am not measuring the extent to which people write like they're writing a questionnaire? This is critical, since questionnaires tend to be written in formal, well organized, full sentences, and certain psychological constructs might lead to people writing less - or more - like that.
+
+The solution I proposed was to create a "neutralized" version of the questionnaire average embedding, which reflects each original question *and its grammatical negation*. By subtracting out this neutralized embedding (which nevertheless maintains its questionnaire-ness all around) from the original embedding, I can isolate the psychological construct of interest without fear of confounds from the particular writing style of the questionnaire. This is the approach I will take here, using the Adult Social Behavior Questionnaire (ASBQ)[^3] for clinical assessment of autism spectrum disorder in adults. The questionnaire includes six subscales: reduced contact, reduced empathy, reduced interpersonal insight, violations of social conventions, insistence on sameness, and sensory stimulation and motor stereotypes. Excluding the last one (I have a hard time imagining how it would apply to Reddit activity), I will treat each subscale on its own.
+
+[^3]: Horwitz, E., Schoevers, R.A., Ketelaars, C., Kan, C.C., Lammeren, A.V., Meesters, Y., Spek, A.A., Wouters, S., Teunisse, J.P., Cuppen, L., Bartels, A.A., Schuringa, E., Moorlag, H., Raven, D., Wiersma, D., Minderaa, R.B., & Hartman, C.A. (2016). Clinical assessment of ASD in adults using self- and other-report : Psychometric properties and validity of the Adult Social Behavior Questionnaire (ASBQ). *Research in Autism Spectrum Disorders, 24*, 17-28.
+
+As in my last post, I am using embeddings from the second to last layer of BERT (base uncased).
+
+```{r}
+#| eval: false
+# Adult Social Behavior Questionnaire (ASBQ); self-report, excluding 'sensory stimulation and motor stereotypes'
+reduced_contact <- c(
+  "i do not take the initiative in contacts with other people",
+  "i have little or no interest in socializing with others",
+  "i ignore invitations from others to do something with them",
+  "i avoid people who try to make contact with me",
+  "the only contact i have with others is when i have to buy something or arrange something, for example with people in a shop or in a government office",
+  "i am a loner, even in a group i hold myself apart",
+  "i do not enjoy doing things with other people, for example, doing a chore together or going somewhere together"
+  )
+reduced_empathy <- c(
+  "i find it difficult to put myself in someone else’s shoes, for example, i can not see why someone is angry",
+  "i am unaware of other people’s emotional needs, for example, i do not encourage other people or reassure them",
+  "i find it hard to sense what someone else will like or think is nice",
+  "i am not really bothered by someone else in pain",
+  "i do not notice when someone is upset or has problems",
+  "the reason why i would contact others is to get things done rather than because i am interested in them",
+  "i do not show sympathy when others hurt themselves or are unhappy"
+  )
+reduced_interpersonal_insight <- c(
+  "i do not get jokes",
+  "i take everything literally, for example, i do not understand certain expressions",
+  "i am very naïve; i believe everything i am told",
+  "it is easy to take advantage of me or get me to do other people’s dirty work",
+  "i do not notice when others make fun of me",
+  "i find it hard to follow the gist of a conversation—i miss the point",
+  "i need an explanation before i understand the meaning behind someone’s words",
+  "i give answers that are not relevant because i have not really understood the question"
+  )
+violations_of_social_conventions <- c(
+  "i do not differentiate between friends and strangers, for example, i do not care who i am with",
+  "i seek contact with anyone and everyone; i show no reserve",
+  "i touch people when it is not suitable, for example, i hug virtual strangers",
+  "the questions i ask are too personal, or i tell others things that are too personal",
+  "i behave the same wherever i am; it makes no difference to me whether i am at home or somewhere else (visiting others, at work, in the streets)",
+  "i ask strangers for things i need, for example for food or drink if i am hungry or thirsty"
+  )
+insistence_on_sameness <- c(
+  "i panic when things turn out differently than i am used to",
+  "i resist change; if it were left up to me, everything would stay the same",
+  "i want to do certain things in exactly the same way every time",
+  "i do not like surprises, for example, unexpected visitors",
+  "i do not like a lot of things happening at once",
+  "i really need fixed routines and things to be predictable",
+  "i hate it when plans are changed at the last moment",
+  "it takes me ages to get used to somewhere new"
+  )
+#~~~~~~~~~~~~~~~~~~~~~~~~# Negated Versions
+reduced_contact_neg <- c(
+  "i take the initiative in contacts with other people",
+  "i have lots of interest in socializing with others",
+  "i do not ignore invitations from others to do something with them",
+  "i do not avoid people who try to make contact with me",
+  "i have contact with others all the time, not just when i have to buy something or arrange something, or with people in a shop or in a government office",
+  "i am not a loner, in a group i do not hold myself apart",
+  "i enjoy doing things with other people, for example, doing a chore together or going somewhere together"
+  )
+reduced_empathy_neg <- c(
+  "i do not find it difficult to put myself in someone else’s shoes, for example, i can see why someone is angry",
+  "i am aware of other people’s emotional needs, for example, i encourage other people or reassure them",
+  "i do not find it hard to sense what someone else will like or think is nice",
+  "i really bothered by someone else in pain",
+  "i notice when someone is upset or has problems",
+  "the reason why i would contact others is because i am interested in them rather than to get things done",
+  "i show sympathy when others hurt themselves or are unhappy"
+  )
+reduced_interpersonal_insight_neg <- c(
+  "i get jokes",
+  "i do not take everything literally, for example, i understand expressions",
+  "i am not very naïve; i do not believe everything i am told",
+  "it is not easy to take advantage of me or get me to do other people’s dirty work",
+  "i notice when others make fun of me",
+  "i do not find it hard to follow the gist of a conversation—i do not miss the point",
+  "i do not need an explanation before i understand the meaning behind someone’s words",
+  "i give answers that are relevant because i have really understood the question"
+  )
+violations_of_social_conventions_neg <- c(
+  "i differentiate between friends and strangers, for example, i care who i am with",
+  "i do not seek contact with anyone and everyone; i show reserve",
+  "i do not touch people when it is not suitable, for example, i do not hug virtual strangers",
+  "the questions i ask are not too personal; i do not tell others things that are too personal",
+  "i do not behave the same wherever i am; it makes a difference to me whether i am at home or somewhere else (visiting others, at work, in the streets)",
+  "i do not ask strangers for things i need, for example for food or drink if i am hungry or thirsty"
+  )
+insistence_on_sameness_neg <- c(
+  "i do not panic when things turn out differently than i am used to",
+  "i do not resist change; if it were left up to me, nothing would stay the same",
+  "i do not want to do things in exactly the same way every time",
+  "i like surprises, for example, unexpected visitors",
+  "i like a lot of things happening at once",
+  "i do not really need fixed routines or things to be predictable",
+  "i do not hate it when plans are changed at the last moment",
+  "it does not take me ages to get used to somewhere new"
+  )
+
+#~~~~~~~~~~~~~~~~~~~~~~~~# Generate Embeddings
+
+# Mean embeddings of each subscale and its negation
+reduced_contact <- textEmbed(reduced_contact)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+reduced_empathy <- textEmbed(reduced_empathy)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+reduced_interpersonal_insight <- textEmbed(reduced_interpersonal_insight)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+violations_of_social_conventions <- textEmbed(violations_of_social_conventions)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+insistence_on_sameness <- textEmbed(insistence_on_sameness)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+
+reduced_contact_neg <- textEmbed(reduced_contact_neg)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+reduced_empathy_neg <- textEmbed(reduced_empathy_neg)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+reduced_interpersonal_insight_neg <- textEmbed(reduced_interpersonal_insight_neg)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+violations_of_social_conventions_neg <- textEmbed(violations_of_social_conventions_neg)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+insistence_on_sameness_neg <- textEmbed(insistence_on_sameness_neg)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+
+# Neutralized Questionnaire - Initial - mean(Initial, Negated)
+reduced_contact_neutralized <- reduced_contact - (reduced_contact + reduced_contact_neg)/2
+reduced_empathy_neutralized <- reduced_empathy - (reduced_empathy + reduced_empathy_neg)/2
+reduced_interpersonal_insight_neutralized <- reduced_interpersonal_insight - (reduced_interpersonal_insight + reduced_interpersonal_insight_neg)/2
+violations_of_social_conventions_neutralized <- violations_of_social_conventions - (violations_of_social_conventions + violations_of_social_conventions_neg)/2
+insistence_on_sameness_neutralized <- insistence_on_sameness - (insistence_on_sameness + insistence_on_sameness_neg)/2
+```
+
+## r/aspergers
+
+My second metric for autistic tendencies is less sensitive to the nuances of various ASD symptoms, but is more directly tailored to the task at hand. The r/aspergers subreddit describes itself as "the internet's largest community of people affected by Autism Spectrum Disorder". So here, I am simply going to compute the average embedding of posts in this group and use it as a paradigm of the construct of interest.
+
+```{r}
+#| eval: false
+ASD_threads <- find_thread_urls(subreddit = "aspergers")
+
+ASD_threads$full_text <- preprocess(paste(ASD_threads$title, ASD_threads$text))
+
+# Embedding
+ASD_threads_embeddings <- textEmbed(ASD_threads$full_text)$texts[[1]]
+
+# Average Embedding
+ASD <- ASD_threads_embeddings %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+```
+
+# Measuring Anxiety in Text
+
+## Kaggle Dataset
+
+I could easily take the same approach for anxiety as I did for autism. I could even use questionnaires designed specifically for OCD and selective mutism, the diagnoses mentioned by Greta Thunberg in the quote above. Nevertheless, I am going to use a different, more straightforward method: [the Students Anxiety and Depression Dataset](https://www.kaggle.com/datasets/sahasourav17/students-anxiety-and-depression-dataset) includes 733 handcoded examples of social media posts and comments that reflect anxiety. I will simply take the average BERT embedding of these as the quintessence of anxiety on social media.
+
+```{r}
+#| eval: false
+anxiety_texts <- readxl::read_xlsx("dataset.xlsx") %>% 
+  filter(label == 1) %>% pull(text)
+
+anxiety_texts <- preprocess(anxiety_texts)
+
+anxiety <- textEmbed(anxiety_texts)$texts[[1]] %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+```
+
+## r/OCD
+
+As with ASD above, my second metric will simply be an average embedding of posts on a disorder-specific subreddit. This time, r/OCD.
+
+```{r}
+#| eval: false
+OCD_threads <- find_thread_urls(subreddit = "OCD")
+
+OCD_threads$full_text <- preprocess(paste(OCD_threads$title, OCD_threads$text))
+
+OCD_threads_subset <- slice_sample(OCD_threads, n = 100)
+
+# Embedding
+OCD_threads_embeddings <- textEmbed(OCD_threads$full_text)$texts[[1]]
+
+# Average Embedding
+OCD <- OCD_threads_embeddings %>% 
+  summarise(across(Dim1_texts:Dim768_texts, mean)) %>% 
+  unlist(use.names=FALSE)
+```
+
+# Do environmentalists exhibit more autism and anxiety characteristics than control?
+
+Now that I have vector representations of five autism subscales, generalized ASD, OCD, and anxiety, I can simply embed each comment in the Reddit data using the same method, and score them based on their cosine similarity to each construct embedding. Then I can use classical statistical methods to test whether environmentalists exhibit more autism and anxiety characteristics than control.
+
+```{r}
+#| eval: false
+
+# Subset Corpus
+env_threadcontent_subset <- env_threadcontent %>% slice_sample(n = 1000)
+control_threadcontent_subset <- control_threadcontent %>% slice_sample(n = 1000)
+# Embed each comment in the corpus (took my CPU about 50 minutes for 2000 texts)
+env_comment_embeddings <- textEmbed(env_threadcontent_subset$comment_preprocessed)$texts[[1]]
+control_comment_embeddings <- textEmbed(control_threadcontent_subset$comment_preprocessed)$texts[[1]]
+
+# cosine similarity of each text to construct embedding
+env_threadcontent_subset$reduced_contact <- NA
+env_threadcontent_subset$reduced_empathy <- NA
+env_threadcontent_subset$reduced_interpersonal_insight <- NA
+env_threadcontent_subset$violations_of_social_conventions <- NA
+env_threadcontent_subset$insistence_on_sameness <- NA
+env_threadcontent_subset$anxiety <- NA
+env_threadcontent_subset$ASD <- NA
+env_threadcontent_subset$OCD <- NA
+for (row in 1:nrow(env_comment_embeddings)) {
+  doc_embedding <- slice(env_comment_embeddings, row) %>% 
+    unlist(use.names = FALSE)
+  env_threadcontent_subset$reduced_contact[row] <- lsa::cosine(doc_embedding, reduced_contact_neutralized)
+  env_threadcontent_subset$reduced_empathy[row] <- lsa::cosine(doc_embedding, reduced_empathy_neutralized)
+  env_threadcontent_subset$reduced_interpersonal_insight[row] <- lsa::cosine(doc_embedding, reduced_interpersonal_insight_neutralized)
+  env_threadcontent_subset$violations_of_social_conventions[row] <- lsa::cosine(doc_embedding, violations_of_social_conventions_neutralized)
+  env_threadcontent_subset$insistence_on_sameness[row] <- lsa::cosine(doc_embedding, insistence_on_sameness_neutralized)
+  env_threadcontent_subset$anxiety[row] <- lsa::cosine(doc_embedding, anxiety)
+  env_threadcontent_subset$ASD[row] <- lsa::cosine(doc_embedding, ASD)
+  env_threadcontent_subset$OCD[row] <- lsa::cosine(doc_embedding, OCD)
+}
+
+control_threadcontent_subset$reduced_contact <- NA
+control_threadcontent_subset$reduced_empathy <- NA
+control_threadcontent_subset$reduced_interpersonal_insight <- NA
+control_threadcontent_subset$violations_of_social_conventions <- NA
+control_threadcontent_subset$insistence_on_sameness <- NA
+control_threadcontent_subset$anxiety <- NA
+control_threadcontent_subset$ASD <- NA
+control_threadcontent_subset$OCD <- NA
+for (row in 1:nrow(control_comment_embeddings)) {
+  doc_embedding <- slice(control_comment_embeddings, row) %>% 
+    unlist(use.names = FALSE)
+  control_threadcontent_subset$reduced_contact[row] <- lsa::cosine(doc_embedding, reduced_contact_neutralized)
+  control_threadcontent_subset$reduced_empathy[row] <- lsa::cosine(doc_embedding, reduced_empathy_neutralized)
+  control_threadcontent_subset$reduced_interpersonal_insight[row] <- lsa::cosine(doc_embedding, reduced_interpersonal_insight_neutralized)
+  control_threadcontent_subset$violations_of_social_conventions[row] <- lsa::cosine(doc_embedding, violations_of_social_conventions_neutralized)
+  control_threadcontent_subset$insistence_on_sameness[row] <- lsa::cosine(doc_embedding, insistence_on_sameness_neutralized)
+  control_threadcontent_subset$anxiety[row] <- lsa::cosine(doc_embedding, anxiety)
+  control_threadcontent_subset$ASD[row] <- lsa::cosine(doc_embedding, ASD)
+  control_threadcontent_subset$OCD[row] <- lsa::cosine(doc_embedding, OCD)
+}
+
+comments_unified <- env_threadcontent_subset %>% 
+  mutate(environmentalist = 1) %>% 
+  left_join(env_threads %>% select(url, subreddit)) %>% 
+  bind_rows(control_threadcontent_subset %>% 
+              mutate(environmentalist = 0) %>% 
+              left_join(control_threads %>% select(url, subreddit)))
+```
+
+The aforementioned classical statistical methods do require some thought, though. Because the data were gathered from multiple communities, the samples are not independent, and fixed-parameter-only methods like t-tests will be biased. This is a job for multilevel modeling, with the intercept for each community allowed to vary freely around its group (environmentalist/non-environmentalist) mean.
+
+```{r}
+library(lmerTest)
+
+reduced_contact_mod1 <- lmer(reduced_contact ~ environmentalist + (1 | subreddit), data = comments_unified)
+reduced_empathy_mod1 <- lmer(reduced_empathy ~ environmentalist + (1 | subreddit), data = comments_unified)
+reduced_interpersonal_insight_mod1 <- lmer(reduced_interpersonal_insight ~ environmentalist + (1 | subreddit), data = comments_unified)
+violations_of_social_conventions_mod1 <- lmer(violations_of_social_conventions ~ environmentalist + (1 | subreddit), data = comments_unified)
+insistence_on_sameness_mod1 <- lmer(insistence_on_sameness ~ environmentalist + (1 | subreddit), data = comments_unified)
+ASD_mod1 <- lmer(ASD ~ environmentalist + (1 | subreddit), data = comments_unified)
+
+anxiety_mod1 <- lmer(anxiety ~ environmentalist + (1 | subreddit), data = comments_unified)
+OCD_mod1 <- lmer(OCD ~ environmentalist + (1 | subreddit), data = comments_unified)
+
+summary(reduced_contact_mod1)
+summary(reduced_empathy_mod1)
+summary(reduced_interpersonal_insight_mod1)
+summary(violations_of_social_conventions_mod1)
+summary(insistence_on_sameness_mod1)
+summary(ASD_mod1)
+summary(anxiety_mod1)
+summary(OCD_mod1)
+```
+
+Disappointingly, I find essentially no evidence that environmentalist and non-environmentalist communities are any different on any of these measures. There does not even seem to be a consistent trend in a particular direction.
+
+I do want to see this visually though. In particular, I'm interested in the model's estimates for the random effect parameters. In other words: How does each subreddit score on each of the scales?
+
+Here is that plot, with environmentalist subreddits in green. Higher indicates more of the given construct.
+
+```{r}
+#| fig-height: 11
+#| fig-width: 12
+#| echo: false
+reduced_contact_plot <- ranef(reduced_contact_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "Reduced Contact", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+reduced_empathy_plot <- ranef(reduced_empathy_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "Reduced Empathy", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+reduced_interpersonal_insight_plot <- ranef(reduced_interpersonal_insight_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "Reduced Interpersonal Insight", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+violations_of_social_conventions_plot <- ranef(violations_of_social_conventions_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "Violations of Social Conventions", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+insistence_on_sameness_plot <- ranef(insistence_on_sameness_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "Insistence on Sameness", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+ASD_plot <- ranef(ASD_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "ASD (r/aspergers)", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+anxiety_plot <- ranef(anxiety_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "Anxiety", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+OCD_plot <- ranef(OCD_mod1)$subreddit %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(0, `(Intercept)`, label = rowname, color = rowname %in% env_communities)) +
+    geom_hline(yintercept = 0, color = "grey") +
+    geom_point() +
+    ggrepel::geom_label_repel() + 
+    scale_color_manual(values = c("grey1", "green4")) +
+    guides(color = "none") +
+    theme_bw() +
+    labs(y = "OCD (r/OCD)", x = "") +
+    theme(axis.text = element_blank(),
+          axis.ticks.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank())
+
+cowplot::plot_grid(reduced_contact_plot, reduced_empathy_plot, reduced_interpersonal_insight_plot, violations_of_social_conventions_plot, insistence_on_sameness_plot, ASD_plot, anxiety_plot, OCD_plot, ncol = 4)
+```
+
+The only pattern that really stands out to me is how extreme r/relationship_advice is on every single one of the scales. Why that might be is beyond the scope of this post, but I suspect it will be obvious to anyone familiar with the tone of comments in that subreddit.
+
+# But What About in Their Non-Environmentalist Activity?
+
+So maybe the actual content of environmentalist subreddits shows no difference, but I'm not as interested in the communities themselves as much as I am interested in the *people* in the communities. Maybe these people are displaying autistic or anxious features in their other activity? To test this, I will select 100 users from the environmentalist groups, and 100 users from the control, and retrieve up to 20 threads initiated by each. Then I will repeat the same analysis, this time adding user as a random variable in addition to subreddit.
+
+```{r}
+#| eval: false
+set.seed(100)
+env_user_content <- get_user_content(sample(unique(env_threadcontent$author), 100))
+control_user_content <- get_user_content(sample(unique(control_threadcontent$author), 100))
+
+env_user_threads <- lapply(env_user_content, `[[`, 3)
+env_user_threads <- env_user_threads[unlist(lapply(env_user_threads, is.data.frame))]
+env_user_threads <- bind_rows(env_user_threads)
+
+control_user_threads <- lapply(control_user_content, `[[`, 3)
+control_user_threads <- control_user_threads[unlist(lapply(control_user_threads, is.data.frame))]
+control_user_threads <- bind_rows(control_user_threads)
+
+env_user_threads$full_text <- preprocess(paste(env_user_threads$title, env_user_threads$text))
+control_user_threads$full_text <- preprocess(paste(control_user_threads$title, control_user_threads$text))
+
+user_threads_unified <- env_user_threads %>% 
+  mutate(environmentalist = 1) %>% 
+  bind_rows(control_user_threads %>% 
+              mutate(environmentalist = 0)) %>% 
+  group_by(author) %>% 
+  slice_sample(n = 20) %>% 
+  ungroup()
+
+# Embedding
+user_threads_unified_embeddings <- textEmbed(user_threads_unified$full_text)$texts[[1]]
+
+# Compute metrics
+user_threads_unified$reduced_contact <- NA
+user_threads_unified$reduced_empathy <- NA
+user_threads_unified$reduced_interpersonal_insight <- NA
+user_threads_unified$violations_of_social_conventions <- NA
+user_threads_unified$insistence_on_sameness <- NA
+user_threads_unified$anxiety <- NA
+user_threads_unified$ASD <- NA
+user_threads_unified$OCD <- NA
+for (row in 1:nrow(user_threads_unified_embeddings)) {
+  doc_embedding <- slice(user_threads_unified_embeddings, row) %>% 
+    unlist(use.names = FALSE)
+  user_threads_unified$reduced_contact[row] <- lsa::cosine(doc_embedding, reduced_contact_neutralized)
+  user_threads_unified$reduced_empathy[row] <- lsa::cosine(doc_embedding, reduced_empathy_neutralized)
+  user_threads_unified$reduced_interpersonal_insight[row] <- lsa::cosine(doc_embedding, reduced_interpersonal_insight_neutralized)
+  user_threads_unified$violations_of_social_conventions[row] <- lsa::cosine(doc_embedding, violations_of_social_conventions_neutralized)
+  user_threads_unified$insistence_on_sameness[row] <- lsa::cosine(doc_embedding, insistence_on_sameness_neutralized)
+  user_threads_unified$anxiety[row] <- lsa::cosine(doc_embedding, anxiety)
+  user_threads_unified$ASD[row] <- lsa::cosine(doc_embedding, ASD)
+  user_threads_unified$OCD[row] <- lsa::cosine(doc_embedding, OCD)
+}
+```
+
+```{r}
+# Statistical Analysis
+reduced_contact_mod2 <- lmer(reduced_contact ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+reduced_empathy_mod2 <- lmer(reduced_empathy ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+reduced_interpersonal_insight_mod2 <- lmer(reduced_interpersonal_insight ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+violations_of_social_conventions_mod2 <- lmer(violations_of_social_conventions ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+insistence_on_sameness_mod2 <- lmer(insistence_on_sameness ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+anxiety_mod2 <- lmer(anxiety ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+ASD_mod2 <- lmer(ASD ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+OCD_mod2 <- lmer(OCD ~ environmentalist + (1 | author) + (1 | subreddit), data = user_threads_unified)
+
+summary(reduced_contact_mod2)
+summary(reduced_empathy_mod2)
+summary(reduced_interpersonal_insight_mod2)
+summary(violations_of_social_conventions_mod2)
+summary(insistence_on_sameness_mod2)
+summary(ASD_mod2)
+summary(anxiety_mod2)
+summary(OCD_mod2)
+```
+
+Still nothing approaching statistical significance. Everything except violations of social conventions actually shows a tiny negative trend (that is, environmentalists are slightly *less* autistic/anxious).
+
+The somewhat underwhelming conclusion of this research is therefore:
+
+Most Reddit environmentalists are not Greta Thunberg.

@@ -19,6 +19,12 @@ load("embeddings.RData")
 # save(d_corpus, d, file = "embeddings.RData")
 ```
 
+::: {.callout-tip}
+## Acknowledgement
+
+Thank you [Almog](https://almogsi.com) for a well-organized and scholarly introduction to this topic.
+:::
+
 Sentiment analysis refers to the use of computational methods to extract emotional (or otherwise subjective) content from text. We ask: How happy is this text? Or: How anxious is this text?
 
 Many different methods for sentiment analysis exist, and the recent rise of large language models has opened the door to even more. This post will compare four methods: word-counts, distributed dictionary representation (DDR), and two methods of contextualized construct representation (CCR).
