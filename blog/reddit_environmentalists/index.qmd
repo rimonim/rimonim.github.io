@@ -598,6 +598,12 @@ summary(OCD_mod2)
 
 Still nothing approaching statistical significance. Everything except violations of social conventions actually shows a tiny negative trend (that is, environmentalists are slightly *less* autistic/anxious).
 
+Actually, these findings are consistent with [this paper](https://psycnet.apa.org/record/2021-76007-001)[^4], which likewise found that autistic traits are slightly negatively correlated with pro-environmental attitudes and behaviors. 
+
+[^4]: Taylor, E. C., Livingston, L. A., Callan, M. J., Hanel, P. H. P., & Shah, P. (2021). Do autistic traits predict pro-environmental attitudes and behaviors, and climate change belief? _Journal of Environmental Psychology, 76_, Article 101648. https://doi.org/10.1016/j.jenvp.2021.101648
+
+Of course, this is not to discount Greta Thunberg's account of her own psychological superpowers. She may well be an exception to the rule.
+
 The somewhat underwhelming conclusion of this research is therefore:
 
 Most Reddit environmentalists are not Greta Thunberg.
