@@ -254,64 +254,48 @@ The following object is masked from 'package:quanteda':
 
     data_dictionary_LSD2015</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>[0;34mThis is text (version 0.9.99.2).
-[0m[0;32mText is new and still rapidly improving.
-               
-Newer versions may have improved functions and updated defaults to reflect current understandings of the state-of-the-art.
-               Please send us feedback based on your experience.[0m[0;35m
-
-Please note that defaults has changed in the textEmbed-functions since last version; see help(textEmbed) or www.r-text.org for more details.[0m
-[0;34mtextrpp python option is already set, text will use: condaenv = "textrpp_condaenv"[0m
-[0;32m
-Successfully initialized text required python packages.
-[0m
-[0;34mPython options: 
- type = "textrpp_condaenv", 
- name = "textrpp_condaenv".[0m</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(text)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>env_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Environmentalism"</span>, <span class="st">"sustainability"</span>, <span class="st">"ZeroWaste"</span>, <span class="st">"climate"</span>, <span class="st">"environment"</span>, <span class="st">"SustainabilityPorn"</span>, <span class="st">"Green"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>env_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Environmentalism"</span>, <span class="st">"sustainability"</span>, <span class="st">"ZeroWaste"</span>, <span class="st">"climate"</span>, <span class="st">"environment"</span>, <span class="st">"SustainabilityPorn"</span>, <span class="st">"Green"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(env_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(env_threads<span class="sc">$</span>url)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>threads</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(env_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(env_threads<span class="sc">$</span>url)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>threads</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As a control group, I chose seven communities with broadly similar themes, but without any sustainability-specific agenda: r/worldnews, r/makerspace, r/NoStupidQuestions, r/gardening, r/politics, r/relationship_advice, and r/news.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>control_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"worldnews"</span>, <span class="st">"makerspace"</span>, <span class="st">"NoStupidQuestions"</span>, <span class="st">"gardening"</span>, <span class="st">"politics"</span>, <span class="st">"relationship_advice"</span>, <span class="st">"news"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>control_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(control_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(<span class="fu">sample</span>(control_threads<span class="sc">$</span>url, <span class="dv">500</span>))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>control_threads <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>threads</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>control_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"worldnews"</span>, <span class="st">"makerspace"</span>, <span class="st">"NoStupidQuestions"</span>, <span class="st">"gardening"</span>, <span class="st">"politics"</span>, <span class="st">"relationship_advice"</span>, <span class="st">"news"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>control_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(control_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(<span class="fu">sample</span>(control_threads<span class="sc">$</span>url, <span class="dv">500</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>control_threads <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>threads</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>All texts went through a simple preprocessing step to remove links, email addresses, and punctuation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preprocessing - using stringr</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>preprocess <span class="ot">&lt;-</span> <span class="cf">function</span>(text_vec){</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">"</span><span class="sc">\\</span><span class="st">b[:alnum:]+@[:alnum:]+</span><span class="sc">\\</span><span class="st">.[:lower:]+</span><span class="sc">\\</span><span class="st">b"</span>, <span class="st">""</span>) <span class="co"># email addresses</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'http://[^"</span><span class="sc">\\</span><span class="st">s]+|https://[^"</span><span class="sc">\\</span><span class="st">s]+'</span>, <span class="st">" "</span>)  <span class="co"># links</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'</span><span class="sc">\\\031</span><span class="st">|&amp;gt;'</span>, <span class="st">""</span>)      <span class="co"># remove punctuation</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'</span><span class="sc">\\\n</span><span class="st">|</span><span class="sc">\\\t</span><span class="st">'</span>, <span class="st">" "</span>)      <span class="co"># remove punctuation</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'[:punct:]'</span>, <span class="st">""</span>)      <span class="co"># remove punctuation</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'[.+]'</span>, <span class="st">" "</span>)      <span class="co"># remove removed/deleted tags</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_to_lower</span>(text_vec)   <span class="co"># to lowercase</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>control_threads<span class="sc">$</span>title_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threads<span class="sc">$</span>title)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>control_threads<span class="sc">$</span>text_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threads<span class="sc">$</span>text)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>control_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threadcontent<span class="sc">$</span>comment)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>env_threads<span class="sc">$</span>title_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threads<span class="sc">$</span>title)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>env_threads<span class="sc">$</span>text_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threads<span class="sc">$</span>text)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>env_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threadcontent<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preprocessing - using stringr</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>preprocess <span class="ot">&lt;-</span> <span class="cf">function</span>(text_vec){</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">"</span><span class="sc">\\</span><span class="st">b[:alnum:]+@[:alnum:]+</span><span class="sc">\\</span><span class="st">.[:lower:]+</span><span class="sc">\\</span><span class="st">b"</span>, <span class="st">""</span>) <span class="co"># email addresses</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'http://[^"</span><span class="sc">\\</span><span class="st">s]+|https://[^"</span><span class="sc">\\</span><span class="st">s]+'</span>, <span class="st">" "</span>)  <span class="co"># links</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'</span><span class="sc">\\\031</span><span class="st">|&amp;gt;'</span>, <span class="st">""</span>)      <span class="co"># remove punctuation</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'</span><span class="sc">\\\n</span><span class="st">|</span><span class="sc">\\\t</span><span class="st">'</span>, <span class="st">" "</span>)      <span class="co"># remove punctuation</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'[:punct:]'</span>, <span class="st">""</span>)      <span class="co"># remove punctuation</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'[.+]'</span>, <span class="st">" "</span>)      <span class="co"># remove removed/deleted tags</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_to_lower</span>(text_vec)   <span class="co"># to lowercase</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>control_threads<span class="sc">$</span>title_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threads<span class="sc">$</span>title)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>control_threads<span class="sc">$</span>text_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threads<span class="sc">$</span>text)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>control_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threadcontent<span class="sc">$</span>comment)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>env_threads<span class="sc">$</span>title_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threads<span class="sc">$</span>title)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>env_threads<span class="sc">$</span>text_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threads<span class="sc">$</span>text)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>env_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threadcontent<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="measuring-autism-in-text" class="level1">
@@ -323,159 +307,159 @@ Successfully initialized text required python packages.
 <p>The solution I proposed was to create a “neutralized” version of the questionnaire average embedding, which reflects each original question <em>and its grammatical negation</em>. By subtracting out this neutralized embedding (which nevertheless maintains its questionnaire-ness all around) from the original embedding, I can isolate the psychological construct of interest without fear of confounds from the particular writing style of the questionnaire. This is the approach I will take here, using the Adult Social Behavior Questionnaire (ASBQ)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> for clinical assessment of autism spectrum disorder in adults. The questionnaire includes six subscales: reduced contact, reduced empathy, reduced interpersonal insight, violations of social conventions, insistence on sameness, and sensory stimulation and motor stereotypes. Excluding the last one (I have a hard time imagining how it would apply to Reddit activity), I will treat each subscale on its own.</p>
 <p>As in my last post, I am using embeddings from the second to last layer of BERT (base uncased).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adult Social Behavior Questionnaire (ASBQ); self-report, excluding 'sensory stimulation and motor stereotypes'</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>reduced_contact <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not take the initiative in contacts with other people"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have little or no interest in socializing with others"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i ignore invitations from others to do something with them"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i avoid people who try to make contact with me"</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the only contact i have with others is when i have to buy something or arrange something, for example with people in a shop or in a government office"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am a loner, even in a group i hold myself apart"</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not enjoy doing things with other people, for example, doing a chore together or going somewhere together"</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>reduced_empathy <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i find it difficult to put myself in someone else’s shoes, for example, i can not see why someone is angry"</span>,</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am unaware of other people’s emotional needs, for example, i do not encourage other people or reassure them"</span>,</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i find it hard to sense what someone else will like or think is nice"</span>,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am not really bothered by someone else in pain"</span>,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not notice when someone is upset or has problems"</span>,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the reason why i would contact others is to get things done rather than because i am interested in them"</span>,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not show sympathy when others hurt themselves or are unhappy"</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not get jokes"</span>,</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i take everything literally, for example, i do not understand certain expressions"</span>,</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am very naïve; i believe everything i am told"</span>,</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it is easy to take advantage of me or get me to do other people’s dirty work"</span>,</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not notice when others make fun of me"</span>,</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i find it hard to follow the gist of a conversation—i miss the point"</span>,</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i need an explanation before i understand the meaning behind someone’s words"</span>,</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i give answers that are not relevant because i have not really understood the question"</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not differentiate between friends and strangers, for example, i do not care who i am with"</span>,</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i seek contact with anyone and everyone; i show no reserve"</span>,</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i touch people when it is not suitable, for example, i hug virtual strangers"</span>,</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the questions i ask are too personal, or i tell others things that are too personal"</span>,</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i behave the same wherever i am; it makes no difference to me whether i am at home or somewhere else (visiting others, at work, in the streets)"</span>,</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i ask strangers for things i need, for example for food or drink if i am hungry or thirsty"</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i panic when things turn out differently than i am used to"</span>,</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i resist change; if it were left up to me, everything would stay the same"</span>,</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i want to do certain things in exactly the same way every time"</span>,</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not like surprises, for example, unexpected visitors"</span>,</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not like a lot of things happening at once"</span>,</span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i really need fixed routines and things to be predictable"</span>,</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i hate it when plans are changed at the last moment"</span>,</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it takes me ages to get used to somewhere new"</span></span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~# Negated Versions</span></span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>reduced_contact_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i take the initiative in contacts with other people"</span>,</span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have lots of interest in socializing with others"</span>,</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not ignore invitations from others to do something with them"</span>,</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not avoid people who try to make contact with me"</span>,</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have contact with others all the time, not just when i have to buy something or arrange something, or with people in a shop or in a government office"</span>,</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am not a loner, in a group i do not hold myself apart"</span>,</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i enjoy doing things with other people, for example, doing a chore together or going somewhere together"</span></span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not find it difficult to put myself in someone else’s shoes, for example, i can see why someone is angry"</span>,</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am aware of other people’s emotional needs, for example, i encourage other people or reassure them"</span>,</span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not find it hard to sense what someone else will like or think is nice"</span>,</span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i really bothered by someone else in pain"</span>,</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i notice when someone is upset or has problems"</span>,</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the reason why i would contact others is because i am interested in them rather than to get things done"</span>,</span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i show sympathy when others hurt themselves or are unhappy"</span></span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i get jokes"</span>,</span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not take everything literally, for example, i understand expressions"</span>,</span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am not very naïve; i do not believe everything i am told"</span>,</span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it is not easy to take advantage of me or get me to do other people’s dirty work"</span>,</span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i notice when others make fun of me"</span>,</span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not find it hard to follow the gist of a conversation—i do not miss the point"</span>,</span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not need an explanation before i understand the meaning behind someone’s words"</span>,</span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i give answers that are relevant because i have really understood the question"</span></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i differentiate between friends and strangers, for example, i care who i am with"</span>,</span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not seek contact with anyone and everyone; i show reserve"</span>,</span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not touch people when it is not suitable, for example, i do not hug virtual strangers"</span>,</span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the questions i ask are not too personal; i do not tell others things that are too personal"</span>,</span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not behave the same wherever i am; it makes a difference to me whether i am at home or somewhere else (visiting others, at work, in the streets)"</span>,</span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not ask strangers for things i need, for example for food or drink if i am hungry or thirsty"</span></span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not panic when things turn out differently than i am used to"</span>,</span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not resist change; if it were left up to me, nothing would stay the same"</span>,</span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not want to do things in exactly the same way every time"</span>,</span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i like surprises, for example, unexpected visitors"</span>,</span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i like a lot of things happening at once"</span>,</span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not really need fixed routines or things to be predictable"</span>,</span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not hate it when plans are changed at the last moment"</span>,</span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it does not take me ages to get used to somewhere new"</span></span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~# Generate Embeddings</span></span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean embeddings of each subscale and its negation</span></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>reduced_contact <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_contact)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>reduced_empathy <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_empathy)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_interpersonal_insight)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(violations_of_social_conventions)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(insistence_on_sameness)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>reduced_contact_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_contact_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_empathy_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_interpersonal_insight_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(violations_of_social_conventions_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(insistence_on_sameness_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a><span class="co"># Neutralized Questionnaire - Initial - mean(Initial, Negated)</span></span>
-<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>reduced_contact_neutralized <span class="ot">&lt;-</span> reduced_contact <span class="sc">-</span> (reduced_contact <span class="sc">+</span> reduced_contact_neg)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neutralized <span class="ot">&lt;-</span> reduced_empathy <span class="sc">-</span> (reduced_empathy <span class="sc">+</span> reduced_empathy_neg)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neutralized <span class="ot">&lt;-</span> reduced_interpersonal_insight <span class="sc">-</span> (reduced_interpersonal_insight <span class="sc">+</span> reduced_interpersonal_insight_neg)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neutralized <span class="ot">&lt;-</span> violations_of_social_conventions <span class="sc">-</span> (violations_of_social_conventions <span class="sc">+</span> violations_of_social_conventions_neg)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neutralized <span class="ot">&lt;-</span> insistence_on_sameness <span class="sc">-</span> (insistence_on_sameness <span class="sc">+</span> insistence_on_sameness_neg)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adult Social Behavior Questionnaire (ASBQ); self-report, excluding 'sensory stimulation and motor stereotypes'</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>reduced_contact <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not take the initiative in contacts with other people"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have little or no interest in socializing with others"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i ignore invitations from others to do something with them"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i avoid people who try to make contact with me"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the only contact i have with others is when i have to buy something or arrange something, for example with people in a shop or in a government office"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am a loner, even in a group i hold myself apart"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not enjoy doing things with other people, for example, doing a chore together or going somewhere together"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>reduced_empathy <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i find it difficult to put myself in someone else’s shoes, for example, i can not see why someone is angry"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am unaware of other people’s emotional needs, for example, i do not encourage other people or reassure them"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i find it hard to sense what someone else will like or think is nice"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am not really bothered by someone else in pain"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not notice when someone is upset or has problems"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the reason why i would contact others is to get things done rather than because i am interested in them"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not show sympathy when others hurt themselves or are unhappy"</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not get jokes"</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i take everything literally, for example, i do not understand certain expressions"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am very naïve; i believe everything i am told"</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it is easy to take advantage of me or get me to do other people’s dirty work"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not notice when others make fun of me"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i find it hard to follow the gist of a conversation—i miss the point"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i need an explanation before i understand the meaning behind someone’s words"</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i give answers that are not relevant because i have not really understood the question"</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not differentiate between friends and strangers, for example, i do not care who i am with"</span>,</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i seek contact with anyone and everyone; i show no reserve"</span>,</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i touch people when it is not suitable, for example, i hug virtual strangers"</span>,</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the questions i ask are too personal, or i tell others things that are too personal"</span>,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i behave the same wherever i am; it makes no difference to me whether i am at home or somewhere else (visiting others, at work, in the streets)"</span>,</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i ask strangers for things i need, for example for food or drink if i am hungry or thirsty"</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i panic when things turn out differently than i am used to"</span>,</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i resist change; if it were left up to me, everything would stay the same"</span>,</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i want to do certain things in exactly the same way every time"</span>,</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not like surprises, for example, unexpected visitors"</span>,</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not like a lot of things happening at once"</span>,</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i really need fixed routines and things to be predictable"</span>,</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i hate it when plans are changed at the last moment"</span>,</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it takes me ages to get used to somewhere new"</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~# Negated Versions</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>reduced_contact_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i take the initiative in contacts with other people"</span>,</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have lots of interest in socializing with others"</span>,</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not ignore invitations from others to do something with them"</span>,</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not avoid people who try to make contact with me"</span>,</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have contact with others all the time, not just when i have to buy something or arrange something, or with people in a shop or in a government office"</span>,</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am not a loner, in a group i do not hold myself apart"</span>,</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i enjoy doing things with other people, for example, doing a chore together or going somewhere together"</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not find it difficult to put myself in someone else’s shoes, for example, i can see why someone is angry"</span>,</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am aware of other people’s emotional needs, for example, i encourage other people or reassure them"</span>,</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not find it hard to sense what someone else will like or think is nice"</span>,</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i really bothered by someone else in pain"</span>,</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i notice when someone is upset or has problems"</span>,</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the reason why i would contact others is because i am interested in them rather than to get things done"</span>,</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i show sympathy when others hurt themselves or are unhappy"</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i get jokes"</span>,</span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not take everything literally, for example, i understand expressions"</span>,</span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i am not very naïve; i do not believe everything i am told"</span>,</span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it is not easy to take advantage of me or get me to do other people’s dirty work"</span>,</span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i notice when others make fun of me"</span>,</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not find it hard to follow the gist of a conversation—i do not miss the point"</span>,</span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not need an explanation before i understand the meaning behind someone’s words"</span>,</span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i give answers that are relevant because i have really understood the question"</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i differentiate between friends and strangers, for example, i care who i am with"</span>,</span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not seek contact with anyone and everyone; i show reserve"</span>,</span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not touch people when it is not suitable, for example, i do not hug virtual strangers"</span>,</span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>  <span class="st">"the questions i ask are not too personal; i do not tell others things that are too personal"</span>,</span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not behave the same wherever i am; it makes a difference to me whether i am at home or somewhere else (visiting others, at work, in the streets)"</span>,</span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not ask strangers for things i need, for example for food or drink if i am hungry or thirsty"</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neg <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not panic when things turn out differently than i am used to"</span>,</span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not resist change; if it were left up to me, nothing would stay the same"</span>,</span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not want to do things in exactly the same way every time"</span>,</span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i like surprises, for example, unexpected visitors"</span>,</span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i like a lot of things happening at once"</span>,</span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not really need fixed routines or things to be predictable"</span>,</span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not hate it when plans are changed at the last moment"</span>,</span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>  <span class="st">"it does not take me ages to get used to somewhere new"</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~# Generate Embeddings</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean embeddings of each subscale and its negation</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>reduced_contact <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_contact)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>reduced_empathy <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_empathy)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_interpersonal_insight)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(violations_of_social_conventions)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(insistence_on_sameness)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a>reduced_contact_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_contact_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_empathy_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(reduced_interpersonal_insight_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(violations_of_social_conventions_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neg <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(insistence_on_sameness_neg)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="co"># Neutralized Questionnaire - Initial - mean(Initial, Negated)</span></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a>reduced_contact_neutralized <span class="ot">&lt;-</span> reduced_contact <span class="sc">-</span> (reduced_contact <span class="sc">+</span> reduced_contact_neg)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neutralized <span class="ot">&lt;-</span> reduced_empathy <span class="sc">-</span> (reduced_empathy <span class="sc">+</span> reduced_empathy_neg)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neutralized <span class="ot">&lt;-</span> reduced_interpersonal_insight <span class="sc">-</span> (reduced_interpersonal_insight <span class="sc">+</span> reduced_interpersonal_insight_neg)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neutralized <span class="ot">&lt;-</span> violations_of_social_conventions <span class="sc">-</span> (violations_of_social_conventions <span class="sc">+</span> violations_of_social_conventions_neg)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neutralized <span class="ot">&lt;-</span> insistence_on_sameness <span class="sc">-</span> (insistence_on_sameness <span class="sc">+</span> insistence_on_sameness_neg)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="raspergers" class="level2">
 <h2 class="anchored" data-anchor-id="raspergers">r/aspergers</h2>
 <p>My second metric for autistic tendencies is less sensitive to the nuances of various ASD symptoms, but is more directly tailored to the task at hand. The r/aspergers subreddit describes itself as “the internet’s largest community of people affected by Autism Spectrum Disorder”. So here, I am simply going to compute the average embedding of posts in this group and use it as a paradigm of the construct of interest.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ASD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"aspergers"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ASD_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(ASD_threads<span class="sc">$</span>title, ASD_threads<span class="sc">$</span>text))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ASD_threads_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(ASD_threads<span class="sc">$</span>full_text)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Embedding</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>ASD <span class="ot">&lt;-</span> ASD_threads_embeddings <span class="sc">%&gt;%</span> </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ASD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"aspergers"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ASD_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(ASD_threads<span class="sc">$</span>title, ASD_threads<span class="sc">$</span>text))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ASD_threads_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(ASD_threads<span class="sc">$</span>full_text)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Embedding</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ASD <span class="ot">&lt;-</span> ASD_threads_embeddings <span class="sc">%&gt;%</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -485,33 +469,33 @@ Successfully initialized text required python packages.
 <h2 class="anchored" data-anchor-id="kaggle-dataset">Kaggle Dataset</h2>
 <p>I could easily take the same approach for anxiety as I did for autism. I could even use questionnaires designed specifically for OCD and selective mutism, the diagnoses mentioned by Greta Thunberg in the quote above. Nevertheless, I am going to use a different, more straightforward method: <a href="https://www.kaggle.com/datasets/sahasourav17/students-anxiety-and-depression-dataset">the Students Anxiety and Depression Dataset</a> includes 733 handcoded examples of social media posts and comments that reflect anxiety. I will simply take the average BERT embedding of these as the quintessence of anxiety on social media.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"dataset.xlsx"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(text)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(anxiety_texts)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>anxiety <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(anxiety_texts)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"dataset.xlsx"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(text)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(anxiety_texts)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>anxiety <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(anxiety_texts)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="rocd" class="level2">
 <h2 class="anchored" data-anchor-id="rocd">r/OCD</h2>
 <p>As with ASD above, my second metric will simply be an average embedding of posts on a disorder-specific subreddit. This time, r/OCD.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>OCD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"OCD"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>OCD_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(OCD_threads<span class="sc">$</span>title, OCD_threads<span class="sc">$</span>text))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>OCD_threads_subset <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(OCD_threads, <span class="at">n =</span> <span class="dv">100</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>OCD_threads_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(OCD_threads<span class="sc">$</span>full_text)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Embedding</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>OCD <span class="ot">&lt;-</span> OCD_threads_embeddings <span class="sc">%&gt;%</span> </span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>OCD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"OCD"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>OCD_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(OCD_threads<span class="sc">$</span>title, OCD_threads<span class="sc">$</span>text))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>OCD_threads_subset <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(OCD_threads, <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>OCD_threads_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(OCD_threads<span class="sc">$</span>full_text)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Embedding</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>OCD <span class="ot">&lt;-</span> OCD_threads_embeddings <span class="sc">%&gt;%</span> </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -519,66 +503,66 @@ Successfully initialized text required python packages.
 <h1>Do environmentalists exhibit more autism and anxiety characteristics than control?</h1>
 <p>Now that I have vector representations of five autism subscales, generalized ASD, OCD, and anxiety, I can simply embed each comment in the Reddit data using the same method, and score them based on their cosine similarity to each construct embedding. Then I can use classical statistical methods to test whether environmentalists exhibit more autism and anxiety characteristics than control.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset Corpus</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset <span class="ot">&lt;-</span> env_threadcontent <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset <span class="ot">&lt;-</span> control_threadcontent <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Embed each comment in the corpus (took my CPU about 50 minutes for 2000 texts)</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>env_comment_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(env_threadcontent_subset<span class="sc">$</span>comment_preprocessed)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>control_comment_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(control_threadcontent_subset<span class="sc">$</span>comment_preprocessed)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># cosine similarity of each text to construct embedding</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>reduced_contact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>reduced_empathy <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>insistence_on_sameness <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>anxiety <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>ASD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>OCD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(env_comment_embeddings)) {</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  doc_embedding <span class="ot">&lt;-</span> <span class="fu">slice</span>(env_comment_embeddings, row) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>reduced_contact[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_contact_neutralized)</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>reduced_empathy[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_empathy_neutralized)</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_interpersonal_insight_neutralized)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, violations_of_social_conventions_neutralized)</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>insistence_on_sameness[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, insistence_on_sameness_neutralized)</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>reduced_contact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>reduced_empathy <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>insistence_on_sameness <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>anxiety <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>ASD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>OCD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(control_comment_embeddings)) {</span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>  doc_embedding <span class="ot">&lt;-</span> <span class="fu">slice</span>(control_comment_embeddings, row) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>reduced_contact[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_contact_neutralized)</span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>reduced_empathy[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_empathy_neutralized)</span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_interpersonal_insight_neutralized)</span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, violations_of_social_conventions_neutralized)</span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>insistence_on_sameness[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, insistence_on_sameness_neutralized)</span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>comments_unified <span class="ot">&lt;-</span> env_threadcontent_subset <span class="sc">%&gt;%</span> </span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(env_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(control_threadcontent_subset <span class="sc">%&gt;%</span> </span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>              <span class="fu">left_join</span>(control_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset Corpus</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset <span class="ot">&lt;-</span> env_threadcontent <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset <span class="ot">&lt;-</span> control_threadcontent <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Embed each comment in the corpus (took my CPU about 50 minutes for 2000 texts)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>env_comment_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(env_threadcontent_subset<span class="sc">$</span>comment_preprocessed)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>control_comment_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(control_threadcontent_subset<span class="sc">$</span>comment_preprocessed)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># cosine similarity of each text to construct embedding</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>reduced_contact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>reduced_empathy <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>insistence_on_sameness <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>anxiety <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>ASD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset<span class="sc">$</span>OCD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(env_comment_embeddings)) {</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  doc_embedding <span class="ot">&lt;-</span> <span class="fu">slice</span>(env_comment_embeddings, row) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>reduced_contact[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_contact_neutralized)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>reduced_empathy[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_empathy_neutralized)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_interpersonal_insight_neutralized)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, violations_of_social_conventions_neutralized)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>insistence_on_sameness[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, insistence_on_sameness_neutralized)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  env_threadcontent_subset<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>reduced_contact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>reduced_empathy <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>insistence_on_sameness <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>anxiety <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>ASD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset<span class="sc">$</span>OCD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(control_comment_embeddings)) {</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  doc_embedding <span class="ot">&lt;-</span> <span class="fu">slice</span>(control_comment_embeddings, row) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>reduced_contact[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_contact_neutralized)</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>reduced_empathy[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_empathy_neutralized)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>reduced_interpersonal_insight[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_interpersonal_insight_neutralized)</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>violations_of_social_conventions[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, violations_of_social_conventions_neutralized)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>insistence_on_sameness[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, insistence_on_sameness_neutralized)</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  control_threadcontent_subset<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>comments_unified <span class="ot">&lt;-</span> env_threadcontent_subset <span class="sc">%&gt;%</span> </span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(env_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(control_threadcontent_subset <span class="sc">%&gt;%</span> </span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>              <span class="fu">left_join</span>(control_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The aforementioned classical statistical methods do require some thought, though. Because the data were gathered from multiple communities, the samples are not independent, and fixed-parameter-only methods like t-tests will be biased. This is a job for multilevel modeling, with the intercept for each community allowed to vary freely around its group (environmentalist/non-environmentalist) mean.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: lme4</code></pre>
 </div>
@@ -608,17 +592,17 @@ Attaching package: 'lmerTest'</code></pre>
 
     step</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(violations_of_social_conventions <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(insistence_on_sameness <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>ASD_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ASD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>anxiety_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(anxiety <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>OCD_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(OCD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(violations_of_social_conventions <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(insistence_on_sameness <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>ASD_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ASD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>anxiety_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(anxiety <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>OCD_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(OCD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -648,7 +632,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.611</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -678,7 +662,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.605</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -708,7 +692,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.590</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -738,7 +722,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.601</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -768,7 +752,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.603</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -798,7 +782,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.591</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -828,7 +812,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.594</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -873,70 +857,70 @@ envrnmntlst -0.591</code></pre>
 <h1>But What About in Their Non-Environmentalist Activity?</h1>
 <p>So maybe the actual content of environmentalist subreddits shows no difference, but I’m not as interested in the communities themselves as much as I am interested in the <em>people</em> in the communities. Maybe these people are displaying autistic or anxious features in their other activity? To test this, I will select 100 users from the environmentalist groups, and 100 users from the control, and retrieve up to 20 threads initiated by each. Then I will repeat the same analysis, this time adding user as a random variable in addition to subreddit.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>env_user_content <span class="ot">&lt;-</span> <span class="fu">get_user_content</span>(<span class="fu">sample</span>(<span class="fu">unique</span>(env_threadcontent<span class="sc">$</span>author), <span class="dv">100</span>))</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>control_user_content <span class="ot">&lt;-</span> <span class="fu">get_user_content</span>(<span class="fu">sample</span>(<span class="fu">unique</span>(control_threadcontent<span class="sc">$</span>author), <span class="dv">100</span>))</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>env_user_threads <span class="ot">&lt;-</span> <span class="fu">lapply</span>(env_user_content, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">3</span>)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>env_user_threads <span class="ot">&lt;-</span> env_user_threads[<span class="fu">unlist</span>(<span class="fu">lapply</span>(env_user_threads, is.data.frame))]</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>env_user_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(env_user_threads)</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>control_user_threads <span class="ot">&lt;-</span> <span class="fu">lapply</span>(control_user_content, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">3</span>)</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>control_user_threads <span class="ot">&lt;-</span> control_user_threads[<span class="fu">unlist</span>(<span class="fu">lapply</span>(control_user_threads, is.data.frame))]</span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>control_user_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(control_user_threads)</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>env_user_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(env_user_threads<span class="sc">$</span>title, env_user_threads<span class="sc">$</span>text))</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>control_user_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(control_user_threads<span class="sc">$</span>title, control_user_threads<span class="sc">$</span>text))</span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>user_threads_unified <span class="ot">&lt;-</span> env_user_threads <span class="sc">%&gt;%</span> </span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(control_user_threads <span class="sc">%&gt;%</span> </span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
-<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>user_threads_unified_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(user_threads_unified<span class="sc">$</span>full_text)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
-<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute metrics</span></span>
-<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>reduced_contact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>reduced_empathy <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>insistence_on_sameness <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>anxiety <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>ASD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>OCD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(user_threads_unified_embeddings)) {</span>
-<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>  doc_embedding <span class="ot">&lt;-</span> <span class="fu">slice</span>(user_threads_unified_embeddings, row) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>reduced_contact[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_contact_neutralized)</span>
-<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>reduced_empathy[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_empathy_neutralized)</span>
-<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>reduced_interpersonal_insight[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_interpersonal_insight_neutralized)</span>
-<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>violations_of_social_conventions[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, violations_of_social_conventions_neutralized)</span>
-<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>insistence_on_sameness[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, insistence_on_sameness_neutralized)</span>
-<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
-<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
-<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
-<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>env_user_content <span class="ot">&lt;-</span> <span class="fu">get_user_content</span>(<span class="fu">sample</span>(<span class="fu">unique</span>(env_threadcontent<span class="sc">$</span>author), <span class="dv">100</span>))</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>control_user_content <span class="ot">&lt;-</span> <span class="fu">get_user_content</span>(<span class="fu">sample</span>(<span class="fu">unique</span>(control_threadcontent<span class="sc">$</span>author), <span class="dv">100</span>))</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>env_user_threads <span class="ot">&lt;-</span> <span class="fu">lapply</span>(env_user_content, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">3</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>env_user_threads <span class="ot">&lt;-</span> env_user_threads[<span class="fu">unlist</span>(<span class="fu">lapply</span>(env_user_threads, is.data.frame))]</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>env_user_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(env_user_threads)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>control_user_threads <span class="ot">&lt;-</span> <span class="fu">lapply</span>(control_user_content, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">3</span>)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>control_user_threads <span class="ot">&lt;-</span> control_user_threads[<span class="fu">unlist</span>(<span class="fu">lapply</span>(control_user_threads, is.data.frame))]</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>control_user_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(control_user_threads)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>env_user_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(env_user_threads<span class="sc">$</span>title, env_user_threads<span class="sc">$</span>text))</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>control_user_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(control_user_threads<span class="sc">$</span>title, control_user_threads<span class="sc">$</span>text))</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>user_threads_unified <span class="ot">&lt;-</span> env_user_threads <span class="sc">%&gt;%</span> </span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(control_user_threads <span class="sc">%&gt;%</span> </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>user_threads_unified_embeddings <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(user_threads_unified<span class="sc">$</span>full_text)<span class="sc">$</span>texts[[<span class="dv">1</span>]]</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute metrics</span></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>reduced_contact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>reduced_empathy <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>reduced_interpersonal_insight <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>violations_of_social_conventions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>insistence_on_sameness <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>anxiety <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>ASD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>user_threads_unified<span class="sc">$</span>OCD <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(user_threads_unified_embeddings)) {</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>  doc_embedding <span class="ot">&lt;-</span> <span class="fu">slice</span>(user_threads_unified_embeddings, row) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>reduced_contact[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_contact_neutralized)</span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>reduced_empathy[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_empathy_neutralized)</span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>reduced_interpersonal_insight[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, reduced_interpersonal_insight_neutralized)</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>violations_of_social_conventions[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, violations_of_social_conventions_neutralized)</span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>insistence_on_sameness[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, insistence_on_sameness_neutralized)</span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical Analysis</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical Analysis</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, :
 Model failed to converge with max|grad| = 0.00241566 (tol = 0.002, component 1)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(violations_of_social_conventions <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(insistence_on_sameness <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>anxiety_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(anxiety <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>ASD_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ASD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>OCD_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(OCD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(violations_of_social_conventions <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(insistence_on_sameness <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>anxiety_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(anxiety <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ASD_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ASD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>OCD_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(OCD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -967,7 +951,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.747</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1000,7 +984,7 @@ envrnmntlst -0.744
 optimizer (nloptwrap) convergence code: 0 (OK)
 Model failed to converge with max|grad| = 0.00241566 (tol = 0.002, component 1)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1032,7 +1016,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.743</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1064,7 +1048,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.743</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1096,7 +1080,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.750</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1127,7 +1111,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.739</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1158,7 +1142,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.742</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]

@@ -27,7 +27,7 @@ Using the `RedditExtractoR` package in R, I gathered data on all threads over th
 library(tidyverse)
 library(quanteda) 
 library(quanteda.sentiment)
-library(text)
+# library(text)
 library(RedditExtractoR)
 ```
 

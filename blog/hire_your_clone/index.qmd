@@ -16,7 +16,7 @@ I was talking to my dad on the phone a few weeks ago, and he brought up a questi
 
 But how can we check this empirically?
 
-The first step was to find some data. The best I could find came from [The Official Board](www.theofficialboard.com), which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 23,698 employee/boss pairs across 1,601 US companies. This includes 70 instances of bosses and employees with the exact same first name. Here's an example of the data after some cleaning:
+The first step was to find some data. The best I could find came from [The Official Board](www.theofficialboard.com), which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 34,615 employee/boss pairs across 2,292 US companies. This includes 101 instances of bosses and employees with the exact same first name. Here's an example of the data after some cleaning:
 
 ```{r}
 #| echo: false
@@ -80,13 +80,7 @@ mod_america_bayes1 <- brm(real ~ 0 + same_first_name + both_uncommon_names + bot
 
 `both_EastAsian` is the probability that both boss and employee are East Asian, based on their full names. `WE_Asian` is the probability that the boss is Western European or African American and the employee is East Asian or Japanese.
 
-In total there are 45 fixed effects: 
-1.  same first name (binary) 
-2.  both uncommon names (binary)
-3-6.  gender of boss and employee (four categories, one-hot coded) 
-7-14.  both the same ethnicity (7 ethnic categories, continuous probabilities)
-15-19.  boss is Western European or African American and the employee is a minority (5 minority groups, continuous probabilities)
-20-45.  interactions between gender and pairs involving Western European or African American bosses
+In total there are 45 fixed effects: 1. same first name (binary) 2. both uncommon names (binary) 3-6. gender of boss and employee (four categories, one-hot coded) 7-14. both the same ethnicity (7 ethnic categories, continuous probabilities) 15-19. boss is Western European or African American and the employee is a minority (5 minority groups, continuous probabilities) 20-45. interactions between gender and pairs involving Western European or African American bosses
 
 Notice that there are no intercepts, fixed or random. This is because the dataset is balanced - there is a 50% baseline chance that any pairing will be real, since half of the pairings are real. Similarly, there is a known 50% chance that any given boss or company will be in a real or fake pairing, because of the random sampling process. In log odds, 50% is 0, so the model should be run without intercepts at all.
 

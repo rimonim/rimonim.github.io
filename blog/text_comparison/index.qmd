@@ -12,7 +12,7 @@ image: mental_health_wordcloud.svg
 library(tidyverse)
 library(quanteda) 
 library(quanteda.sentiment)
-library(text)
+# library(text)
 library(effectsize)
 
 load("embeddings.RData")
