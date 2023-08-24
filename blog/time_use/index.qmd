@@ -1,0 +1,471 @@
+---
+title: "Americans Have Eight Kinds of Days"
+author: "Louis Teitelbaum"
+date: "August 23, 2023"
+categories: [R, Clustering, Open Data]
+image: cluster_centers.png
+---
+
+```{r setup}
+#| include: false
+load("~/Documents/coursework/time_use.RData")
+library(tidyverse)
+library(factoextra)
+```
+
+[The American Time Use Survey](https://www.bls.gov/tus/data/datafiles-0322.htm) takes a wide sample of Americans and interviews them in great detail about what they did the day before. They have done this each year going back to 2003. With a little discretion, I can group the activities into broader categories and produce the following graph:
+
+```{r}
+#| include: false
+#| eval: false
+
+# Import data from the American Time Use Survey (https://www.bls.gov/tus/datafiles/atussum-0322.zip)
+d <- read_csv("atussum_0322.csv",
+              col_types = cols(
+                .default = col_integer(),
+                TUCASEID = col_double(),
+                TUFNWGTP = col_double(),
+                TU20FWGT = col_double()
+                )
+              )
+
+# Aggregate major activity categories
+d_major <- d %>% 
+  mutate(weekday = factor(case_when(TUDIARYDAY == 1 ~ "Sunday",
+                                    TUDIARYDAY == 2 ~ "Monday",
+                                    TUDIARYDAY == 3 ~ "Tuesday",
+                                    TUDIARYDAY == 4 ~ "Wednesday",
+                                    TUDIARYDAY == 5 ~ "Thursday",
+                                    TUDIARYDAY == 6 ~ "Friday",
+                                    TUDIARYDAY == 7 ~ "Saturday",
+                                    .default = NA),
+                          levels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")),
+         sleep = rowSums(pick(matches('t0101.*'))), # Sleeping, Sleeplessness
+         personal_care = rowSums(pick(matches('t0102.*|t0103.*|t0104.*|t0104.*|t0199.*'))), # Grooming, Health-related self care, Personal Activities, Personal Care Emergencies
+         housework = rowSums(pick(matches('t0201.*|t0299.*|t0901.*|t0999.*'))), # Interior cleaning, Laundry, Sewing, repairing, & maintaining textiles, Storing interior hh items, inc. food, other household activities, housework services
+         food_prep = rowSums(pick(matches('t0202.*'))), # food prep, presentation, cleanup
+         home_maintenance = rowSums(pick(matches('t0203.*|t0204.*|t0205.*|t0207.*|t0208.*|t0902.*|t0904.*|t0905.*'))), # Interior/Exterior Maintenance, Repair & Decoration, Garden, Vehicles, Appliances, Tools, and Toys
+         pets = rowSums(pick(matches('t0206.*|t0807.*|t0903.*'))), # pet care, vetrinary services, other pet care
+         household_management = rowSums(pick(matches('t0209.*'))), # Financial management, Household & personal organization and planning, HH & personal mail & messages (except e-mail), Home security
+         child_care = rowSums(pick(matches('t0301.*|t0302.*|t0303.*'))),
+         adult_care = rowSums(pick(matches('t0304.*|t0305.*'))),
+         nonhousehold_child_care = rowSums(pick(matches('t0401.*|t0402.*|t0403.*'))),
+         nonhousehold_adult_care = rowSums(pick(matches('t0404.*|t0405.*|t0499.*'))),
+         work = rowSums(pick(matches('t0501.*|t0502.*|t0503.*|t0599.*'))),
+         job_search = rowSums(pick(matches('t0504.*'))), # searching, interviewing
+         education = rowSums(pick(matches('t06.*'))), # classes, homework, research, extracurriculars
+         shopping = rowSums(pick(matches('t07.*'))), 
+         childcare_services = rowSums(pick(matches('t0801.*'))),
+         financial_services = rowSums(pick(matches('t0802.*'))),
+         legal_services = rowSums(pick(matches('t0803.*'))),
+         medical_services = rowSums(pick(matches('t0804.*'))),
+         personal_care_services = rowSums(pick(matches('t0805.*'))),
+         real_estate = rowSums(pick(matches('t0806.*'))),
+         government_services = rowSums(pick(matches('t10.*'))),
+         eating_drinking = rowSums(pick(matches('t11.*'))),
+         socializing = rowSums(pick(matches('t1201.*|t1202.*|t0499.*'))), # Socializing, attending social events
+         relaxing_leisure = rowSums(pick(matches('t1203.*'))) - rowSums(pick(matches('t12030[3-8]'))), # Relaxing, thinking, Tobacco and drug use, Television and movies (not religious), Arts and crafts as a hobby, Collecting as a hobby, Hobbies, except arts & crafts and collecting, Reading for personal interest, Writing for personal interest
+         tv_radio_computer = rowSums(pick(matches('t12030[3-8]'))),
+         entertainment = rowSums(pick(matches('t1204.*'))), # performing arts, gambling, museums, movies
+         exercise = rowSums(pick(matches('t1301.*'))),
+         sports = rowSums(pick(matches('t1302.*'))), # Attending Sports/Recreational Events
+         religion = rowSums(pick(matches('t14.*'))),
+         volunteering = rowSums(pick(matches('t15.*'))),
+         travel = rowSums(pick(matches('t18.*'))),
+         work_travel = rowSums(pick(matches('t1805.*')))
+         ) %>% 
+  select(TUCASEID, TEAGE, TESEX, TRERNWA, TUYEAR, weekday, sleep:work_travel)
+
+varnames <- c("Sleep", "Personal Care", "Housework", "Food Prep", "Home Maintenance", 
+              "Pets", "Household Management", "Childcare", "Care for Adults", "Non-household Childcare", 
+              "Nonhousehold Care for Adults", "Work", "Job Search", "Education", 
+              "Shopping", "Childcare Services", "Financial Services", "Legal Services", 
+              "Medical Services", "Personal Care Services", "Real Estate", 
+              "Government Services", "Eating/Drinking", "Socializing", "Relaxing/Leisure", 
+              "TV/Radio/Computer", "Entertainment", "Exercise", "Attending Sports Games", "Religion", 
+              "Volunteering", "Travel", "Travel for Work")
+```
+
+
+```{r}
+#| echo: false
+#| fig-width: 20
+#| fig-height: 11
+#| warning: false
+
+d_major %>% 
+  mutate(age = case_when(TEAGE <= 18 ~ "15-18",
+                         TEAGE > 18 & TEAGE <= 30 ~ "19-30",
+                         TEAGE > 30 & TEAGE <= 50 ~ "31-50",
+                         TEAGE > 50 & TEAGE <= 70 ~ "51-70",
+                         TEAGE > 70 ~ "70+")) %>% 
+  group_by(TUYEAR, age) %>% 
+  summarise(across(sleep:work_travel, ~ mean(.x)/60)) %>% 
+  pivot_longer(sleep:work_travel, names_to = "activity", values_to = "avg_hours") %>% 
+  group_by(TUYEAR, age) %>% 
+  mutate(activity = varnames) %>% 
+  filter(activity %in% c("Sleep", "Childcare", "Eating/Drinking", "Work", "Education", 
+                         "Shopping", "Medical Services", "Socializing", "Relaxing/Leisure", 
+                         "TV/Radio/Computer", "Exercise", "Job Search", 
+                         "Religion", "Pets", "Housework", "Food Prep", "Home Maintenance", "Household Management",
+                         "Travel", "Travel for Work")) %>% 
+  ggplot(aes(TUYEAR, avg_hours, color = age)) +
+    geom_line(linewidth = 1) +
+    viridis::scale_color_viridis(discrete=TRUE, option="mako", end = .8) +
+    facet_wrap(~activity, scales="free_y") +
+    labs(title = "Trends in American Time Use, 2003-2021",
+         subtitle = "Americans are relaxing more and socializing less than they were 18 years ago.",
+         caption = "Source: American Time Use Survey",
+         x = "", y = "Average Daily Hours Spent", color = "Age Group") +
+    theme_light() +
+    theme(plot.title = element_text(size = 25, hjust = .5),
+          plot.subtitle = element_text(size = 13, hjust = .5),
+          axis.text = element_text(size = 10),
+          strip.text = element_text(size = 10))
+```
+
+There is a lot to unpack in this graph. I may come back to some of the trends here in future posts, but right now I want to take an entirely different approach to the data: cluster analysis.
+
+::: {.callout-tip}
+Code for this article is available [here](https://github.com/rimonim/rimonim.github.io/tree/main/blog/time_use/index.qmd).
+:::
+
+Looking at average daily hours spent is enlightening, but it obscures the fundamental experience of time-use: What kinds of days do Americans have? A 1 hour-a-day average for socializing could mean that every American spends one hour each day socializing, or it could mean that 5% of Americans spend 20 hours a day socializing and the rest don't socialize at all. It could also mean that half of Americans spend 7 hours a day socializing on weekends, and the rest don't socialize at all. My point: Averages don't tell us much about the ways in which individual Americans spend their days.
+
+Cluster analysis can solve this problem. Clustering is a family of machine learning techniques that ask the question: What types of cases are there? It can help us say things like "There are two kinds of people in the world..." or "There are three types of days that Americans have". 
+
+I will be using the k-means clustering algorithm - probably the most popular clustering method. Given the number of clusters `k`, it finds a "center" for each cluster - the average of all cases in the cluster - so that each case is assigned to its nearest center. This makes it very easy to visualize the clusters, since cluster's center is the paradigmatic example for all of its members. But k-means does have one tricky aspect: The algorithm only figures out what the clusters are like, not how many of them there should be. The right number of clusters needs to be figured out in advance.
+
+A popular, sophisticated method for finding the optimal number of clusters (the optimal `k`) is the gap statistic method, introduced by [Tibshirani et al. (Standford University, 2001)](http://web.stanford.edu/~hastie/Papers/gap.pdf). This metric compares the total within-cluster dispersion for each `k` (how spread out the cluster members are) with the dispersion that could be expected if the data were totally random and uncluttered. The "gap" is the difference between these two numbers. The chosen number of clusters is the lowest one for which one higher would result in a significantly smaller gap.
+
+Running this algorithm on a subset of the time use data results in the following graph:
+
+```{r}
+#| include: false
+#| eval: false
+# Gap Statistic method for finding optimal k
+
+# Subset the data for faster optimization
+# Since all variables are in comparable units (minutes), normalization is unnecessary
+set.seed(123)
+d_major_sample <- d_major %>% slice_sample(n = 5000) %>% select(sleep:work_travel)
+
+# Warning: Takes a long time to run
+set.seed(123)
+gap_stat_plot <- fviz_nbclust(d_major_sample, kmeans, k.max = 18, 
+                              iter.max = 500, algorithm = "Lloyd", 
+                              nstart = 25, method = "gap_stat", nboot = 500) +
+  labs(subtitle = "Gap Statistic")
+```
+
+
+```{r}
+#| echo: false
+gap_stat_plot # Optimal number of clusters: 3
+```
+The maximum gap statistic is identified here at `k = 18`, the maximum `k` tested. Nevertheless, it is clear from the full graph the 3 is the lowest reasonable number of clusters. This pattern, in which the gap statistic continues to rise after an initial local maximum is discussed by Tibshirani et al. in the original paper:
+
+> In cases where there are smaller subclusters within larger well-separated clusters, it can exhibit non-monotone behaviour. Hence it is important to examine the entire gap curve rather than simply to find the position of its maximum.
+
+In our case, this means that there are a lot of fine distinctions in the ways people spend their days, but `k = 3` may be a good start for a very general breakdown. For now then, there are types of days that Americans have! 
+
+```{r}
+#| include: false
+#| eval: false
+
+k_means <- kmeans(select(d_major, sleep:work_travel),
+                  centers = 3, iter.max = 50, nstart = 25,
+                  algorithm = "Lloyd")
+```
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 9
+
+# Visualize the 3 clusters
+k_means$centers %>% as_tibble() %>% 
+  mutate(cluster = c("Work Day", "Leisure With Responsibilities", "Leisure Without Responsibilities")) %>% 
+  pivot_longer(sleep:work_travel, names_to = "activity", values_to = "min") %>%
+  group_by(cluster) %>% 
+  mutate(percent = 100*min/sum(min),
+         activity = factor(varnames, levels = rev(varnames)),
+         label_group = factor(as.numeric(percent > 2.5)*(activity %in% c("Eating/Drinking", "Socializing", "Relaxing/Leisure", 
+                                                                          "TV/Radio/Computer", "Work", "Childcare") + 1L))) %>% 
+  ggplot(aes(cluster, percent, fill = activity, label = activity)) +
+    geom_bar(position = "stack", stat = "identity") +
+    viridis::scale_fill_viridis(discrete=TRUE, option="turbo") +
+    geom_text(aes(group = activity,
+                  color = label_group), 
+              position = position_stack(.5), size = 4.2) +
+    scale_color_manual(values = c("#00000000", "white", "black")) +
+    guides(fill = "none", color = "none") +
+    labs(title = "Three Ways Americans Spend Their Days",
+         subtitle = "K-Means Cluster Centers",
+         x = "", y = "Percent of Total Time",
+         caption = "Activities with low representation in each cluster are unlabeled.") +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 25, hjust = .5),
+          plot.subtitle = element_text(size = 13, hjust = .5),
+          axis.text = element_text(size = 15),
+          panel.grid.major.x = element_blank())
+```
+I've named the three clusters "Leisure With Responsibilities", "Leisure Without Responsibilities", and "Work Day". A day of leisure with responsibilities has basically no work and a fair amount of relaxing, watching TV, or surfing the internet, but it also has time spent caring for children, preparing food, and doing housework. It also has a notable about of socializing. A day of leisure without responsibilities is similar, but with none of the household responsibilities and none of the socializing. Almost all time not spent sleeping or eating is spent relaxing and in front of the TV or computer. A work day has about 8 hours of work, but otherwise looks more similar the day of leisure with responsibilities, minus the housework and home maintenance.
+
+How is cluster membership distributed over weekdays?
+
+```{r}
+#| echo: false
+#| warning: false
+d_major %>% 
+  select(!sleep:work_travel) %>% 
+  mutate(
+    cluster = c("Work Day", "Leisure With Responsibilities", "Leisure Without Responsibilities")[k_means$cluster]
+    ) %>% 
+  group_by(weekday, cluster) %>% 
+  summarise(n = n()) %>% 
+  group_by(weekday) %>% 
+  mutate(cluster = cluster,
+         percent = 100*n/sum(n)) %>% 
+  ggplot(aes(weekday, percent, fill = cluster)) +
+    geom_bar(position = "stack", stat = "identity") +
+    labs(title = "Types of Days Had by Americans, by Weekday",
+         x = "", y = "Percent of Days", fill = "") +
+    theme_minimal()
+```
+
+Sure enough, workdays in America mostly happen from Monday through Friday. On weekends, Americans are tend to have days of leisure with responsibilities. The proportion of leisure without responsibilities also goes up a bit on weekends, but not dramatically. I get the sense that the kind of people who have days of leisure without responsibilities are generally not the kind of people who have day jobs. Can we see this with a breakdown by age group?
+
+```{r}
+#| echo: false
+#| warning: false
+
+# How is cluster membership distributed over age?
+d_major %>% 
+  select(!sleep:work_travel) %>% 
+  mutate(
+    age = case_when(TEAGE <= 18 ~ "15-18",
+                    TEAGE > 18 & TEAGE <= 30 ~ "19-30",
+                    TEAGE > 30 & TEAGE <= 40 ~ "31-40",
+                    TEAGE > 40 & TEAGE <= 50 ~ "41-50",
+                    TEAGE > 50 & TEAGE <= 60 ~ "51-60",
+                    TEAGE > 60 & TEAGE <= 70 ~ "61-70",
+                    TEAGE > 70 & TEAGE <= 80 ~ "71-80",
+                    TEAGE > 80 ~ "80+"),
+    cluster = c("Work Day", "Leisure With Responsibilities", "Leisure Without Responsibilities")[k_means$cluster]
+  ) %>% 
+  group_by(age, cluster) %>% 
+  summarise(n = n()) %>% 
+  group_by(age) %>% 
+  mutate(cluster = cluster,
+         percent = 100*n/sum(n)) %>% 
+  ggplot(aes(age, percent, fill = cluster)) +
+  geom_bar(position = "stack", stat = "identity") +
+  labs(title = "Types of Days Had by Americans, by Age",
+       x = "", y = "Percent of Days", fill = "") +
+  theme_minimal()
+```
+
+Sure enough, the most avid practitioners of leisure without responsibilities are senior citizens. Children under 18 also have a few more of those than the working-age adults, but not much. This suggests to me that the algorithm has identified school days as leisure with responsibilities. To investigate this possibility further, it may be worthwhile to try out 5-cluster breakdown. Before I do that, though, I'd like to recreate the first graph in this post, but now with types of days instead of averages for individual activities.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-width: 12
+#| fig-height: 9
+
+# How has cluster membership changed over time?
+d_major %>% 
+  select(!sleep:work_travel) %>% 
+  mutate(
+    age = case_when(TEAGE <= 18 ~ "15-18",
+                    TEAGE > 18 & TEAGE <= 30 ~ "19-30",
+                    TEAGE > 30 & TEAGE <= 50 ~ "31-50",
+                    TEAGE > 50 & TEAGE <= 70 ~ "51-70",
+                    TEAGE > 70 ~ "70+"),
+    cluster = c("Work Day", "Leisure With Responsibilities", "Leisure Without Responsibilities")[k_means$cluster]
+  ) %>% 
+  group_by(TUYEAR, age, cluster) %>% 
+  summarise(n = n()) %>% 
+  group_by(TUYEAR, age) %>% 
+  mutate(cluster = cluster,
+         percent = 100*n/sum(n)) %>% 
+  ggplot(aes(TUYEAR, percent, color = age)) +
+  geom_line(linewidth = 1.5) +
+  scale_x_continuous(breaks = seq(2000, 2020, 5)) +
+  viridis::scale_color_viridis(discrete=TRUE, option="mako", end = .8) +
+  labs(title = "Types of Days Had by Americans, by Year",
+       x = "", y = "Percent of Days", color = "Age Group") +
+  facet_wrap(~cluster) +
+  theme_bw() +
+  theme(plot.title = element_text(size = 25, hjust = .5),
+        plot.subtitle = element_text(size = 13, hjust = .5),
+        axis.text = element_text(size = 10),
+        strip.text = element_text(size = 10),
+        panel.grid.major.x = element_blank())
+```
+
+If you squint, the 2008 financial crisis is recognizable as a drop in workdays and rise in days of leisure without responsibilities. COVID is even more dramatic. The 2020 fall in days of leisure with responsibilities among children under 18 confirms my suspicion that school days count.
+
+Interestingly, there looks to be a steady rise in days of leisure without responsibilities, especially among the elderly. This is accompanied by a steady decline in days of leisure with responsibilities across all age groups. 
+
+To see some finer detail, I'd like to re-cluster with a higher `k` and see what it comes up with. I'm not sure I could make sense of 18 different categories, so I'll chose `k = 8`.
+
+```{r}
+#| echo: false
+#| eval: false
+
+k_means_8 <- kmeans(select(d_major, sleep:work_travel),
+                    centers = 8, iter.max = 150, nstart = 25,
+                    algorithm = "Lloyd")
+```
+```{r}
+#| echo: false
+#| fig-width: 15
+#| fig-height: 9
+
+# Visualize the 5 clusters
+k_means_8$centers %>% as_tibble() %>% 
+  mutate(cluster = c("Social Day", "Work Day", "School Day", "Parenting", "Sleeping In", "All Day on TV/\nRadio/Computer", "Leisure Without\nResponsibilities", "Household\nResponsibilities"),
+         cluster = factor(cluster, levels = c("Work Day", "School Day", "Parenting", "Household\nResponsibilities", "Social Day", "Sleeping In", "Leisure Without\nResponsibilities", "All Day on TV/\nRadio/Computer"))
+         ) %>% 
+  pivot_longer(sleep:work_travel, names_to = "activity", values_to = "min") %>%
+  group_by(cluster) %>% 
+  mutate(percent = 100*min/sum(min),
+         activity = factor(varnames, levels = rev(varnames)),
+         label_group = factor(as.numeric(percent > 2.5)*(activity %in% c("Eating/Drinking", "Socializing", "Relaxing/Leisure", "TV/Radio/Computer", "Work", "Childcare", "Shopping", "Education") + 1L))) %>% 
+  ggplot(aes(cluster, percent, fill = activity, label = activity)) +
+    geom_bar(position = "stack", stat = "identity") +
+    viridis::scale_fill_viridis(discrete=TRUE, option="turbo") +
+    geom_text(aes(group = activity,
+                  color = label_group), 
+              position = position_stack(.5), size = 4.2) +
+    scale_color_manual(values = c("#00000000", "white", "black")) +
+    guides(fill = "none", color = "none") +
+    labs(title = "Eight Ways Americans Spend Their Days",
+         subtitle = "K-Means Cluster Centers",
+         x = "", y = "Percent of Total Time",
+         caption = "Activities with low representation in each cluster are unlabeled.") +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 25, hjust = .5),
+          plot.subtitle = element_text(size = 13, hjust = .5),
+          axis.text = element_text(size = 15),
+          panel.grid.major.x = element_blank())
+```
+Here is the school day in its full glory! Now we also have two types of leisure days without responsibilities, a parenting day, a non-parental household responsibilities day, a day of socializing, and a day with extra sleep. 
+
+```{r}
+#| echo: false
+#| warning: false
+d_major %>% 
+  select(!sleep:work_travel) %>% 
+  mutate(
+    cluster = c("Social Day", "Work Day", "School Day", "Parenting", "Sleeping In", "All Day on TV/\nRadio/Computer", "Leisure Without\nResponsibilities", "Household\nResponsibilities")[k_means_8$cluster],
+    cluster = factor(cluster, levels = c("Work Day", "School Day", "Parenting", "Household\nResponsibilities", "Social Day", "Sleeping In", "Leisure Without\nResponsibilities", "All Day on TV/\nRadio/Computer"))
+    ) %>% 
+  group_by(weekday, cluster) %>% 
+  summarise(n = n()) %>% 
+  group_by(weekday) %>% 
+  mutate(cluster = cluster,
+         percent = 100*n/sum(n)) %>% 
+  ggplot(aes(weekday, percent, fill = cluster)) +
+    geom_bar(position = "stack", stat = "identity") +
+    scale_fill_brewer(palette = "Paired") +
+    labs(title = "Types of Days Had by Americans, by Weekday",
+         x = "", y = "Percent of Days", fill = "") +
+    theme_minimal()
+```
+
+We can now see that school days and work days both tend to happen on Monday through Friday. Days of extra sleeping happen most often on Sundays, likely reflecting a sleep deficit from the work week. Social days are most common on Saturdays. 
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-width: 16
+#| fig-height: 9
+
+# How has cluster membership changed over time?
+d_major %>% 
+  select(!sleep:work_travel) %>% 
+  mutate(
+    age = case_when(TEAGE <= 18 ~ "15-18",
+                    TEAGE > 18 & TEAGE <= 30 ~ "19-30",
+                    TEAGE > 30 & TEAGE <= 50 ~ "31-50",
+                    TEAGE > 50 & TEAGE <= 70 ~ "51-70",
+                    TEAGE > 70 ~ "70+"),
+    cluster = c("Social Day", "Work Day", "School Day", "Parenting", "Sleeping In", "All Day on TV/\nRadio/Computer", "Leisure Without\nResponsibilities", "Household\nResponsibilities")[k_means_8$cluster],
+    cluster = factor(cluster, levels = c("Work Day", "School Day", "Parenting", "Household\nResponsibilities", "Social Day", "Sleeping In", "Leisure Without\nResponsibilities", "All Day on TV/\nRadio/Computer"))
+  ) %>% 
+  group_by(TUYEAR, age, cluster) %>% 
+  summarise(n = n()) %>% 
+  group_by(TUYEAR, age) %>% 
+  mutate(cluster = cluster,
+         percent = 100*n/sum(n)) %>% 
+  ggplot(aes(TUYEAR, percent, color = age)) +
+  geom_line(linewidth = 1.5) +
+  scale_x_continuous(breaks = seq(2000, 2020, 5)) +
+  viridis::scale_color_viridis(discrete=TRUE, option="mako", end = .8) +
+  labs(title = "Types of Days Had by Americans, by Year",
+       x = "", y = "Percent of Days", color = "Age Group") +
+  facet_wrap(~cluster, nrow = 2) +
+  theme_bw() +
+  theme(plot.title = element_text(size = 25, hjust = .5),
+        plot.subtitle = element_text(size = 13, hjust = .5),
+        axis.text = element_text(size = 10),
+        strip.text = element_text(size = 10),
+        panel.grid.major.x = element_blank())
+```
+
+Again we see the prominent 2020 drop in both school days (for children) and work days (for working-age people), corresponding with a rise in days of leisure of all sorts. It looks like the younger people in 2020 tended to gravitate toward days of TV/Radio/Computer use, whereas older people found other ways to kick back. The slow trends are more interesting though. Days of household responsibilities are clearly on a long and slow decline, as are days of socializing. Days of sleeping in look to be on the rise. Again the rise in days of leisure without responsibilities is most evident among the elderly, but now we can more definitively blame TV and computers, since the other sort of leisure days are on the decline.
+
+I'm curious to see the same graph, but broken up by income rather than age.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-width: 16
+#| fig-height: 9
+
+# How has cluster membership changed over time?
+d_major %>% 
+  select(!sleep:work_travel) %>% 
+  mutate(
+    age = case_when(TEAGE <= 18 ~ "15-18",
+                    TEAGE > 18 & TEAGE <= 30 ~ "19-30",
+                    TEAGE > 30 & TEAGE <= 50 ~ "31-50",
+                    TEAGE > 50 & TEAGE <= 70 ~ "51-70",
+                    TEAGE > 70 ~ "70+"),
+    cluster = c("Social Day", "Work Day", "School Day", "Parenting", "Sleeping In", "All Day on TV/\nRadio/Computer", "Leisure Without\nResponsibilities", "Household\nResponsibilities")[k_means_8$cluster],
+    cluster = factor(cluster, levels = c("Work Day", "School Day", "Parenting", "Household\nResponsibilities", "Social Day", "Sleeping In", "Leisure Without\nResponsibilities", "All Day on TV/\nRadio/Computer")),
+    weekly_salary = factor(case_when(TRERNWA <= 0 ~ "No Income",
+                              TRERNWA <= 50000 ~ "$0-$500",
+                              TRERNWA <= 100000 ~ "$500-$1000",
+                              TRERNWA <= 200000 ~ "$1000-$2000",
+                              TRERNWA > 200000 ~ "$2000+"),
+                           levels = c("No Income", "$0-$500", "$500-$1000", "$1000-$2000", "$2000+")),
+  ) %>% 
+  group_by(TUYEAR, weekly_salary, cluster) %>% 
+  summarise(n = n()) %>% 
+  group_by(TUYEAR, weekly_salary) %>% 
+  mutate(cluster = cluster,
+         percent = 100*n/sum(n)) %>% 
+  ggplot(aes(TUYEAR, percent, color = weekly_salary)) +
+  geom_line(linewidth = 1.5) +
+  scale_x_continuous(breaks = seq(2000, 2020, 5)) +
+  viridis::scale_color_viridis(discrete=TRUE, option="mako", end = .8) +
+  labs(title = "Types of Days Had by Americans, by Year",
+       x = "", y = "Percent of Days", color = "Weekly Earnings\nat Main Job") +
+  facet_wrap(~cluster, nrow = 2) +
+  theme_bw() +
+  theme(plot.title = element_text(size = 25, hjust = .5),
+        plot.subtitle = element_text(size = 13, hjust = .5),
+        axis.text = element_text(size = 10),
+        strip.text = element_text(size = 10),
+        panel.grid.major.x = element_blank())
+```
+
+This looks like all the trends observed above are true of all income brackets. Looking at these together with the individual-activity graph from the beginning of this post, the most dramatic long-term trends are:
+
+- A fall in days of household responsibilities, corresponding to the falls in average time spent on home maintenance, shopping, and housework (though food prep is on the rise).
+- A fall in days of socializing, corresponding to a fall in time spend socializing generally. We should be careful with this one though, since "socializing" here may only includes time explicitly devoted to socializing. In practice of course, a fair bit of socializing happens at work, school, or during other activities. 
+- Rise in days of TV/computer use, especially for the elderly. This corresponds to a rise in average time spent watching TV, listening to the radio, or on the computer.
+- Also, it looks like people with higher income sleep in less. Is this because their jobs are less exhausting? Or because their jobs are more regular, so they have no time to sleep in?
