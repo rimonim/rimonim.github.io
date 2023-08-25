@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -179,7 +213,7 @@ Tip
 </div>
 <p>Looking at average daily hours spent is enlightening, but it obscures the fundamental experience of time-use: What kinds of days do Americans have? A 1 hour-a-day average for socializing could mean that every American spends one hour each day socializing, or it could mean that 5% of Americans spend 20 hours a day socializing and the rest don’t socialize at all. It could also mean that half of Americans spend 7 hours a day socializing on weekends, and the rest don’t socialize at all. My point: Averages don’t tell us much about the ways in which individual Americans spend their days.</p>
 <p>Cluster analysis can solve this problem. Clustering is a family of machine learning techniques that ask the question: What types of cases are there? It can help us say things like “There are two kinds of people in the world…” or “There are three types of days that Americans have”.</p>
-<p>I will be using the k-means clustering algorithm - probably the most popular clustering method. Given the number of clusters <code>k</code>, it finds a “center” for each cluster - the average of all cases in the cluster - so that each case is assigned to its nearest center. This makes it very easy to visualize the clusters, since cluster’s center is the paradigmatic example for all of its members. But k-means does have one tricky aspect: The algorithm only figures out what the clusters are like, not how many of them there should be. The right number of clusters needs to be figured out in advance.</p>
+<p>I will be using the k-means clustering algorithm - probably the most popular clustering method. Given the number of clusters <code>k</code>, it finds a “center” for each cluster - the average of all cases in the cluster - so that each case is assigned to its nearest center. This makes it very easy to visualize the clusters, since each cluster’s center is the paradigmatic example for all of its members. But k-means does have one tricky aspect: The algorithm only figures out what the clusters are like, not how many of them there should be. The right number of clusters needs to be figured out in advance.</p>
 <p>A popular, sophisticated method for finding the optimal number of clusters (the optimal <code>k</code>) is the gap statistic method, introduced by <a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">Tibshirani et al.&nbsp;(Standford University, 2001)</a>. This metric compares the total within-cluster dispersion for each <code>k</code> (how spread out the cluster members are) with the dispersion that could be expected if the data were totally random and uncluttered. The “gap” is the difference between these two numbers. The chosen number of clusters is the lowest one for which one higher would result in a significantly smaller gap.</p>
 <p>Running this algorithm on a subset of the time use data results in the following graph:</p>
 <div class="cell">
@@ -187,30 +221,30 @@ Tip
 <p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The maximum gap statistic is identified here at <code>k = 18</code>, the maximum <code>k</code> tested. Nevertheless, it is clear from the full graph the 3 is the lowest reasonable number of clusters. This pattern, in which the gap statistic continues to rise after an initial local maximum is discussed by Tibshirani et al.&nbsp;in the original paper:</p>
+<p>The maximum gap statistic is identified here at <code>k = 20</code>, the maximum <code>k</code> tested. Nevertheless, it is clear from the full graph that 3 is the lowest reasonable number of clusters. A pattern similar to this, in which the gap statistic continues to rise after an initial local maximum, is discussed by Tibshirani et al.&nbsp;in the original paper:</p>
 <blockquote class="blockquote">
 <p>In cases where there are smaller subclusters within larger well-separated clusters, it can exhibit non-monotone behaviour. Hence it is important to examine the entire gap curve rather than simply to find the position of its maximum.</p>
 </blockquote>
-<p>In our case, this means that there are a lot of fine distinctions in the ways people spend their days, but <code>k = 3</code> may be a good start for a very general breakdown. For now then, there are types of days that Americans have!</p>
+<p>In our case, this means that there are a lot of fine distinctions in the ways people spend their days, but <code>k = 3</code> may be a good start for a very general breakdown. For now then, there are three types of days that Americans have!</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1152"></p>
 </div>
 </div>
-<p>I’ve named the three clusters “Leisure With Responsibilities”, “Leisure Without Responsibilities”, and “Work Day”. A day of leisure with responsibilities has basically no work and a fair amount of relaxing, watching TV, or surfing the internet, but it also has time spent caring for children, preparing food, and doing housework. It also has a notable about of socializing. A day of leisure without responsibilities is similar, but with none of the household responsibilities and none of the socializing. Almost all time not spent sleeping or eating is spent relaxing and in front of the TV or computer. A work day has about 8 hours of work, but otherwise looks more similar the day of leisure with responsibilities, minus the housework and home maintenance.</p>
-<p>How is cluster membership distributed over weekdays?</p>
+<p>I’ve named the three clusters “Leisure With Responsibilities”, “Leisure Without Responsibilities”, and “Work Day.” A day of leisure with responsibilities has basically no work and a fair amount of relaxing, watching TV, or surfing the internet, but it also has time spent caring for children, preparing food, and doing housework. It also has a notable amount of socializing. A day of leisure without responsibilities is similar, but with none of the household responsibilities and none of the socializing. Almost all time not spent sleeping or eating is spent relaxing and in front of the TV or computer. A work day has about 8 hours of work, but otherwise looks more similar to the day of leisure with responsibilities, minus the housework and home maintenance.</p>
+<p>How are the clusters distributed over the week?</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Sure enough, workdays in America mostly happen from Monday through Friday. On weekends, Americans are tend to have days of leisure with responsibilities. The proportion of leisure without responsibilities also goes up a bit on weekends, but not dramatically. I get the sense that the kind of people who have days of leisure without responsibilities are generally not the kind of people who have day jobs. Can we see this with a breakdown by age group?</p>
+<p>Sure enough, workdays in America mostly happen from Monday through Friday. On weekends, Americans tend to have days of leisure with responsibilities. The proportion of leisure without responsibilities also goes up a bit on weekends, but not dramatically. I get the sense that the kind of people who have days of leisure without responsibilities are often not the kind of people who have day jobs. Can we see this with a breakdown by age group?</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Sure enough, the most avid practitioners of leisure without responsibilities are senior citizens. Children under 18 also have a few more of those than the working-age adults, but not much. This suggests to me that the algorithm has identified school days as leisure with responsibilities. To investigate this possibility further, it may be worthwhile to try out 5-cluster breakdown. Before I do that, though, I’d like to recreate the first graph in this post, but now with types of days instead of averages for individual activities.</p>
+<p>Sure enough, the most avid practitioners of leisure without responsibilities are senior citizens. Children under 18 also have a few more of those than the working-age adults, but not much. This suggests to me that the algorithm has identified school days as leisure with responsibilities. To investigate this possibility further, it may be worthwhile to try out a breakdown into more clusters. Before I do that, though, I’d like to recreate the first graph in this post, but now with types of days instead of averages for individual activities.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1152"></p>
@@ -233,23 +267,60 @@ Tip
 <p>We can now see that school days and work days both tend to happen on Monday through Friday. Days of extra sleeping happen most often on Sundays, likely reflecting a sleep deficit from the work week. Social days are most common on Saturdays.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="1536"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
-<p>Again we see the prominent 2020 drop in both school days (for children) and work days (for working-age people), corresponding with a rise in days of leisure of all sorts. It looks like the younger people in 2020 tended to gravitate toward days of TV/Radio/Computer use, whereas older people found other ways to kick back. The slow trends are more interesting though. Days of household responsibilities are clearly on a long and slow decline, as are days of socializing. Days of sleeping in look to be on the rise. Again the rise in days of leisure without responsibilities is most evident among the elderly, but now we can more definitively blame TV and computers, since the other sort of leisure days are on the decline.</p>
+<p>Again we see the prominent 2020 drop in both school days (for children) and work days (for working-age people), corresponding with a rise in days of leisure of all sorts. It looks like the younger people in 2020 spiked more dramatically toward days of TV/Radio/Computer use, whereas older people found other ways to kick back. The slow trends are more interesting though. Days of household responsibilities are clearly on a long and slow decline, as are days of socializing. Days of sleeping in look to be on the rise. Again the slow rise in days of leisure without responsibilities is most evident among the elderly, but not all days of leisure without responsibilities - only ones spend entirely on the TV/Radio/Computer. The other sort of leisure days are on the decline.</p>
 <p>I’m curious to see the same graph, but broken up by income rather than age.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1536"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
 <p>This looks like all the trends observed above are true of all income brackets. Looking at these together with the individual-activity graph from the beginning of this post, the most dramatic long-term trends are:</p>
 <ul>
 <li>A fall in days of household responsibilities, corresponding to the falls in average time spent on home maintenance, shopping, and housework (though food prep is on the rise).</li>
-<li>A fall in days of socializing, corresponding to a fall in time spend socializing generally. We should be careful with this one though, since “socializing” here may only includes time explicitly devoted to socializing. In practice of course, a fair bit of socializing happens at work, school, or during other activities.</li>
+<li>A fall in days of socializing, corresponding to a fall in time spent socializing generally. We should be careful with this one though, since “socializing” here only includes time explicitly devoted to socializing. In practice of course, a fair bit of socializing happens at work, school, or during other activities. In particular, the internet has become an increasingly social place during the time period under investigation here.</li>
 <li>Rise in days of TV/computer use, especially for the elderly. This corresponds to a rise in average time spent watching TV, listening to the radio, or on the computer.</li>
 <li>Also, it looks like people with higher income sleep in less. Is this because their jobs are less exhausting? Or because their jobs are more regular, so they have no time to sleep in?</li>
 </ul>
+<p>Finally, I wonder how these clusters are distributed between sexes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cluster membership cby gender</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d_major <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>sleep<span class="sc">:</span>work_travel) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex =</span> <span class="fu">case_when</span>(TESEX <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Male"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                    TESEX <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Female"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.default =</span> <span class="cn">NA</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster =</span> <span class="fu">c</span>(<span class="st">"Social Day"</span>, <span class="st">"Work Day"</span>, <span class="st">"School Day"</span>, <span class="st">"At-Home</span><span class="sc">\n</span><span class="st">Parenting"</span>, <span class="st">"Sleeping In"</span>, <span class="st">"All Day on TV/</span><span class="sc">\n</span><span class="st">Radio/Computer"</span>, <span class="st">"Leisure Without</span><span class="sc">\n</span><span class="st">Responsibilities"</span>, <span class="st">"Household</span><span class="sc">\n</span><span class="st">Responsibilities"</span>)[k_means_8<span class="sc">$</span>cluster],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster =</span> <span class="fu">factor</span>(cluster, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Work Day"</span>, <span class="st">"School Day"</span>, <span class="st">"At-Home</span><span class="sc">\n</span><span class="st">Parenting"</span>, <span class="st">"Household</span><span class="sc">\n</span><span class="st">Responsibilities"</span>, <span class="st">"Social Day"</span>, <span class="st">"Sleeping In"</span>, <span class="st">"Leisure Without</span><span class="sc">\n</span><span class="st">Responsibilities"</span>, <span class="st">"All Day on TV/</span><span class="sc">\n</span><span class="st">Radio/Computer"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(TUYEAR, sex, cluster) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">sum</span>(TUFNWGTP)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(TUYEAR, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cluster =</span> cluster,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">percent =</span> <span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(TUYEAR, percent, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2000</span>, <span class="dv">2020</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_color_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">option=</span><span class="st">"mako"</span>, <span class="at">end =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Types of Days Had by Americans, by Sex and Year"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Percent of Days"</span>, <span class="at">color =</span> <span class="st">"Sex"</span>) <span class="sc">+</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>cluster, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">hjust =</span> .<span class="dv">5</span>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'TUYEAR', 'sex'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>Males have more workdays, and more days spent entirely on the TV/Radio/Computer. Females have more parenting days and more days of household responsibilities. Females look to have slighty more social days than males do, but not by much. In 2020, males increased their days doing household responsibilities more than did females, presumably since household responsibilities replaced their workdays. This is all basically what I expected. Interestingly, it does look like females are increasing their days sleeping in faster than are males. I don’t have a good explanation for why that might be.</p>
 
 
 
