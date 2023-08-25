@@ -473,8 +473,10 @@ Finally, I wonder how these clusters are distributed between sexes.
 ```{r}
 #| fig-width: 10
 #| fig-height: 6
+#| echo: false
+#| warning: false
 
-# Cluster membership cby gender
+# Cluster membership by gender
 d_major %>% 
   select(!sleep:work_travel) %>% 
   mutate(
