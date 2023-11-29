@@ -8,7 +8,7 @@ image: cluster_centers.png
 
 ```{r setup}
 #| include: false
-load("~/Documents/coursework/time_use.RData")
+load("~/Documents/coursework/time_use/time_use.RData")
 library(tidyverse)
 library(factoextra)
 ```
@@ -86,7 +86,6 @@ varnames <- c("Sleep", "Personal Care", "Housework", "Food Prep", "Home Maintena
               "Volunteering", "Travel", "Travel for Work")
 ```
 
-
 ```{r}
 #| echo: false
 #| fig-width: 20
@@ -128,13 +127,13 @@ d_major %>%
 
 There is a lot to unpack in this graph. I may come back to some of the trends here in future posts, but right now I want to take an entirely different approach to the data: cluster analysis.
 
-::: {.callout-tip}
+::: callout-tip
 Code for this article is available [here](https://github.com/rimonim/rimonim.github.io/tree/main/blog/time_use/index.qmd).
 :::
 
 Looking at average daily hours spent is enlightening, but it obscures the fundamental experience of time-use: What kinds of days do Americans have? A 1 hour-a-day average for socializing could mean that every American spends one hour each day socializing, or it could mean that 5% of Americans spend 20 hours a day socializing and the rest don't socialize at all. It could also mean that half of Americans spend 7 hours a day socializing on weekends, and the rest don't socialize at all. My point: Averages don't tell us much about the ways in which individual Americans spend their days.
 
-Cluster analysis can solve this problem. Clustering is a family of machine learning techniques that ask the question: What types of cases are there? It can help us say things like "There are two kinds of people in the world..." or "There are three types of days that Americans have". 
+Cluster analysis can solve this problem. Clustering is a family of machine learning techniques that ask the question: What types of cases are there? It can help us say things like "There are two kinds of people in the world..." or "There are three types of days that Americans have".
 
 I will be using the k-means clustering algorithm - probably the most popular clustering method. Given the number of clusters `k`, it finds a "center" for each cluster - the average of all cases in the cluster - so that each case is assigned to its nearest center. This makes it very easy to visualize the clusters, since each cluster's center is the paradigmatic example for all of its members. But k-means does have one tricky aspect: The algorithm only figures out what the clusters are like, not how many of them there should be. The right number of clusters needs to be figured out in advance.
 
@@ -160,16 +159,16 @@ gap_stat_plot <- fviz_nbclust(d_major_sample, kmeans, k.max = 20,
   labs(subtitle = "Gap Statistic")
 ```
 
-
 ```{r}
 #| echo: false
 gap_stat_plot # Optimal number of clusters: 3
 ```
+
 The maximum gap statistic is identified here at `k = 20`, the maximum `k` tested. Nevertheless, it is clear from the full graph that 3 is the lowest reasonable number of clusters. A pattern similar to this, in which the gap statistic continues to rise after an initial local maximum, is discussed by Tibshirani et al. in the original paper:
 
 > In cases where there are smaller subclusters within larger well-separated clusters, it can exhibit non-monotone behaviour. Hence it is important to examine the entire gap curve rather than simply to find the position of its maximum.
 
-In our case, this means that there are a lot of fine distinctions in the ways people spend their days, but `k = 3` may be a good start for a very general breakdown. For now then, there are three types of days that Americans have! 
+In our case, this means that there are a lot of fine distinctions in the ways people spend their days, but `k = 3` may be a good start for a very general breakdown. For now then, there are three types of days that Americans have!
 
 ```{r}
 #| include: false
@@ -179,6 +178,7 @@ k_means <- kmeans(select(d_major, sleep:work_travel),
                   centers = 3, iter.max = 50, nstart = 25,
                   algorithm = "Lloyd")
 ```
+
 ```{r}
 #| echo: false
 #| fig-width: 12
@@ -211,6 +211,7 @@ k_means$centers %>% as_tibble() %>%
           axis.text = element_text(size = 15),
           panel.grid.major.x = element_blank())
 ```
+
 I've named the three clusters "Leisure With Responsibilities", "Leisure Without Responsibilities", and "Work Day." A day of leisure with responsibilities has basically no work and a fair amount of relaxing, watching TV, or surfing the internet, but it also has time spent caring for children, preparing food, and doing housework. It also has a notable amount of socializing. A day of leisure without responsibilities is similar, but with none of the household responsibilities and none of the socializing. Almost all time not spent sleeping or eating is spent relaxing and in front of the TV or computer. A work day has about 8 hours of work, but otherwise looks more similar to the day of leisure with responsibilities, minus the housework and home maintenance.
 
 How are the clusters distributed over the week?
@@ -308,7 +309,7 @@ d_major %>%
 
 If you squint, the 2008 financial crisis is recognizable as a drop in workdays and rise in days of leisure without responsibilities. COVID is even more dramatic. The 2020 fall in days of leisure with responsibilities among children under 18 confirms my suspicion that school days count.
 
-Interestingly, there looks to be a steady rise in days of leisure without responsibilities, especially among the elderly. This is accompanied by a steady decline in days of leisure with responsibilities across all age groups. 
+Interestingly, there looks to be a steady rise in days of leisure without responsibilities, especially among the elderly. This is accompanied by a steady decline in days of leisure with responsibilities across all age groups.
 
 To see some finer detail, I'd like to re-cluster with a higher `k` and see what it comes up with. I'm not sure I could make sense of 18 different categories, so I'll chose `k = 8`.
 
@@ -320,6 +321,7 @@ k_means_8 <- kmeans(select(d_major, sleep:work_travel),
                     centers = 8, iter.max = 150, nstart = 25,
                     algorithm = "Lloyd")
 ```
+
 ```{r}
 #| echo: false
 #| fig-width: 15
@@ -353,7 +355,8 @@ k_means_8$centers %>% as_tibble() %>%
           axis.text = element_text(size = 15),
           panel.grid.major.x = element_blank())
 ```
-Here is the school day in its full glory! Now we also have two types of leisure days without responsibilities, a parenting day, a non-parental household responsibilities day, a day of socializing, and a day with extra sleep. 
+
+Here is the school day in its full glory! Now we also have two types of leisure days without responsibilities, a parenting day, a non-parental household responsibilities day, a day of socializing, and a day with extra sleep.
 
 ```{r}
 #| echo: false
@@ -377,7 +380,7 @@ d_major %>%
     theme_minimal()
 ```
 
-We can now see that school days and work days both tend to happen on Monday through Friday. Days of extra sleeping happen most often on Sundays, likely reflecting a sleep deficit from the work week. Social days are most common on Saturdays. 
+We can now see that school days and work days both tend to happen on Monday through Friday. Days of extra sleeping happen most often on Sundays, likely reflecting a sleep deficit from the work week. Social days are most common on Saturdays.
 
 ```{r}
 #| echo: false
@@ -463,10 +466,10 @@ d_major %>%
 
 This looks like all the trends observed above are true of all income brackets. Looking at these together with the individual-activity graph from the beginning of this post, the most dramatic long-term trends are:
 
-- A fall in days of household responsibilities, corresponding to the falls in average time spent on home maintenance, shopping, and housework (though food prep is on the rise).
-- A fall in days of socializing, corresponding to a fall in time spent socializing generally. We should be careful with this one though, since "socializing" here only includes time explicitly devoted to socializing. In practice of course, a fair bit of socializing happens at work, school, or during other activities. In particular, the internet has become an increasingly social place during the time period under investigation here.
-- Rise in days of TV/computer use, especially for the elderly. This corresponds to a rise in average time spent watching TV, listening to the radio, or on the computer.
-- Also, it looks like people with higher income sleep in less. Is this because their jobs are less exhausting? Or because their jobs are more regular, so they have no time to sleep in?
+-   A fall in days of household responsibilities, corresponding to the falls in average time spent on home maintenance, shopping, and housework (though food prep is on the rise).
+-   A fall in days of socializing, corresponding to a fall in time spent socializing generally. We should be careful with this one though, since "socializing" here only includes time explicitly devoted to socializing. In practice of course, a fair bit of socializing happens at work, school, or during other activities. In particular, the internet has become an increasingly social place during the time period under investigation here.
+-   Rise in days of TV/computer use, especially for the elderly. This corresponds to a rise in average time spent watching TV, listening to the radio, or on the computer.
+-   Also, it looks like people with higher income sleep in less. Is this because their jobs are less exhausting? Or because their jobs are more regular, so they have no time to sleep in?
 
 Finally, I wonder how these clusters are distributed between sexes.
 
@@ -505,4 +508,3 @@ d_major %>%
 ```
 
 Males have more workdays, and more days spent entirely on the TV/Radio/Computer. Females have more parenting days and more days of household responsibilities. Females look to have slighty more social days than males do, but not by much. In 2020, males increased their days doing household responsibilities more than did females, presumably since household responsibilities replaced their workdays. This is all basically what I expected. Interestingly, it does look like females are increasing their days sleeping in faster than are males. I don't have a good explanation for why that might be.
-

@@ -1,0 +1,44 @@
+---
+title: "Louis Teitelbaum's Cover Letter"
+author: Louis Teitelbaum
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+    css: cover_letter_hebrew.css
+    paged-footnotes: true
+dir: rtl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+# Aside
+
+<center><img src="images/louisprof.jpg" style="width:100%; border-radius: 40%;"/></center>
+
+## Contact Info {#contact}
+
+<i class="fa fa-envelope"></i> [louist\@post.bgu.ac.il](mailto:louist@post.bgu.ac.il){.email}\
+<i class="fa fa-globe"></i> [Home Page](https://rimonim.github.io) \| <i class="fa fa-rss"></i> [Blog](https://rimonim.github.io/blog)\
+<i class="fa fa-github"></i> [GitHub](https://github.com/rimonim) \| <i class="fa fa-linkedin"></i> [LinkedIn](https://www.linkedin.com/in/louisteitelbaum/)
+
+# Main
+
+## לואיס טייטלבאום {#title}
+
+------------------------------------------------------------------------
+
+29 ביוני, 2023
+
+<br> כללית חדשנות שלום,
+
+שמי לואיס טייטלבאום, סטודנט לתואר שני בפסיכולוגיה קוגניטיבית ומדעי הנתונים באוניברסיטת בן גוריון. יש לי ניסיון של שלוש שנים בניתוח נתונים כמותיים בR וPython. בשנים האלו, תרמתי למחקר בשלוש מעבדות שונות בשתי מדינות שונות, ובניתי פרויקטים רבים אחרים בזמני האישי ([צפו באתר שלי!](http://rimonim.github.io/)). אני מנוסה בשיטות עדכניות בלמידת מכונה כגון multilevel modeling, Bayesian inference, random forest, XGBoost, elastic-net regression, ועוד. כיום אני מתחיל לעבוד עם רשתות נוירונים עמוקים מתוך בניית מודל לנבא סיכון עתידי מהקלטות של שיחות במוקד החירום המשטרתי. הייתי שמח מאוד ליישם את הידע הזה (ולרכוש ידע חדש) אצלכם בכללית. בנוסף על כך, אני דובר אנגלית ברמת שפת-אם, ומסוגל לבצע סקירת ספרות בזריזות ובעומק. אני חושב שהיכולות שלי באנגלית, בספרות אקדמית בפרט, תכנות בR (שאותו התחלתי ללמוד כשנתיים לפני רוב הסטודנטים במגמה) יכולות להוות ערך ייחודי לחברה במהלך הפרקטיקום.
+
+<br> תודה רבה על ההזדמנות,
+
+<br>
+
+לואיס

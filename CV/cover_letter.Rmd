@@ -1,0 +1,45 @@
+---
+title: "Louis Teitelbaum's Cover Letter"
+author: Louis Teitelbaum
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+    css: cover_letter.css
+    paged-footnotes: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+# Aside
+
+<center><img src="images/louisprof.jpg" style="width:100%; border-radius: 40%;"/></center>
+
+## Contact Info {#contact}
+
+<i class="fa fa-envelope"></i> [louist\@post.bgu.ac.il](mailto:louist@post.bgu.ac.il){.email}\
+<i class="fa fa-globe"></i> [Home Page](https://rimonim.github.io) \| <i class="fa fa-rss"></i> [Blog](https://rimonim.github.io/blog)\
+<i class="fa fa-github"></i> [GitHub](https://github.com/rimonim) \| <i class="fa fa-linkedin"></i> [LinkedIn](https://www.linkedin.com/in/louisteitelbaum/)
+
+# Main
+
+## Louis Teitelbaum {#title}
+
+------------------------------------------------------------------------
+
+29th June 2023
+
+<br> Dear Autodesk Construction Solutions team,
+
+My name is Louis Teitelbaum. I am a master’s student in data science and cognitive psychology at Ben Gurion University, now finishing my first year. I have three years of experience working with quantitative data in R, Python, SPSS, and Excel. In that time, I’ve worked on research in three different labs in two different countries, and built numerous side projects on my own time ([take a look at my website!](http://rimonim.github.io/)). Among other topics, I've researched cognitive dynamics in collaborative dialogue (using NLP), the efficiency of the police emergency response hotline in Israel (1-0-0), and in-group--out-group bias in corporate organizational structure. Given your advertised requirements, I believe my skills and experience in learning new coding tools on short notice (I learned R and Python on my own) will help me quickly become useful to the company.
+
+I have always been interested in accessible data visualization, and this year I am especially excited about interactive dashboards. I’ve learned Streamlit for Python and Shiny for R (examples of my work in both are on my website) and am now proficient in SQL. Working with these tools has made me curious to learn more and to integrate effective analysis with effective communication. Autodesk Construction Solutions seems like a perfect fit for these goals.
+
+<br> Thank you for the opportunity,
+
+<br>
+
+Louis
