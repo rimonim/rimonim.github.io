@@ -34,7 +34,7 @@ I gathered this data myself from wherever I could find it - mostly Wikipedia and
 # load preprocessed data
 load("medieval_philosophers.RData")
 
-data %>% select(-short_name) %>% head(10)
+data %>% dplyr::select(-short_name) %>% head(10)
 ```
 
 ### Step 2: Fitting Geography Onto One Axis
@@ -49,6 +49,8 @@ library(httr)
 library(jsonlite)
 
 get_coordinates <- function(search) {
+  # Remove weird characters
+  search <- stringi::stri_trans_general(str = search, id = "Latin-ASCII")
   # Replace spaces with +
   search <- str_replace_all(search, ' ', '+')
   

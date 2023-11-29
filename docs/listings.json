@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/troll_classification/TrollClassification.html",
       "/blog/time_use/index.html",
       "/blog/troll_classification/index.html",
       "/blog/reddit_environmentalists/index.html",
@@ -14,6 +13,23 @@
       "/blog/chess_brain/index.html",
       "/blog/police_exploratory/index.html",
       "/blog/wordle/index.html"
+    ]
+  },
+  {
+    "listing": "/design.html",
+    "items": [
+      "/design/art/art.html",
+      "/design/fliers/fliers.html",
+      "/design/logos/logos.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/hire_your_clone.html",
+      "/projects/wormsplot.html",
+      "/projects/tidy_tuesday.html",
+      "/projects/paper_provenance.html"
     ]
   }
 ]
