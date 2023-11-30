@@ -203,9 +203,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The first step was to find some data. The best I could find came from <a href="www.theofficialboard.com">The Official Board</a>, which maintains detailed corporate organizational charts for tens of thousands of companies worldwide. I downloaded data on 34,615 employee/boss pairs across 2,292 US companies. This includes 101 instances of bosses and employees with the exact same first name. Here’s an example of the data after some cleaning:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 × 5
-# ℹ 5 variables: first_name &lt;chr&gt;, last_name &lt;chr&gt;, boss_first_name &lt;chr&gt;,
-#   boss_last_name &lt;chr&gt;, company &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 6 × 5
+  first_name last_name      boss_first_name boss_last_name company
+  &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;  
+1 Zach       Kirkhorn       "Elon "         Musk           Tesla  
+2 Franz      von Holzhausen "Elon "         Musk           Tesla  
+3 Tom        Zhu            "Elon "         Musk           Tesla  
+4 Nagesh     Saldi          "Elon "         Musk           Tesla  
+5 James      Bickford       "Elon "         Musk           Tesla  
+6 Bert       Somsin         "Elon "         Musk           Tesla  </code></pre>
 </div>
 </div>
 <p>Now we arrive at the first two problems:</p>
