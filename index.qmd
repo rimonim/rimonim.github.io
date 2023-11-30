@@ -2,7 +2,7 @@
 title: "Louis Teitelbaum"
 about:
   template: jolla
-  image: CV/images/louisprof.jpg
+  image: CV/images/louisprof2_square.jpg
   image-width: 12em
   links:
     - icon: linkedin
