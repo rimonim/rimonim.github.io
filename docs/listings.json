@@ -16,20 +16,20 @@
     ]
   },
   {
-    "listing": "/design.html",
-    "items": [
-      "/design/art/art.html",
-      "/design/fliers/fliers.html",
-      "/design/logos/logos.html"
-    ]
-  },
-  {
     "listing": "/projects.html",
     "items": [
       "/projects/hire_your_clone.html",
       "/projects/wormsplot.html",
       "/projects/tidy_tuesday.html",
       "/projects/paper_provenance.html"
+    ]
+  },
+  {
+    "listing": "/design.html",
+    "items": [
+      "/design/art/art.html",
+      "/design/fliers/fliers.html",
+      "/design/logos/logos.html"
     ]
   }
 ]

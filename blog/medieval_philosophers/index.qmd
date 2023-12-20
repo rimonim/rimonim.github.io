@@ -201,7 +201,7 @@ data <- data %>% arrange(name, date) %>%
   left_join(place, by = join_by(city))
 
 regions <- data.frame(name = c("N. Europe", "Italy", "Provence", "Catalonia", "Andalusia", "North Africa", "Levant", "", "Iraq", "Iran", "Khorasan", "Transoxiana"),
-                      ymax = c(15, 25, 36, 49, 75, 120, 175, 188, 218, 240, 311, 340)) %>% mutate(ymin = c(-5, head(ymax, -1)),
+                      ymax = c(15, 25, 36, 49, 75, 120, 175, 188, 218, 242, 314, 342)) %>% mutate(ymin = c(-5, head(ymax, -1)),
                       mid = ymin + (ymax-ymin)/2)
 
 region_fills <- c("#FF6666", "#BD3E3E", "#9B3634",
@@ -292,12 +292,12 @@ p <- data %>%
               data = place %>% filter(city %in% big_cities)) +
     guides(fill = "none") +
     geom_rect(xmin = -Inf, xmax = Inf, ymin = -15, ymax = -5, fill = "#01264E") +
-    geom_rect(xmin = -Inf, xmax = Inf, ymin = 340, ymax = 350, fill = "#01264E") +
+    geom_rect(xmin = -Inf, xmax = Inf, ymin = 342, ymax = 352, fill = "#01264E") +
     geom_text(aes(x,y,label = x), size = 7, color = 'white', family = "Avenir Next", 
-              data = data.frame(y = rep(c(-10, 345), times = length(seq(800, 1400, 100))),
+              data = data.frame(y = rep(c(-10, 347), times = length(seq(800, 1400, 100))),
                                 x = rep(seq(800, 1400, 100), each = 2))) +
     geom_text(aes(x,y,label = x), size = 5, color = 'white', family = "Avenir Next", 
-              data = data.frame(y = rep(c(-10, 345), times = length(seq(850, 1400, 100))),
+              data = data.frame(y = rep(c(-10, 347), times = length(seq(850, 1400, 100))),
                                 x = rep(seq(850, 1400, 100), each = 2))) +
     annotate('rect', xmin = -Inf, ymin = -Inf, xmax = Inf, ymax = -15,
              fill = 'white') +
@@ -305,7 +305,7 @@ p <- data %>%
              size = 10, color = "#01264E", 
              family = "Avenir Next", fontface = 'bold',
              label = "Great Philosophers of the Medieval Islamic World") +
-    coord_cartesian(xlim = c(650, 1450), ylim = c(-35, 350), clip = 'on') +
+    coord_cartesian(xlim = c(650, 1450), ylim = c(-35, 352), clip = 'on') +
     labs(x = NULL, y = NULL) +
     theme(panel.grid.major.y = element_blank(),
           panel.grid.minor.y = element_blank(),
@@ -322,6 +322,7 @@ Now that we have a suitable background, all that remains to represent the data. 
 
 ```{r}
 #| echo: false
+#| eval: false
 #| warning: false
 #| fig.height: 12
 #| fig.width: 18
@@ -350,6 +351,8 @@ p <- p + stat_worm(aes(date, y, group = name,
 
 p
 ```
+
+![](medieval_islamic_philosophers.svg)
 
 I think it looks quite nice! Even without squinting at the individual names, big trends in the history of philosophy are immediately evident, like the Baghdad school starting with al-Kindī and running for about 150 years, or the explosion of philosophical activity in Andalusia in the 12th century.
 
