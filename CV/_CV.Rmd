@@ -47,19 +47,15 @@ Hebrew - fluent
 
 ## Professional Experience {data-icon="laptop"}
 
-### Neurocognitive Psychology Researcher
+### Data Analyst
 
-N/A
+Autodesk \| Internship
 
-N/A
+Tel Aviv, Israel
 
-Since 2020
+Since 2023
 
-***Working Memory and Predictive Processing***: - Thesis work under supervision of Prof. Yoav Kessler, Ben Gurion University
-
-***Language and Communication***: - Thesis work under supervision of Prof. Bruno Galantucci, Yeshiva University Psychology Department - Developed novel Natural Language Processing (NLP) based metrics for diadic conversations using Python and R. - Wrote peer review - Designed research agenda and experimental paradigm for the continuation of research post-COVID-19 - Read over 100 scholarly articles in the field of Language and Communication
-
-***Power Dynamics in Long-Term Romantic Relationships***: - Research Assistant for Dr. Jenny Isaacs, Yeshiva University Psychology Department - Researched and designed survey for data collection. - Analyzed data in SPSS and R; finalized analysis for publication. - Logged over 200 hours as a primary contributor to project.
+Wrote complex SQL queries in Snowflake. Analyzed user behavior using R and ggplot2. Prepared presentations for Data Science and Data Analytics teams. Collaborated with UX Research team to develop evidence-based coding for data.
 
 ### R Developer
 
@@ -70,6 +66,21 @@ N/A
 Since 2021
 
 -   Developer of [*wormsplot*](https://github.com/rimonim/wormsplot) for visualizing the movements of historical figures; Read the [blog post](https://rimonim.github.io/blog/medieval_philosophers).
+-   Contributor to the [Quanteda](http://quanteda.io) package for Natural Language Processing.
+
+### Neurocognitive Psychology Researcher
+
+N/A
+
+N/A
+
+Since 2020
+
+***Working Memory and Predictive Processing***: - Thesis work under supervision of Prof. Yoav Kessler, Ben Gurion University
+
+***Language and Communication***: - Thesis work under supervision of Prof. Bruno Galantucci, Yeshiva University Psychology Department - Developed novel Natural Language Processing (NLP) based metrics for diadic conversations using Python and R. - Wrote peer reviews - Designed research agenda and experimental paradigm for the continuation of research post-COVID-19
+
+***Power Dynamics in Long-Term Romantic Relationships***: - Research Assistant for Dr. Jenny Isaacs, Yeshiva University Psychology Department - Researched and designed survey for data collection. - Analyzed data in SPSS and R; finalized analysis for publication. - Logged over 200 hours as a primary contributor to project.
 
 ## Education {#education data-icon="graduation-cap" data-concise="true"}
 
@@ -124,6 +135,26 @@ New York, NY
 2021
 
 ## Scientific Publications and Presentations {#pubs data-icon="file"}
+
+### Books
+
+N/A
+
+N/A
+
+N/A
+
+-   Simchon, A., & **Teitelbaum, L.** (2024). *Data Science for Psychology: Natural Language*. [Manuscript in preparation].
+
+### Papers
+
+N/A
+
+N/A
+
+N/A
+
+-   **Teitelbaum, L.** & Kessler, Y. (2024). *Perceptual Anticipation is Independent from Spatial Attention and Motor Preparation*. [Manuscript in preparation].
 
 ### Theses
 
