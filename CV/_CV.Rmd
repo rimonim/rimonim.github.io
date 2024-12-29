@@ -31,15 +31,13 @@ Hebrew - fluent
 
 ## Technical Skills
 
-**Programming:** R, Python, SQL, Git(Hub), SPSS, Excel
+**Programming:** R, Python, SQL, Git(Hub), SPSS
 
 **Documentation:** (R)Markdown/Quarto, JupyterLab, Google Colab, Google Docs/Sheets
 
 **Design:** ggplot2, Gimp, Photoshop, Inkscape
 
 **Deployment:** Shiny, Streamlit
-
-**Machine Learning:** Bayesian inference, multilevel modeling, logistic and binomial regression, PCA/SVD, random forest, elastic-net regression, k-means clustering, t-SNE, word/document embeddings, sentiment analysis
 
 # Main
 
@@ -59,13 +57,13 @@ An open-source, interactive textbook covering state-of-the-art methods for analy
 
 ### Research Assistant
 
-Collaboration with Google Jigsaw: Validating Classifiers for Manipulative Techniques
+Collaboration with Google Jigsaw: Applying Prebunking Classifiers
 
 N/A
 
 Since 2024
 
-Lead role in research on new machine learning classifiers developed by Google. Regularly present findings to the Google team. Integrate theoretical framework on rhetoric with empirical findings on large, naturalistic datasets.
+Lead role in research on new machine learning classifiers developed by Google. Regularly present findings to the Google team. Integrated theoretical framework on rhetoric with empirical findings on large, naturalistic datasets. Ongoing development of benchmark dataset for harmfulness in online discourse.
 
 ### Data Analyst
 
@@ -85,24 +83,20 @@ N/A
 
 Since 2021
 
+-   Developer of [*embedplyr*](https://rimonim.github.io/embedplyr/), which enables common operations with word and text embeddings within a ‘tidyverse’ and/or ‘quanteda’ workflow.
 -   Developer of [*wormsplot*](https://github.com/rimonim/wormsplot) for visualizing the movements of historical figures; Read the [blog post](https://rimonim.github.io/blog/medieval_philosophers).
--   Contributor to the [Quanteda](http://quanteda.io) package for Natural Language Processing.
-
-### Cognitive Psychology Researcher
-
-N/A
-
-N/A
-
-Since 2020
-
-***Working Memory and Predictive Processing***: - Thesis work under supervision of Prof. Yoav Kessler, Ben Gurion University
-
-***Language and Communication***: - Thesis work under supervision of Prof. Bruno Galantucci, Yeshiva University Psychology Department - Developed novel Natural Language Processing (NLP) based metrics for diadic conversations using Python and R. - Wrote peer reviews - Designed research agenda and experimental paradigm for the continuation of research post-COVID-19
-
-***Power Dynamics in Long-Term Romantic Relationships***: - Research Assistant for Dr. Jenny Isaacs, Yeshiva University Psychology Department - Researched and designed survey for data collection. - Analyzed data in SPSS and R; finalized analysis for publication. - Logged over 200 hours as a primary contributor to project.
 
 ## Education {#education data-icon="graduation-cap" data-concise="true"}
+
+### PhD in Social Psychology
+
+Ben-Gurion University
+
+Be'er Sheva, Israel
+
+2024 - Present
+
+**Supervisor:** Dr. Almog Simchon
 
 ### M.A. in Experimental Cognitive Psychology
 
@@ -110,7 +104,9 @@ Ben-Gurion University
 
 Be'er Sheva, Israel
 
-2022 - Present
+2022 - 2024
+
+Dean's List
 
 **Supervisor:** Prof. Yoav Kessler
 
@@ -146,14 +142,6 @@ Jan 2021
 
 For research in marital power dynamics in divorce mediation.
 
-### Three funding awards from the Yeshiva University Honors Program
-
-Yeshiva University Honors Program
-
-New York, NY
-
-2021
-
 ## Scientific Publications and Presentations {#pubs data-icon="file"}
 
 ### Books
@@ -164,7 +152,7 @@ N/A
 
 N/A
 
--   **Teitelbaum, L.**, & Simchon, A. (2024). *Data Science for Psychology: Natural Language*. https://zenodo.org/doi/10.5281/zenodo.10908366
+-   **Teitelbaum, L.**, & Simchon, A. (2024). *Data Science for Psychology: Natural Language*. https://doi.org/10.5281/zenodo.10908367
 
 ### Papers
 
@@ -174,7 +162,8 @@ N/A
 
 N/A
 
--   **Teitelbaum, L.** & Simchon, A. (2024). *Neural Text Embeddings in Psychological Research: A Tutorial With Examples in R*. [Manuscript in preparation].
+-   **Teitelbaum, L.** & Simchon, A. (2024). *Neural Text Embeddings in Psychological Research: A Guide With Examples in R*. [Under review].  https://osf.io/wj96q/?view_only=57966181c5e94dce971b0304ebad90e3
+-   **Teitelbaum, L.**, & Simchon, A. (2024). Modeling Word Frequencies: Common Practice Risks False Positives. https://osf.io/mqbdr/?view_only=8c2797bcb78543fd9bac64b9451205e3
 -   **Teitelbaum, L.** & Kessler, Y. (2024). *Perceptual Anticipation is Independent from Spatial Attention and Motor Preparation*. [Manuscript in preparation].
 
 ### Theses
