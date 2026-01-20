@@ -8,7 +8,7 @@ image: cluster_centers.png
 
 ```{r setup}
 #| include: false
-load("~/Documents/coursework/time_use/time_use.RData")
+load('/Volumes/Crucial X9/coursework/time_use/time_use.RData')
 library(tidyverse)
 library(factoextra)
 ```

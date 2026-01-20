@@ -7,13 +7,25 @@ description: "Brand logos for products, people, companies, or clubs."
 ```{r}
 #| echo: false
 #| out-width: 50%
+knitr::include_graphics("csplab_logo_transparency.png")
+```
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("../../embedplyr.png")
+```
+
+```{r}
+#| echo: false
+#| out-width: 50%
 knitr::include_graphics("../../images/rimonim.svg")
 ```
 
 ```{r}
 #| echo: false
 #| out-width: 50%
-knitr::include_graphics("../../projects/wormsplot.svg")
+knitr::include_graphics("../../software/wormsplot.svg")
 ```
 
 ```{r}

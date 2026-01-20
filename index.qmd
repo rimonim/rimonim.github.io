@@ -2,7 +2,7 @@
 title: "Louis Teitelbaum"
 about:
   template: jolla
-  image: CV/images/louisprof2_square.jpg
+  image: CV/images/louisprof3_square.jpg
   image-width: 12em
   links:
     - icon: linkedin
@@ -15,3 +15,5 @@ about:
       text: Mail
       href: mailto:louist@post.bgu.ac.il
 ---
+
+I use modern language models and old-fashioned experiments to understand how ideas spread between individuals and communities. My questions range from cognition (how are the meanings of words and concepts represented in the brain?) to politics (does cultural homogeneity cause polarization?). 

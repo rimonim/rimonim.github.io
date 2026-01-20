@@ -1,0 +1,33 @@
+---
+title: Publications
+---
+
+For an always-up-to-date list, please visit my [Google Scholar profile](https://scholar.google.com/citations?user=uIysmmcAAAAJ&hl=en).
+
+# Books
+
+::: {.hanging-indent}
+**Teitelbaum, L.**, & Simchon, A. (2024). *Data Science for Psychology: Natural Language*. <https://doi.org/10.5281/zenodo.10908367>
+:::
+
+# Papers
+
+::: {.hanging-indent}
+Simchon, A., Zipori, T., **Teitelbaum, L.**, Lewandowsky, S., & van der Linden, S. (2026). A signal detection theory meta-analysis of psychological inoculation against misinformation. *Current Opinion in Psychology*, 67, 102194. <https://doi.org/10.1016/j.copsyc.2025.102194>
+
+**Teitelbaum, L.**, Saltz, E., Lewandowsky, S., & Simchon, A. (2025). Rhetorical features from social media predict real-world violent outcomes of manifestos. *PsyArXiv*. <https://doi.org/10.31234/osf.io/26q7w_v1>
+
+**Teitelbaum, L.** (2025). embedplyr: Tools for Working With Text Embeddings. *Journal of Open Source Software*, 10(115), 8262. <https://doi.org/10.21105/joss.08262>
+
+**Teitelbaum, L.** & Simchon, A. (2025). Neural text embeddings in psychological research: A guide with examples in R. *Psychological Methods*. <https://doi.org/10.1037/met0000768>
+
+**Teitelbaum, L.**, & Simchon, A. (2024). Modeling Word Frequencies: Common Practice Risks False Positives. <https://osf.io/mqbdr/?view_only=8c2797bcb78543fd9bac64b9451205e3>
+:::
+
+### Theses
+
+::: {.hanging-indent}
+**Teitelbaum, L.** (2024). *Perceptual anticipation is independent from spatial attention and motor preparation* [Master's Thesis, Ben-Gurion University of the Negev]. <https://primo.bgu.ac.il/discovery/fulldisplay/alma9927177558004361/972BGU_INST:972BGU>
+
+**Teitelbaum, L.** (2021). *When faithful informational exchange is just not worth it: Reformulation ability as a predictor of other-initiated repair* [Honors thesis, Yeshiva University]. Yeshiva Academic Institutional Repository. <https://repository.yu.edu/handle/20.500.12202/7148>
+:::

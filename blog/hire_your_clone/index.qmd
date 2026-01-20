@@ -8,7 +8,7 @@ image: you_yourboss.png
 
 ```{r setup}
 #| include: false
-load("~/Projects/hire_your_clone/data/show.RData")
+load('/Volumes/Crucial X9/projects/hire_your_clone/data/show.RData')
 library(tidyverse)
 ```
 

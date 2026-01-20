@@ -1,0 +1,5 @@
+- title: embedplyr
+  description: Tools for working with text embeddings in R
+  categories: [R, embeddings, natural language]
+  image: embedplyr.png
+  path: "https://rimonim.github.io/embedplyr/"

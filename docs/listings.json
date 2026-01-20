@@ -3,9 +3,7 @@
     "listing": "/blog.html",
     "items": [
       "/blog/time_use/index.html",
-      "/blog/troll_classification/index.html",
       "/blog/reddit_environmentalists/index.html",
-      "/blog/text_comparison/index.html",
       "/blog/hire_your_clone/index.html",
       "/blog/medieval_philosophers/index.html",
       "/blog/semantic_history/index.html",
@@ -16,20 +14,16 @@
     ]
   },
   {
-    "listing": "/projects.html",
-    "items": [
-      "/projects/hire_your_clone.html",
-      "/projects/wormsplot.html",
-      "/projects/tidy_tuesday.html",
-      "/projects/paper_provenance.html"
-    ]
-  },
-  {
     "listing": "/design.html",
     "items": [
       "/design/art/art.html",
-      "/design/fliers/fliers.html",
       "/design/logos/logos.html"
+    ]
+  },
+  {
+    "listing": "/software.html",
+    "items": [
+      "/software/wormsplot.html"
     ]
   }
 ]

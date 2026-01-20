@@ -13,8 +13,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: projects.qmd
-        text: Projects
+      - href: publications.qmd
+        text: Publications
+      - href: software.qmd
+        text: Software
+      - href: https://ds4psych.com
+        text: DS4Psych - Book
       - href: blog.qmd
         text: Blog
       - href: design.qmd
@@ -23,7 +27,9 @@ website:
         text: CV
 format:
   html:
-    theme: lumen
+    theme: 
+      - lumen
+      - custom.scss
     css: styles.css
     toc: true
 
