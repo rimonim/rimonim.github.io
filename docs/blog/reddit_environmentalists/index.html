@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Shockingly, Most Reddit Environmentalists are not Greta Thunberg – Louis Teitelbaum</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-abdc49e859dd411fdbbbc4b181915f8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,7 +121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Louis Teitelbaum</span>
@@ -151,8 +155,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../design.html"> 
-<span class="menu-text">Art and Design</span></a>
+<span class="menu-text">Art</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../CV/CV.pdf"> 
@@ -244,12 +252,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Gathering Data</h1>
 <p>Using the <code>RedditExtractoR</code> package in R, I gathered data on all threads over the last month from seven environmentalist communities on Reddit: r/Environmentalism, r/sustainability, r/ZeroWaste, r/climate, r/environment, r/SustainabilityPorn, and r/Green.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ dplyr     1.2.0     ✔ readr     2.2.0
 ✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.1     ✔ tibble    3.3.1
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.2
 ✔ purrr     1.2.1     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -257,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Package version: 4.3.1
 Unicode version: 14.0
@@ -265,7 +273,7 @@ ICU version: 71.1
 Parallel computing: 12 of 12 threads used.
 See https://quanteda.io for tutorials and examples.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.sentiment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'quanteda.sentiment'
@@ -274,32 +282,32 @@ The following object is masked from 'package:quanteda':
 
     data_dictionary_LSD2015</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(text)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(text)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>env_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Environmentalism"</span>, <span class="st">"sustainability"</span>, <span class="st">"ZeroWaste"</span>, <span class="st">"climate"</span>, <span class="st">"environment"</span>, <span class="st">"SustainabilityPorn"</span>, <span class="st">"Green"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>env_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Environmentalism"</span>, <span class="st">"sustainability"</span>, <span class="st">"ZeroWaste"</span>, <span class="st">"climate"</span>, <span class="st">"environment"</span>, <span class="st">"SustainabilityPorn"</span>, <span class="st">"Green"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(env_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(env_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(env_threads<span class="sc">$</span>url)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>env_threads <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>threads</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>env_threadcontent <span class="ot">&lt;-</span> env_threadcontent<span class="sc">$</span>comments</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As a control group, I chose seven communities with broadly similar themes, but without any sustainability-specific agenda: r/worldnews, r/makerspace, r/NoStupidQuestions, r/gardening, r/politics, r/relationship_advice, and r/news.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>control_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"worldnews"</span>, <span class="st">"makerspace"</span>, <span class="st">"NoStupidQuestions"</span>, <span class="st">"gardening"</span>, <span class="st">"politics"</span>, <span class="st">"relationship_advice"</span>, <span class="st">"news"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>control_communities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"worldnews"</span>, <span class="st">"makerspace"</span>, <span class="st">"NoStupidQuestions"</span>, <span class="st">"gardening"</span>, <span class="st">"politics"</span>, <span class="st">"relationship_advice"</span>, <span class="st">"news"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>control_threads <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(control_communities, <span class="cf">function</span>(community){<span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> community)}))</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(<span class="fu">sample</span>(control_threads<span class="sc">$</span>url, <span class="dv">500</span>))</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>control_threads <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>threads</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>control_threadcontent <span class="ot">&lt;-</span> control_threadcontent<span class="sc">$</span>comments</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>All texts went through a simple preprocessing step to remove links, email addresses, and punctuation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preprocessing - using stringr</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preprocessing - using stringr</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>preprocess <span class="ot">&lt;-</span> <span class="cf">function</span>(text_vec){</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">"</span><span class="sc">\\</span><span class="st">b[:alnum:]+@[:alnum:]+</span><span class="sc">\\</span><span class="st">.[:lower:]+</span><span class="sc">\\</span><span class="st">b"</span>, <span class="st">""</span>) <span class="co"># email addresses</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  text_vec <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text_vec, <span class="st">'http://[^"</span><span class="sc">\\</span><span class="st">s]+|https://[^"</span><span class="sc">\\</span><span class="st">s]+'</span>, <span class="st">" "</span>)  <span class="co"># links</span></span>
@@ -315,7 +323,7 @@ The following object is masked from 'package:quanteda':
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>control_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(control_threadcontent<span class="sc">$</span>comment)</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>env_threads<span class="sc">$</span>title_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threads<span class="sc">$</span>title)</span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>env_threads<span class="sc">$</span>text_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threads<span class="sc">$</span>text)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>env_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threadcontent<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>env_threadcontent<span class="sc">$</span>comment_preprocessed <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(env_threadcontent<span class="sc">$</span>comment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="measuring-autism-in-text" class="level1">
@@ -327,7 +335,7 @@ The following object is masked from 'package:quanteda':
 <p>The solution I proposed was to create a “neutralized” version of the questionnaire average embedding, which reflects each original question <em>and its grammatical negation</em>. By subtracting out this neutralized embedding (which nevertheless maintains its questionnaire-ness all around) from the original embedding, I can isolate the psychological construct of interest without fear of confounds from the particular writing style of the questionnaire. This is the approach I will take here, using the Adult Social Behavior Questionnaire (ASBQ)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> for clinical assessment of autism spectrum disorder in adults. The questionnaire includes six subscales: reduced contact, reduced empathy, reduced interpersonal insight, violations of social conventions, insistence on sameness, and sensory stimulation and motor stereotypes. Excluding the last one (I have a hard time imagining how it would apply to Reddit activity), I will treat each subscale on its own.</p>
 <p>As in my last post, I am using embeddings from the second to last layer of BERT (base uncased).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adult Social Behavior Questionnaire (ASBQ); self-report, excluding 'sensory stimulation and motor stereotypes'</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adult Social Behavior Questionnaire (ASBQ); self-report, excluding 'sensory stimulation and motor stereotypes'</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>reduced_contact <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i do not take the initiative in contacts with other people"</span>,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"i have little or no interest in socializing with others"</span>,</span>
@@ -462,14 +470,14 @@ The following object is masked from 'package:quanteda':
 <span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>reduced_empathy_neutralized <span class="ot">&lt;-</span> reduced_empathy <span class="sc">-</span> (reduced_empathy <span class="sc">+</span> reduced_empathy_neg)<span class="sc">/</span><span class="dv">2</span></span>
 <span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_neutralized <span class="ot">&lt;-</span> reduced_interpersonal_insight <span class="sc">-</span> (reduced_interpersonal_insight <span class="sc">+</span> reduced_interpersonal_insight_neg)<span class="sc">/</span><span class="dv">2</span></span>
 <span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_neutralized <span class="ot">&lt;-</span> violations_of_social_conventions <span class="sc">-</span> (violations_of_social_conventions <span class="sc">+</span> violations_of_social_conventions_neg)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neutralized <span class="ot">&lt;-</span> insistence_on_sameness <span class="sc">-</span> (insistence_on_sameness <span class="sc">+</span> insistence_on_sameness_neg)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_neutralized <span class="ot">&lt;-</span> insistence_on_sameness <span class="sc">-</span> (insistence_on_sameness <span class="sc">+</span> insistence_on_sameness_neg)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="raspergers" class="level2">
 <h2 class="anchored" data-anchor-id="raspergers">r/aspergers</h2>
 <p>My second metric for autistic tendencies is less sensitive to the nuances of various ASD symptoms, but is more directly tailored to the task at hand. The r/aspergers subreddit describes itself as “the internet’s largest community of people affected by Autism Spectrum Disorder”. So here, I am simply going to compute the average embedding of posts in this group and use it as a paradigm of the construct of interest.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ASD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"aspergers"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ASD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"aspergers"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ASD_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(ASD_threads<span class="sc">$</span>title, ASD_threads<span class="sc">$</span>text))</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -479,7 +487,7 @@ The following object is masked from 'package:quanteda':
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Embedding</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ASD <span class="ot">&lt;-</span> ASD_threads_embeddings <span class="sc">%&gt;%</span> </span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -489,21 +497,21 @@ The following object is masked from 'package:quanteda':
 <h2 class="anchored" data-anchor-id="kaggle-dataset">Kaggle Dataset</h2>
 <p>I could easily take the same approach for anxiety as I did for autism. I could even use questionnaires designed specifically for OCD and selective mutism, the diagnoses mentioned by Greta Thunberg in the quote above. Nevertheless, I am going to use a different, more straightforward method: <a href="https://www.kaggle.com/datasets/sahasourav17/students-anxiety-and-depression-dataset">the Students Anxiety and Depression Dataset</a> includes 733 handcoded examples of social media posts and comments that reflect anxiety. I will simply take the average BERT embedding of these as the quintessence of anxiety on social media.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"dataset.xlsx"</span>) <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"dataset.xlsx"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(text)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>anxiety_texts <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(anxiety_texts)</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>anxiety <span class="ot">&lt;-</span> <span class="fu">textEmbed</span>(anxiety_texts)<span class="sc">$</span>texts[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="rocd" class="level2">
 <h2 class="anchored" data-anchor-id="rocd">r/OCD</h2>
 <p>As with ASD above, my second metric will simply be an average embedding of posts on a disorder-specific subreddit. This time, r/OCD.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>OCD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"OCD"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>OCD_threads <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"OCD"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>OCD_threads<span class="sc">$</span>full_text <span class="ot">&lt;-</span> <span class="fu">preprocess</span>(<span class="fu">paste</span>(OCD_threads<span class="sc">$</span>title, OCD_threads<span class="sc">$</span>text))</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -515,7 +523,7 @@ The following object is masked from 'package:quanteda':
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Embedding</span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>OCD <span class="ot">&lt;-</span> OCD_threads_embeddings <span class="sc">%&gt;%</span> </span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Dim1_texts<span class="sc">:</span>Dim768_texts, mean)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="at">use.names=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -523,7 +531,7 @@ The following object is masked from 'package:quanteda':
 <h1>Do environmentalists exhibit more autism and anxiety characteristics than control?</h1>
 <p>Now that I have vector representations of five autism subscales, generalized ASD, OCD, and anxiety, I can simply embed each comment in the Reddit data using the same method, and score them based on their cosine similarity to each construct embedding. Then I can use classical statistical methods to test whether environmentalists exhibit more autism and anxiety characteristics than control.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset Corpus</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset Corpus</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>env_threadcontent_subset <span class="ot">&lt;-</span> env_threadcontent <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>control_threadcontent_subset <span class="ot">&lt;-</span> control_threadcontent <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Embed each comment in the corpus (took my CPU about 50 minutes for 2000 texts)</span></span>
@@ -578,11 +586,11 @@ The following object is masked from 'package:quanteda':
 <span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(env_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(control_threadcontent_subset <span class="sc">%&gt;%</span> </span>
 <span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">environmentalist =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>              <span class="fu">left_join</span>(control_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>              <span class="fu">left_join</span>(control_threads <span class="sc">%&gt;%</span> <span class="fu">select</span>(url, subreddit)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The aforementioned classical statistical methods do require some thought, though. Because the data were gathered from multiple communities, the samples are not independent, and fixed-parameter-only methods like t-tests will be biased. This is a job for multilevel modeling, with the intercept for each community allowed to vary freely around its group (environmentalist/non-environmentalist) mean.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: lme4</code></pre>
 </div>
@@ -612,7 +620,7 @@ Attaching package: 'lmerTest'</code></pre>
 
     step</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(violations_of_social_conventions <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
@@ -622,7 +630,7 @@ Attaching package: 'lmerTest'</code></pre>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>anxiety_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(anxiety <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>OCD_mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(OCD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> comments_unified)</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -652,7 +660,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.611</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -682,7 +690,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.605</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -712,7 +720,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.590</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -742,7 +750,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.601</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -772,7 +780,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.603</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -793,8 +801,8 @@ Number of obs: 2000, groups:  subreddit, 12
 
 Fixed effects:
                   Estimate Std. Error        df t value Pr(&gt;|t|)    
-(Intercept)       0.806791   0.006971  5.562273 115.741 1.27e-10 ***
-environmentalist -0.006938   0.011804  5.797721  -0.588    0.579    
+(Intercept)       0.806791   0.006971  5.562267 115.741 1.27e-10 ***
+environmentalist -0.006938   0.011804  5.797717  -0.588    0.579    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -802,7 +810,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.591</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -832,7 +840,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.594</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -881,7 +889,7 @@ envrnmntlst -0.591</code></pre>
 <h1>But What About in Their Non-Environmentalist Activity?</h1>
 <p>So maybe the actual content of environmentalist subreddits shows no difference, but I’m not as interested in the communities themselves as much as I am interested in the <em>people</em> in the communities. Maybe these people are displaying autistic or anxious features in their other activity? To test this, I will select 100 users from the environmentalist groups, and 100 users from the control, and retrieve up to 20 threads initiated by each. Then I will repeat the same analysis, this time adding user as a random variable in addition to subreddit.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>env_user_content <span class="ot">&lt;-</span> <span class="fu">get_user_content</span>(<span class="fu">sample</span>(<span class="fu">unique</span>(env_threadcontent<span class="sc">$</span>author), <span class="dv">100</span>))</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>control_user_content <span class="ot">&lt;-</span> <span class="fu">get_user_content</span>(<span class="fu">sample</span>(<span class="fu">unique</span>(control_threadcontent<span class="sc">$</span>author), <span class="dv">100</span>))</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -927,24 +935,24 @@ envrnmntlst -0.591</code></pre>
 <span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>anxiety[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, anxiety)</span>
 <span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>ASD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, ASD)</span>
 <span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a>  user_threads_unified<span class="sc">$</span>OCD[row] <span class="ot">&lt;-</span> lsa<span class="sc">::</span><span class="fu">cosine</span>(doc_embedding, OCD)</span>
-<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical Analysis</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical Analysis</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>reduced_contact_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_contact <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>reduced_empathy_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_empathy <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, :
-Model failed to converge with max|grad| = 0.00241565 (tol = 0.002, component 1)</code></pre>
+<pre><code>Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model failed to converge with max|grad| = 0.00241566 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>reduced_interpersonal_insight_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(reduced_interpersonal_insight <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>violations_of_social_conventions_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(violations_of_social_conventions <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>insistence_on_sameness_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(insistence_on_sameness <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>anxiety_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(anxiety <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ASD_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ASD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>OCD_mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(OCD <span class="sc">~</span> environmentalist <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> author) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subreddit), <span class="at">data =</span> user_threads_unified)</span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_contact_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -967,7 +975,7 @@ Number of obs: 1785, groups:  subreddit, 902; author, 140
 Fixed effects:
                    Estimate Std. Error         df t value Pr(&gt;|t|)    
 (Intercept)       -0.119735   0.002188 131.203764 -54.732   &lt;2e-16 ***
-environmentalist  -0.002693   0.002862 117.789048  -0.941    0.349    
+environmentalist  -0.002693   0.002862 117.789049  -0.941    0.349    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -975,7 +983,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.747</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_empathy_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1006,9 +1014,10 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.744
 optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00241565 (tol = 0.002, component 1)</code></pre>
+Model failed to converge with max|grad| = 0.00241566 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reduced_interpersonal_insight_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1040,7 +1049,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.743</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(violations_of_social_conventions_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1072,7 +1081,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.743</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(insistence_on_sameness_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1104,7 +1113,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.750</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ASD_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1127,7 +1136,7 @@ Number of obs: 1785, groups:  subreddit, 902; author, 140
 Fixed effects:
                    Estimate Std. Error         df t value Pr(&gt;|t|)    
 (Intercept)        0.799575   0.007542 134.279751 106.017   &lt;2e-16 ***
-environmentalist  -0.006601   0.009923 118.225715  -0.665    0.507    
+environmentalist  -0.006601   0.009923 118.225716  -0.665    0.507    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1135,7 +1144,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.739</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anxiety_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1166,7 +1175,7 @@ Correlation of Fixed Effects:
             (Intr)
 envrnmntlst -0.742</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(OCD_mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1188,8 +1197,8 @@ Number of obs: 1785, groups:  subreddit, 902; author, 140
 
 Fixed effects:
                   Estimate Std. Error        df t value Pr(&gt;|t|)    
-(Intercept)        0.79217    0.00779 134.04136 101.696   &lt;2e-16 ***
-environmentalist  -0.00686    0.01025 117.91558  -0.669    0.505    
+(Intercept)        0.79217    0.00779 134.04166 101.696   &lt;2e-16 ***
+environmentalist  -0.00686    0.01025 117.91580  -0.669    0.505    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1268,13 +1277,14 @@ envrnmntlst -0.738</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1289,7 +1299,7 @@ envrnmntlst -0.738</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/rimonim\.github\.io\/");
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -4,3 +4,7 @@
 .Ruserdata
 
 /.quarto/
+design/art/bereishit.xcf
+
+**/*.quarto_ipynb
+blog/time_use/atussum_0322.csv

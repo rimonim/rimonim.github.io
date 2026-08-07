@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="rtl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>תכלית מוקד 100 להציל חיים – Louis Teitelbaum</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-abdc49e859dd411fdbbbc4b181915f8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,7 +121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Louis Teitelbaum</span>
@@ -151,8 +155,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../design.html"> 
-<span class="menu-text">Art and Design</span></a>
+<span class="menu-text">Art</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../CV/CV.pdf"> 
@@ -223,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>פוסט זה הוא ניטוח אקספלורטיבי-ראשוני. באו איתי להרפתקה ללמוד מה שאפשר ללמוד על מוקד 100 ועמידתו ביעוד המוצהר שלו, להציל חיים!</p>
 <p>לפני שנתחיל לנתח נתונים ישראליים, באו נלמד כמה נתונים בסיסיים מהמערכת האמריקאית. הנתונים האלה ישמשו לנו כהשערות אפריוריות בניתוח הנתונים הישראליים. חשוב שתהיה לנו הבנה אפריורית מבוססת מכיוון שהנתונים הישראלים שנמצאים ברשותנו כרגע הם לא רק דלים מאוד אלא גם לעתים גם לא ברורים מצד משמעות המשתנים שבם. לעומת זאת, יש לנו <a href="https://github.com/tsdataclinic/Vera/tree/master/data">מערך נתונים נקי וברור</a> עם מידע מארבעה ערים אמריקאיות (ניו אורלינס, דלס, דטרויט, וצ’רלסטון) על סיווג האירועים, ייזום השיחות (מהמשטרה או מהציבור), תוצאת האירוע, והרבה יותר.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data manipulation</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data manipulation</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphics that can deal with Hebrew text</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ragg)</span>
@@ -233,25 +241,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># American data from Charleston, Detroit, New Orleans, and Dallas </span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (sampled for faster computation - the dataset is 6,347,478 rows long):   </span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>american <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Documents/all_calls.csv"</span>)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6347478</span>, <span class="dv">20000</span>), <span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>american <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Documents/all_calls.csv"</span>)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6347478</span>, <span class="dv">20000</span>), <span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>כמה שאלות ראשוניות: - כמה אירועים נפתחו בעקבות קריאה למוקד מהציבור (לעומת זהויים עצמאיים של שוטרים)? - כמה שיחות הגיעו למוקד אך לא נפתח אירוע תגובה בעקבותם? בכמה מהם האירוע הסתיים בעקבות השיחה/לא היה צורך בתגובה/הטרדה וכו’? - כמה פניות למוקד התגלו כמקרי חירום? ממקרי החירום, כמה קיבלו מענה משטרטי? - האם זה נפוץ שיש שינוי בין זיהוי הראשון של סוג האירוע ודיווח הסופי? יש סוגי אירוע שבהם הסיכוי של סיווג מוטעה גבוה יותר?</p>
 <p><strong><em>הגעת לחלק החופר, כאשר עדיין לא התמקמתי בנתונים. אם אתה לא רוצה ללכת איתי בהרפתקאה הזאת, אתה מוזמן לדלג עד הכותרת “סיכום הנתונים האמריקאים”.</em></strong></p>
 <p>נתחיל בשאלת הייזום של השיחות.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What percentage of 911 calls are citizen-initiated?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What percentage of 911 calls are citizen-initiated?</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>american <span class="sc">%&gt;%</span> </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Detroit"</span>, <span class="st">"NewOrleans"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(self_initiated) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(.))</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">#&gt; No (Citizen-initiated):  0.443</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="co">#&gt; Yes (Police-initiated):  0.328</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="co">#&gt; Other:                   0.228</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="co">#&gt; Other:                   0.228</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>44.3 אחוז של פניות הגיעו מהציבור בלי הצטרפות המשטרה. חשוב להזכיר שהנתונים האלה מגיעים משתי ערים גדולות (רק דטרויט וניו אורלינס מעניקים את המשתנה הזה). הייתי מנכש שהאחוז יהיה גבוה יותר במקומות פחות עירניים, איפה שיש פחות פעילות משטרתית באופן כללי. גם ראוי לציין שאני לא יודע מה המשמעות של “Other” בהקשר הזה. נראה לי שהכוונה למערכות אזעקות וכדומה, שיכולים ליזום אירוע משרתי בלי קשר גם לשוטרים וגם לאזרחים. רק לניו אורלינס יש את הקטגוריה הזאת. לדטרויט יש רק כן או לא ייזום פנימי.</p>
 <p>מה עם תוצאות השיחות?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>american <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>american <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(disposition) <span class="sc">==</span> F, city <span class="sc">!=</span> <span class="st">"Detroit"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(disposition) <span class="sc">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent =</span> <span class="dv">100</span><span class="sc">*</span><span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(.)) <span class="sc">%&gt;%</span></span>
@@ -264,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Spectral"</span>) <span class="sc">+</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Outcome of 911 calls in New Orleans, Charleston, and Dallas"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Percent of Total Cases"</span>) <span class="sc">+</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked4.png" class="img-fluid"></p>
 <p>אחלה תרשים! מה זה אומר? שאלה טובה - יש הרבה קטגוריות פה, ולא ברור מה הם בדיוק. נעבור אחד אחד ונתרגם קצת: - פעילות אכיפה (Enforcement Activity) 39.9 % : שליחת שוטרים לאתר בלא מעצר - יצירת דו”ח (Report Generated) 16.8 % : אני חושב שזה אומר שלא שלחו ניידת, אבל דיווחו על פשיעה או על פעילות חשודה - לא מבוסס (Unfounded) 15.7 % - פעילות ללא מעצר (Non-Arrest Activity) 10.8 % : אני לא בטוח מה ההבדל בין זה לבין “Enforcement Activity” - מבוטל/נסוג (Cancellation/Withdrawn) 9.67 % - חוזר (Repeat) 2.1 % : כלומר, משהו כבר התקשר בנוגע לאורוע הזה? אותו ב”א כבר התקשר? - מעצר (Arrest Issued) 1.9 % - נתינת אזהרה (Warning Issued) 1.3 % - נתינת דוח (Citation Issued) 0.9 %<br>
@@ -284,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>הקבוצה ההכי גדולה (כ35%) היא דברים מגוונים שלא ידעו איך למיין אותם. אחרי זה, “תלונות/תנאים סביבתיים” תופס יותר מ15%. רכוש (גניבה, ונדליזם) ועבירות תנועה שניהם מתקרבים ל10%. פשע אלים מהווה פחות מ5% אבל עדיין אינה זנוחה. בריאות הנפש מגיעה ל1 אחוז. שריפות ומקרי חירום רפואים הם זנוחים לגמרי. סדר הנתונים בסיאטל הוא דומה, רק בלי ההסתפקות בחלק הגדול ביותר.</p>
 <p>עכשיו נחזור לתוצאות האירועים - אולי אפשר להבין יותר על הגדרות הקטגוריות על בסיס סוגי האירועים שמתגלגלים אליהם. התרשים הבא מייצג רק את ניו אורלינס - דלס, דטרויט, וצ’רלסטון כולם חסרות או ייזום השיחות או תוצאות.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Maybe we can learn more from the overlap between call type and outcome</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Maybe we can learn more from the overlap between call type and outcome</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>american <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">call_type =</span> <span class="fu">str_wrap</span>(call_type, <span class="at">width =</span> <span class="dv">18</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(disposition) <span class="sc">==</span> F, </span>
@@ -296,13 +304,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_brewer</span>(<span class="at">name =</span> <span class="st">"Outcome"</span>, <span class="at">palette =</span> <span class="st">"Paired"</span>) <span class="sc">+</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked6.png" class="img-fluid"></p>
 <p>פניות הקשורות לעבירות רכוש, עבירות תנועה, אלימות במשפחה, ופשע אלים מסתיימים הרבה פעמים בפעילות אכיפה, אבל יותר נפוץ שהם מתגלים כחסרי ביסוס, והרבה יותר נפוץ שהם מסתיימים (מבחינת המשטרה) ביצירת דו”ח. אני מניח שבהקשר הזה “יצירת דו”ח” אומר שהאירוע הסתיים כך שהמצב כבר לא היה דחוף, ולכן דיווחו על האירוע לצורך טיפול עתידי. מקרי חירום רפואי נראים דומים, רק בלי הסיכוי שהם לא מבוססים. כאן אבל, הייתי רוצה להאמין שב”יצירת דו”ח” הכוונה להתרעה בפני הגופים הרלוונטיים - אמבולנס וכו’. כנ”ל לגבי יצירת דו”חות בשריפות, אלא ששוטרים נוטים כן להגיע לשריפות. נעדרים, עבירות מין, חשד, ואזעקות כולם מחולקים בין פעילות אכיפה לחסר ביסוס. קריאות הקשורות לבריאות הנפש נוטים להענות עם “פעילות אכיפה”, אבל לפעמים רק ביצירת דו”ח.</p>
 <p>לוודא שמה שאנחנו רואים ניתן להכללה, נעיין רגע בנתונים המקבילים מסיאטל, שלא היה מוצג לעיל, ושהקטגוריות שלה הן קצת יותר מפורטות:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>seattle <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Downloads/Seattle.csv.zip"</span>)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4206691</span>, <span class="dv">20000</span>),]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>seattle <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Downloads/Seattle.csv.zip"</span>)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4206691</span>, <span class="dv">20000</span>),]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>seattle <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">call_type =</span> <span class="fu">str_wrap</span>(call_type, <span class="at">width =</span> <span class="dv">18</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(disposition) <span class="sc">==</span> F, </span>
@@ -315,17 +323,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Incident Outcomes by Type in Seattle"</span>) <span class="sc">+</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>) , <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>) , <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked9.png" class="img-fluid"></p>
 <p>לעיניי, התמונה פה דומה למה שראינו בניו אורלינס. חידוש אחד שאפשר לזהות: במקום החלק הגדול של “לא מבוסס” שראינו מקודם (21.2% בניו אורלינס), פה יש מבוטל (6.6% סה”כ), תלונת שוא (3.6%), לא מבוסס (1.5%), והכי מפתיע - שגיאת מיקום (10.1%). ע”פ זה נראה שאחוז משמעותי של אירועים - ובמיוחד מקרי חירום רפואי - מסתיימים במצב בו המשטרה לא מצליח למקם את האירוע. אני לא יודע מה לעשות עם זה.</p>
 <p>שאלה אחרונה: רציתי לדעת אם זה נפוץ שזיהוי הראשוני של סוג האירוע מתגלה כשגוי. לענות על זה, נצטרך למצוא את הנתונים הגולמיים מסיאטל, שמדווחת על שני הזיהויים.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>seattle_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Downloads/Call_Data_Seattle.csv"</span>)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4842110</span>, <span class="dv">20000</span>),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>seattle_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Downloads/Call_Data_Seattle.csv"</span>)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4842110</span>, <span class="dv">20000</span>),]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>די מהר אחרי שפתחתי את המערך הזה, ראיתי את הבעיה:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>seattle_raw <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>seattle_raw <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Initial Call Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Final Call Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Initial Call Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
@@ -349,7 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Seattle"</span>,</span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of Unique Initial Call Types"</span>,</span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count of Final Call Types"</span>) <span class="sc">+</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked11.png" class="img-fluid"> <img src="figures/moked12.png" class="img-fluid"></p>
 <p>במילים אחרות, פרדיגמות הסיווג בזיהוי ראשוני וזיהוי סופי הם שונים לגמרי. יש הרבה סוגים ראשוניים שמתחלקים לעשר ואפילו עשרים סוגים סופיים, ויש הרבה סוגים סופיים שכוללים אפילו שלושים סוגים ראשוניים. ניתן עוד לעקוב אחרי השאלה הזאת (למשל, עם cosine similarity למדוד את הדמיון הלשוני בין ראשוני לסופי), אבל אין לי את הזמן או את הרצון כרגע.</p>
@@ -368,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>הנתונים הישראליים</h1>
 <p>נתונים על מוקד 100 מ<a href="https://www.gov.il/BlobFolder/reports/police_statistical_abstract_2020/he/%D7%94%D7%A9%D7%A0%D7%AA%D7%95%D7%9F%20%D7%94%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99%20%D7%A9%D7%9C%20%D7%9E%D7%A9%D7%98%D7%A8%D7%AA%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C%20%D7%9C%D7%A9%D7%A0%D7%AA%202020.pdf">פה</a>, <a href="https://www.odata.org.il/dataset/f4a3cbdb-4c9f-4445-ac8e-221101f825c8">פה</a>, <a href="https://www.odata.org.il/dataset/e-haim">ופה</a>. על אוכלוסייה מ<a href="https://www.cbs.gov.il/he/settlements/Pages/default.aspx?mode=Yeshuv">פה</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Incoming calls by region, city, day of week (Jan 1 - March 21, 2020)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Incoming calls by region, city, day of week (Jan 1 - March 21, 2020)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>day.place<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/louisteitelbaum/Documents/moked_janfebmar.csv"</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">date_names =</span> <span class="st">"he"</span>, <span class="at">encoding =</span> <span class="st">"UTF-8"</span>))</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -392,14 +400,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>type.place.year <span class="ot">&lt;-</span> type.place.year <span class="sc">%&gt;%</span></span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>, <span class="sc">~</span><span class="fu">replace</span>(., . <span class="sc">==</span> <span class="st">"$"</span>, <span class="st">"1"</span>))) <span class="sc">%&gt;%</span></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>, <span class="sc">~</span><span class="fu">replace</span>(., . <span class="sc">==</span> <span class="st">"-"</span>, <span class="st">"0"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">type_convert</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">type_convert</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>אם רוצים לדעת על סכנת מוות, ובמיוחד במישור ההלכתי, יש לנו הזדמנות בישראל שלא היתה לנו בארה”ב: התנהגות הדתיים. אם בדרך כלל יש אחוז משעותי של פניות למוקד שהם <em>אינם</em> מהווים סכנת מוות (ולכן אסורים בשבת על פי הלכה כפי שהיא נהוגה), נוכל לצפות שמספר הפנות ירד באופן משמעותי בשבת, ובמיוחד במקומות אם אוכלוסייה דתית יותר.</p>
 <p>לצערנו, השנתון הסטטיסטי של משטרת ישראל לא מדווח על חלוקה של פניות לימות השבוע. הוא כן מחלק ככה את אירועי התגובה (“מענה לאירוע עקב קריאה שנתקבלה מהציבור או זיהוי עצמי של שוטר אשר פתח אירוע במוקד”). הנה הנתונים משנת 2020:</p>
 <p><img src="figures/moked13.png" class="img-fluid"></p>
 <p>קשה לי לראות מה קורה בטבלה כזאת. הנה אותו דבר בתרשים:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weekdays <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">type =</span> <span class="fu">c</span>(<span class="st">"תנועה"</span>, <span class="st">"איכות חיים"</span>, <span class="st">"אלימות"</span>, <span class="st">"חירום וסכנות לציבור"</span>, <span class="st">"בטחון"</span>, <span class="st">"פעילות משטרתית"</span>, <span class="st">"רכוש"</span>, <span class="st">"סדר ציבורי"</span>, <span class="st">"סמים ואלכוהול"</span>, <span class="st">"מין"</span>, <span class="st">"עבירות ברשת"</span>,   <span class="st">"היסטורי"</span>, <span class="st">"פח'ע"</span>),</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weekdays <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">type =</span> <span class="fu">c</span>(<span class="st">"תנועה"</span>, <span class="st">"איכות חיים"</span>, <span class="st">"אלימות"</span>, <span class="st">"חירום וסכנות לציבור"</span>, <span class="st">"בטחון"</span>, <span class="st">"פעילות משטרתית"</span>, <span class="st">"רכוש"</span>, <span class="st">"סדר ציבורי"</span>, <span class="st">"סמים ואלכוהול"</span>, <span class="st">"מין"</span>, <span class="st">"עבירות ברשת"</span>,   <span class="st">"היסטורי"</span>, <span class="st">"פח'ע"</span>),</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                   א <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">106065</span>, <span class="dv">38568</span>, <span class="dv">43801</span>, <span class="dv">57382</span>, <span class="dv">20330</span>, <span class="dv">83383</span>, <span class="dv">44352</span>, <span class="dv">5345</span>, <span class="dv">6002</span>, <span class="dv">1577</span>, <span class="dv">127</span>, <span class="dv">18</span>, <span class="dv">6276</span>),</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                   ב <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">106998</span>, <span class="dv">34000</span>, <span class="dv">43729</span>, <span class="dv">56949</span>, <span class="dv">20217</span>, <span class="dv">84631</span>, <span class="dv">42905</span>, <span class="dv">5681</span>, <span class="dv">5903</span>, <span class="dv">1478</span>, <span class="dv">79</span>, <span class="dv">13</span>, <span class="dv">5245</span>),</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                   ג <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">111376</span>, <span class="dv">36151</span>, <span class="dv">44429</span>, <span class="dv">57119</span>, <span class="dv">20393</span>, <span class="dv">83880</span>, <span class="dv">44268</span>, <span class="dv">5730</span>, <span class="dv">5821</span>, <span class="dv">1449</span>, <span class="dv">113</span>, <span class="dv">17</span>, <span class="dv">5096</span>),</span>
@@ -417,12 +425,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"יום"</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"מספר אירועים"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"מספר אירועים"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked14.png" class="img-fluid"></p>
 <p>לא צריך כלים סטטיסטים לראות שמספר האירועים יורד בשבת. עדיין קצת קשה לראות את הפרופורציות. הנה השוואה בין פרופוציות הממוצעות של ימי השבוע לבין הפרופורציות של שבת:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weekdays <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weekdays <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shabbat =</span> <span class="fu">recode</span>(<span class="fu">if_else</span>(day <span class="sc">==</span> <span class="st">"שבת"</span>, <span class="st">"Y"</span>, <span class="st">"N"</span>), <span class="st">"Y"</span> <span class="ot">=</span> <span class="st">"שבת"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"ימות השבוע"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(shabbat, type) <span class="sc">%&gt;%</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
@@ -432,13 +440,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>shabbat) <span class="sc">+</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title =</span> <span class="fu">element_blank</span>(), <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title =</span> <span class="fu">element_blank</span>(), <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked15.png" class="img-fluid"></p>
 <p>בשבת יש פרופורציה קטנה יחסית של אירועי תנועה. זה הגיוני. יש גם פרופורציה <em>גדולה</em> יחסית של אירועי איכות חיים. אפשר לנחש שזה מייצג את הבלגן והרעש של סופ”ש, מצורף עם כמות נמוכה של כל הסוגים האחרים. אף אחד מאלה לא מוכיחים שמספר האירועים הכללי בשבת הוא תוצאה של התנהגות הדתיים במדינה. סביר להניח שגם חילינום נוסעים פחות בשבת - אין עבודה - ולכן יש פחות אירועים במשטרה. גם יכול להיות שהמשטרה היא קצת יותר עצלנית בסופ”שים ולכן מטפלת בקצת פחות אירועים בכל הקטגוריות (תזכר שאנחנו מסתכלים רק על אירועי תגובה כרגע).</p>
 <p>למרבה המזל, יש לנו נתונים על <em>פניות</em> למוקד מחולקים גם לימי השבוע וגם לערים. האם אפשר לראות שלערים עם אוכלוסייה דתית יותר יש הפרש גדול יותר בין הפניות בשבת לבין ימי החול? נסתכל על כמה ערים.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># WRANGLE DATA (Incoming calls by region, city, day of week)</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -504,12 +512,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
 <span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"יום"</span>,</span>
 <span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"אחוז פניות"</span>,</span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"2020 מינואר לאפריל 100 פניות למוקד "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"2020 מינואר לאפריל 100 פניות למוקד "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/moked1.png" class="img-fluid"></p>
 <p>אני לא רואה שום נטייה פה. אולי אני פשות לא מכיר כמה דתיים יש בכל עיר. אם נדע את גודל האוכלוסייה הדתית בכל עיר (בייחס לאוכלוססיה הככלית כמובן) נוכל לבנות מודל סטטיסטי ולראות אם אוכלוסייה דתית יותר גורמת להנמחת הפניות למוקד בשבת. בליתי הרבה זמן בחיפוש הנתונים האלה. <a href="https://www.cbs.gov.il/he/settlements/Pages/default.aspx?mode=Yeshuv">מפקד האוכלוסין</a> סופר כמה יהודים יש בכל עיר, אבל לא כמה דתיים. <a href="https://www.pewforum.org/2016/03/08/israels-religiously-divided-society/">מרכז המחקר פיו</a> מונה את הדתיים למיניהם אבל מחלק רק למחוזות, לא ערים. נצטרך למצוא <a href="https://en.wikipedia.org/wiki/Proxy_(statistics)">proxy</a> - משתנה שמתואם מספיק ליעד. ב<a href="https://www.kipa.co.il/%D7%91%D7%AA%D7%99-%D7%9B%D7%A0%D7%A1%D7%AA/">אתר ‘כיפה’</a> יש רשימות של כל בתי הכנסת וכל המקוואות בארץ, לפי ערים. אלך על זה.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># WEB SCRAPING</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -559,22 +567,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>  nmikvaot</span>
 <span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>mikvaot <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ir =</span> mikva_cities,</span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mikvaot =</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(mikva_city_links, <span class="at">FUN =</span> get_mikvaot)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mikvaot =</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(mikva_city_links, <span class="at">FUN =</span> get_mikvaot)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>לפני שאסמוך על המקוואות ובתי הכנסת, צריך לוודא שהנתונים נראים איך שהיינו מצפים. הם מתואמים אחד אל השני לפחות?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>shuls <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>shuls <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(mikvaot) <span class="sc">%&gt;%</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demographics) <span class="sc">%&gt;%</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">shulspercap =</span> shuls<span class="sc">/</span>pop,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mikvaotpercap =</span> mikvaot<span class="sc">/</span>pop</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cor =</span> <span class="fu">cor</span>(shulspercap, mikvaotpercap, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cor =</span> <span class="fu">cor</span>(shulspercap, mikvaotpercap, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>כן. מספר בתי הכנסת בעיר מתואם עם מספר המקוואות (שניהם מחולקים לאוכלוסייה הכללית) r=.64. זה הגיוני - יותר בתי כנסת לאדם, יותר מקוואות לאדם. אפשר גם לראות את מספר בתי הכנסת מול אוכלוסייה הכללית של העיר:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>shulspopmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(shuls<span class="sc">~</span>pop, <span class="at">data =</span> (shuls<span class="sc">%&gt;%</span><span class="fu">left_join</span>(demographics)<span class="sc">%&gt;%</span><span class="fu">filter</span>(ir <span class="sc">!=</span> <span class="st">"ירושלים"</span>)))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>shulspopmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(shuls<span class="sc">~</span>pop, <span class="at">data =</span> (shuls<span class="sc">%&gt;%</span><span class="fu">left_join</span>(demographics)<span class="sc">%&gt;%</span><span class="fu">filter</span>(ir <span class="sc">!=</span> <span class="st">"ירושלים"</span>)))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>shuls <span class="sc">%&gt;%</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demographics) <span class="sc">%&gt;%</span></span>
@@ -587,13 +595,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100000</span>, <span class="dv">200000</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"100,000"</span>, <span class="st">"200,000"</span>)) <span class="sc">+</span> </span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"אוכלוסייה"</span>,</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"מספר בתי כנסת בעיר"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"מספר בתי כנסת בעיר"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="figures/shulspopulation.png" class="img-fluid"></p>
 <p>אפשר להניח שערים שיש להם יותר בתי כנסת ביחס לאוכלוסייה שלהם (צבועים ב<code>תכלת</code>) הם אלה שיש להם קהילה דתית מובהקת יותר. אפשר לראות כמה ערים בחלק העליון של הגרף - הם כדוגמת צפת, שיש לה הרבה יותר בתי כנסת מאשר מגיע לה. הערים האדומות בחלק התחתון הם היותר חילוניים או ערביים.</p>
 <p>עכשיו אפשר לשאול את השאלה: האם אוכלוסייה דתית יותר גורמת להנמחת הפניות למוקד בשבת?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does more religious Jewish population predict a lower proportion of 100 calls on shabbat?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does more religious Jewish population predict a lower proportion of 100 calls on shabbat?</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(MASS)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>mikvaotpopmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(mikvaot<span class="sc">~</span>pop, <span class="at">data =</span> (mikvaot<span class="sc">%&gt;%</span><span class="fu">left_join</span>(demographics)<span class="sc">%&gt;%</span><span class="fu">filter</span>(ir <span class="sc">!=</span> <span class="st">"ירושלים"</span>)))</span>
@@ -623,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shulmod)</span>
 <span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>robustshulmod <span class="ot">&lt;-</span> <span class="fu">rlm</span>(daypercent<span class="sc">~</span>shulspopresid, <span class="at">data =</span> shab.place)</span>
 <span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(robustshulmod)</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="fu">compare.fits</span>(daypercent<span class="sc">~</span>shulspopresid, <span class="at">data =</span> shab.place, shulmod, robustshulmod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="fu">compare.fits</span>(daypercent<span class="sc">~</span>shulspopresid, <span class="at">data =</span> shab.place, shulmod, robustshulmod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>בלי להכנס לכל הטכניקה… התשובה היא לא. לא רואים שום קשר לינארי בין אוכלוסייה דתית לפניות למוקד בשבת. אני עוד לא יודע מה לעשות עם זה. אכן, היו נתונים לכל ימי השבוע רק ב42 ערים, וגם אז בהרבה מהם לא היו נתונים לכל אורך הזמן בין ינואר לאפריל 2020. אולי זאת הבעיה? מה שגם מוסיף קושי זה שהנתונים אינם מחולקים לסוגי האירוע - רק לימים. לו היה לי מערך נתונים מחולק גם לימים וגם לערים, אולי הייתי מוצא משהו.</p>
 <p>מתוך ייאוש מוחלט, אני אנסה עם דיסקרטיזציה לשני חלקים - התכלת והאדום שאינו לעיל על גרף האוכלוסייה ומספר בתי הכנסת.</p>
@@ -685,13 +693,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -706,7 +715,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/rimonim\.github\.io\/");
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

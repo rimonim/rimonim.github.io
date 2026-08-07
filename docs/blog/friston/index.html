@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Louis Teitelbaum">
+<meta name="dcterms.date" content="2025-05-09">
+
+<title>The Soul of Karl Friston – Louis Teitelbaum</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/rimonim.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Louis Teitelbaum</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://ds4psych.com"> 
+<span class="menu-text">DS4Psych - Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../design.html"> 
+<span class="menu-text">Art</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../CV/CV.pdf"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#i---epicurus" id="toc-i---epicurus" class="nav-link active" data-scroll-target="#i---epicurus">I - Epicurus</a></li>
+  <li><a href="#ii---hedonists-but-not-the-fun-kind" id="toc-ii---hedonists-but-not-the-fun-kind" class="nav-link" data-scroll-target="#ii---hedonists-but-not-the-fun-kind">II - Hedonists (But Not the Fun Kind)</a></li>
+  <li><a href="#iii---karl" id="toc-iii---karl" class="nav-link" data-scroll-target="#iii---karl">III - Karl</a></li>
+  <li><a href="#iv---introducing-the-conclusions" id="toc-iv---introducing-the-conclusions" class="nav-link" data-scroll-target="#iv---introducing-the-conclusions">IV - Introducing: The Conclusions</a></li>
+  <li><a href="#v---the-core-principles" id="toc-v---the-core-principles" class="nav-link" data-scroll-target="#v---the-core-principles">V - The Core Principles</a></li>
+  <li><a href="#vi---so-what" id="toc-vi---so-what" class="nav-link" data-scroll-target="#vi---so-what">VI - So What?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Soul of Karl Friston<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Philosophy</div>
+    <div class="quarto-category">Cognitive Science</div>
+    <div class="quarto-category">Active Inference</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Louis Teitelbaum </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 9, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="i---epicurus" class="level2">
+<h2 class="anchored" data-anchor-id="i---epicurus">I - Epicurus</h2>
+<p>Athens, 277 BCE. Epicurus sat on the ground in a corner of his garden and felt the dust between his toes. He contemplated the events of the day. Metrodorus was dead.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Metrodorus had been a true friend—the kind Epicurus was always trying to explain to his students.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Metrodorus had proven his goodness in every way; he had taken every opportunity to protect the tranquility of all those around him. He had come with Epicurus all the way from Anatolia; he had helped him select the land for this garden. Metrodorus had never left his side except for a six-month visit to his home town, and after that he had returned invigorated.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Epicurus could just barely hear Mys speaking softly to Metrodorus’s orphan son, little Epicurus<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, in the exedra on the other side of the garden. He wondered where the boy’s uncle was. He hadn’t seen Timocrates all day, though the news of his brother’s death must surely have reached him by now. He guessed that Timocrates was at the city gate, or at one of the other schools, telling a crowd that his brother had died of gluttonous overindulgence. Or some other slanderous misinterpretation like that.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Epicurus had never been sure whether Timocrates was intentionally twisting his doctrine or had really never understood the meaning of pleasure. He decided it did not matter, since the result was the same either way. And Epicurus knew that no amount of public disdain could sour his own ability to appreciate the wisdom and prudence of his departed friend. He had seen first hand how Metrodorus had trained so meticulously to expect no more than a crust of bread and water, though he had no qualms about feasting when the time was right. He remembered their journey on the ship from Lampsacus to Athens, when they were both young and still referred to themselves as Democriteans.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> They had gone a day without water and had given in to fear, begging the pilot to change course. Epicurus tried to imagine the mature Metrodorus—the one he had spoken to yesterday at dinner—acting in such a way. He could not. The refined Metrodorus would think nothing of a few hours without water, having passed many a happy day in such conditions. Metrodorus was always dauntless in the face of troubles and death.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Epicurus nevertheless savored the memory of his friend and the ship. He pitied Timocrates, who was full of the greatest disquiet.</p>
+<p>Epicurus looked past a stray gray hair that was sticking out of his beard and saw an ant stilting along the ground near his right sandal. He watched the ant as it wove between pebbles. Ahead of it, a second ant was locked in silent battle with a caterpillar five times its size. As this ant darted around and the caterpillar writhed around trying to catch it, the first ant continued picking along the dusty ground. By chance, the first ant came upon the second, and immediately joined the fight, biting the caterpillar on its back side. After a few minutes, all three creatures abandoned their scuffle and continued on their way as before. Epicurus wondered at this ant coming to the aid of its colleague: Most animals are incapable of making any sort of agreements with one another, but ants act together in harmony, so that every ant finds greater tranquility in the protection of its peers.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Epicurus wondered how the ant decided to join the fight, and why both ants would abandon it so suddenly. Perhaps, he thought, one of the fine atoms that made up the ant’s soul<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> had swerved ever so slightly and sent all the atoms downstream of its collisions on new paths.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>The Olympian gods gazed down upon Epicurus in his garden with not the slightest hint of irritation - for they never experienced irritation.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> They noted with serenity that Epicurus had reduced all of human and animal behavior to an optimization problem, maximizing pleasure, minimizing disturbance and instability in the long term. Epicurus’s soul was one of reductionist elegance—his passion was parsimony. But with the same blissful serenity, they noted that the simplicity of his account was incomplete. Epicurus saw his elegant ethics as something that his followers could opt into, blaming others’ behavior on the corrupting influence of their own reasoned worldviews. He did not guess that his optimization problem could explain all behavior. But the gods took pleasure in their knowledge that the process was not finished. Epicurus’s soul would have to return at another time, in another place, and pick up where it had left off.</p>
+</section>
+<section id="ii---hedonists-but-not-the-fun-kind" class="level2">
+<h2 class="anchored" data-anchor-id="ii---hedonists-but-not-the-fun-kind">II - Hedonists (But Not the Fun Kind)</h2>
+<p>Epicureanism got started in the fourth century BCE with Epicurus and his garden in Athens. By Julius Caesar’s time, it was a major religion. Cicero felt compelled to write an obnoxious letter to his friend Trebatius Testa after Trebatius was convinced to convert to Epicureanism by a heart-to-heart with a popular politician in a Gaul army camp.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> Cassius, leader of the plot to assassinate Caesar, was also an Epicurean.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> Over in the Roman Province of Judea, Epicureanism was popular enough among Jews that “Epicurus” became the catch-all term for a Jewish heretic in rabbinic literature.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
+<p>Famously, the Epicureans were hedonists; they believed that “the good” is equivalent with pleasure. Many people, taking Timocrates’ lead, imagine that this amounts to a rule that the most pleasurable activities—gluttonous overindulgence, for example—are the best ones. Per Epicurus, however, “the good” is not a set of rules about how to choose individual actions. Instead, it is an optimization scheme by which to plan action over the long term:</p>
+<blockquote class="blockquote">
+<p>It is because pleasure is our first and innate good that we choose every pleasure, though we often forgo many pleasures when a greater annoyance results from them. And we regard many pains as preferable to pleasures when a prolonged endurance of pains brings us greater pleasure. Accordingly, though every pleasure, because we have a natural predilection for it, is good, not every pleasure is to be chosen, just as all pain is bad, though not all kinds of pain are always to be avoided. But it is proper to judge all these matters by weighing and contemplating benefits and disadvantages; for there are times when we treat the good as bad, or, alternatively, the bad as good.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
+</blockquote>
+<p>To this end, Epicurus advocated for tight-knit networks of friendship and mutual support, even if building these networks came at the cost of some unpleasant altruism.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> Not only do support networks make life more stable for everyone involved (cf.&nbsp;reciprocal altruism in evolutionary biology), but just the knowledge that you have loved ones who love you back makes everything much more bearable. Likewise, Epicurus recommended that his students train themselves to live as simply as possible, “on barley cake and water”, so as to cultivate the belief that they are happy with such minimal sustenance.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> This regime was designed to eliminate anxiety about uncertain futures such as going broke—if you’re already happy with bread and water, you have nothing to lose:</p>
+<blockquote class="blockquote">
+<p>And we regard self-sufficiency as a great good, not so as to partake of little on every occasion, but so that if we do not have much we may be content with little, since we are genuinely persuaded that they take the greatest pleasure in luxury who need it the least… For simple fare brings as much pleasure as an extravagant feast, once the pain of want has been removed.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
+</blockquote>
+<p>Epicurus casts both action and perception as means to a single end: long-term pleasure. An action policy of regularly abstaining from luxurious food results in a perception that luxury is unnecessary. This perception, in turn, results in less anxiety and greater enjoyment of food in general.&nbsp;</p>
+<p>Epicurus’ framing of ethics as a single long-term optimization problem is a masterpiece of parsimony. But Epicurus did not take his project far enough. Epicurean ethics could be extended to describe all mental function, even to the lowest sensory processing; and it could be extended to describe all behavior, not just the ideal behavior of the wise man. First of all, the Epicurean training of perception extended only to value judgments (e.g.&nbsp;perception of bread as delicious), not to low-level perception (e.g.&nbsp;perception that an object is bread). He recognized that there was some variability in the way things looked or sounded for different people and from different vantage points, but attributed this to “some other movement in ourselves that was linked to, but distinct from, the apprehension of the impression”<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a>, and seemingly did not consider the possibility that low-level perception could be optimized for maximum pleasure. Epicurus’ physics has its own sort of parsimony (everything is explained in terms of collisions of geometrically shaped atoms<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>) but it remains distinct from his ethics. He does insist that animals and human babies naturally seek pleasure,<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a> but long-term pleasure optimization is presented only as ethical advice and not as a naturalistic explanation of animal or human psychology writ-large.&nbsp;</p>
+<p>The Kabbalah teaches that a soul must return if it fails to fulfill its mission. Thus the soul of Noah, who passively accepted God’s decree that all but his own family should die in the flood, returned to rectify his callousness. It returned in Moses, who bargained his own life when he pleaded with God to save the condemned after the sin of the golden calf, insisting that if the Israelites were not forgiven, he too should be written out of the divine book.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a> Such was the soul of Epicurus: Its mission had to wait for another lifetime.</p>
+</section>
+<section id="iii---karl" class="level2">
+<h2 class="anchored" data-anchor-id="iii---karl">III - Karl</h2>
+<p>England, 1967. Eight-year-old Karl Friston crouched in the garden in the summer heat. About twenty minutes earlier, he had overturned a small rotting log and discovered a host of woodlice scrambling for shelter among the surrounding twigs, leaves, and clods. Now, as he watched the last stragglers, he focused on one at a time. As the tiny arthropods scurried around looking for darkness, he realized that they were not looking for darkness at all. They were simply moving faster when warmed by the sun. Otherwise, as far as he could tell, the movement was entirely random. And yet nearly all of the woodlice had managed to find shelter after their log had been removed.<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a> Karl reflected on this insight. The woodlice moved with purpose—a singular purpose of finding darkness and moisture—but the individual turn of the woodlouse, the decision to climb over this clod or that one, was entirely purposeless.&nbsp;</p>
+<p>God regarded the young Friston through a deep thicket of causes. Down through the most abstract of statistical patterns to the mechanistic interactions of molecules and beyond, God looked through the generative process of reality. And behind a blanket of sensory epithelia lay the boy’s own generative model, built layer upon layer, from the small receptive fields of edge-detecting retinal ganglion cells to plans for what he was going to do that evening and contemplations on the teleology of woodlice. From deep among the abstract causes came Epicurus’ soul, ready to continue its quest for parsimony.</p>
+</section>
+<section id="iv---introducing-the-conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="iv---introducing-the-conclusions">IV - Introducing: The Conclusions</h2>
+<p>Karl J. Friston is a British neuroscientist and theoretician at University College London. He appears to have an almost fanatical devotion to parsimonious explanations. In his teens, he was “convinced that there should be a singular explanation for the shape of things, just starting from the premise that something existed”.<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a> He spent a summer as an undergraduate “trying to get all of physics onto one page”.<a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a> Friston’s account of the purpose of life—“the free energy principle” or “active inference”—is the culmination of this project:</p>
+<blockquote class="blockquote">
+<p>You may get a sense that the explanations on offer under this framework are rather deflationary… Personally, I am drawn to that parsimony—always trying to chase those early “aha moments” when I was a young boy—when insight meant that something that looked very complicated was, in fact, very simple… at its heart, the free energy principle is the ultimate deflationary (possibly tautological) account.<a href="#fn27" class="footnote-ref" id="fnref27" role="doc-noteref"><sup>27</sup></a></p>
+</blockquote>
+<p>At this point, I have to resist the urge to start explaining the core principles of active inference. Every time Karl Friston tries to do this, nobody understands what he’s talking about. In his own words, a straightforward explanation of active inference “calls for a clear and crisp writing style that is beyond me”.<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a> Part of the problem is that following his arguments requires a peculiar array of background knowledge in probability theory, statistical physics, and machine learning that not many people have. Another part of the problem is that he always explains the least intuitive bits first and then insists that everything else was already implied by the first stuff. This is because, from the perspective of someone who understands the free energy principle, the only reason why the later parts of the picture should hang together is that they emerge from the same underlying math. In Friston’s words, these bits are just “a number of interesting corollaries” to the core mathematical truth.<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a> I suspect that this assumption is wrong. After all, in spite of its lack of underlying math, Epicurean ethics is suspiciously similar to active inference—including a whole bunch of those “interesting corollaries”. As it happens, Epicureans were generally against math altogether.<a href="#fn30" class="footnote-ref" id="fnref30" role="doc-noteref"><sup>30</sup></a></p>
+<p>So rather than explaining the core principles of active inference directly, let’s take the route of comparison. In the rest of this section I’m going to go through a number of similarities between Epicurus and Friston. Once we’ve gone through these disparate similarities, I’ll work backwards to establish the core unifying principles. By the end, you should have a good sense for the general vibes of Friston’s thinking—his intellectual soul—without the need for any math.&nbsp;</p>
+<pre><code>Both Friston and Epicurus frame behavior as minimizing a particular value over the long term. For both, this is true minimization in the sense that there is a zero value which is the *telos* of all behavior—the purpose of life. Friston’s soul is one that can contain as much nuance as necessary, but only in the name of a single unifying principle. To appreciate this in Epicurus, you need to appreciate what he means by “pleasure”:</code></pre>
+<blockquote class="blockquote">
+<p>When we say that pleasure is our goal, we do not mean the pleasures of the prodigal or the self-indulgent, as the ignorant think, or those who disagree with or misinterpret our views. By pleasure we mean the absence of pain in the body and torment in the soul.<a href="#fn31" class="footnote-ref" id="fnref31" role="doc-noteref"><sup>31</sup></a></p>
+</blockquote>
+<p>The implication here is that perfect bliss means not giving a single shit about anything: to feel null, zero.<a href="#fn32" class="footnote-ref" id="fnref32" role="doc-noteref"><sup>32</sup></a> Indeed, Epicurus’ gods don’t care about humanity (or anything else that might change) in the slightest. If they did, they wouldn’t be perfectly happy (by definition), and that lack of happiness would be at odds with their “blessedness”.<a href="#fn33" class="footnote-ref" id="fnref33" role="doc-noteref"><sup>33</sup></a> Friston’s version of “pain in the body and torment in the soul” is free energy. Free energy goes to zero when the organism is performing perfect rational (i.e.&nbsp;Bayesian) inference based on sensory input and all incoming sensations are predicted with perfect certainty.<a href="#fn34" class="footnote-ref" id="fnref34" role="doc-noteref"><sup>34</sup></a> This of course never happens in real life, because of the “never-ending threat of entropic erosion”<a href="#fn35" class="footnote-ref" id="fnref35" role="doc-noteref"><sup>35</sup></a>, or as Epicurus calls it, “fortune”. Nevertheless, “fortune impinges but little on a wise man”<a href="#fn36" class="footnote-ref" id="fnref36" role="doc-noteref"><sup>36</sup></a>, and Friston’s active inference agent “maintains sensory states within a narrow range”<a href="#fn37" class="footnote-ref" id="fnref37" role="doc-noteref"><sup>37</sup></a> as close as possible to the zero point.</p>
+<p>A shared view on minimization is not the only thing the two thinkers have in common. According to both, the purpose of life is “to engineer a world of predictability, harmony and (generalized) synchrony, in which there is no uncertainty about what to do—or what will happen,”<a href="#fn38" class="footnote-ref" id="fnref38" role="doc-noteref"><sup>38</sup></a> but in order to know what to do, we need to know what will happen if we do it, and in order to know what will happen, we need to try things out. You have to go out of your comfort zone to find a better comfort zone. Simply navigating in the direction of greatest tranquility is therefore not enough, since we also have to learn more about the world in order to figure out how to get there, and to ensure that we can stay in our pleasant niche by being prepared to deal with anything that might arise to threaten our tranquility. Thus, for both Friston and Epicurus, the idea that nobody has quite achieved the purpose of life is precisely the source of the behavioral dynamics (or ethical advice) that define their respective systems. Per Friston:</p>
+<blockquote class="blockquote">
+<p>We actively carve our ecological niches to render them more predictable and less surprising. This is evident in the ways we construct our physical spaces (e.g., refuges and cities that give shelter from uncontrolled natural forces) and cultural spaces (e.g.&nbsp;, societies with laws and deontic norms that give shelter from anarchic social forces). In all these examples, we usually need to accept some short-term increase of entropy or surprise (e.g.&nbsp;when we build something new or shift social stances) to ensure their long-term decrease.<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a></p>
+</blockquote>
+<p>Accepting a short-term increase of entropy is a great summary of Epicurus’ advice about food: Because you perceive a meal of barley cake and water as a painful experience (Friston might say that such a meal diverges from your general expectations about what meals are), and because you are likely to have to eat meals of barley cake and water once in a while, you might choose to eat barley cake and water more, so as to shift your expectations and be less disturbed by such meals in the future. The fundamental point here is that pain/free energy can be reduced by both changing beliefs (to view barley cake as tastier) and by changing actions (towards the kind of meal that you’ll be able to eat steadily going forward). Friston’s soul is not content with an explanation of belief updating or an explanation of decision-making—it has to be both at the same time.</p>
+<pre><code>Epicureanism is one of those philosophies that advocates certain beliefs on the basis that holding those beliefs will make you happy (see also Buddhism^[Curing Diseases of Belief and Desire: Buddhist Philosophical Therapy. (2010). _Royal Institute of Philosophy Supplement, 66_, 187-217. https://doi.org/10.1017/S1358246109990312]). This stance makes it deeply unclear whether the beliefs in question are also supposed to be *correct*, or whether objective Truth is just besides the point. In fact, Epicurus explicitly says that there’s no value to objective Truth apart from its hedonic value:</code></pre>
+<blockquote class="blockquote">
+<p>If we were not harassed by apprehensions caused by celestial phenomena and by the fear that death somehow affects us, and by our failure to comprehend the limits of pains and desires, we would have no need for natural science.<a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a></p>
+</blockquote>
+<p>So Truth does matter, but only insofar as it helps us interpret and navigate the types of things we actually encounter in life. This is a central point in Friston’s philosophy too. Thus Andy Clark, the foremost translator of Friston’s thinking into philosophical language, writes:</p>
+<blockquote class="blockquote">
+<p>Consider the perception of sentence structure during speech processing… When we (as native speakers) encounter such a sound stream, we hear a sequence of words, separated by gaps. The sound stream itself, however, is perfectly continuous, as a spectrogram quite dramatically reveals. Those gaps are added by the listener. What we encounter in perception is in that sense a construct. But it is a construct that tracks real structure in the signal source (other agents producing strings of distinct meaningful words). The predictive brain here lets us see through the noisy, sensory signal to uncover the humanly relevant aspects of the world giving rise to the waves of sensory stimulation… Perception of this stripe is ‘not-indirect’ since what we perceive is not itself a hypothesis (or model, or fantasy, or virtual reality). Instead, what we perceive is (when all is going well) the structured external world itself. But this is not the world ‘as it is’, where that implies the problematic notion… of a world represented independent of human concerns and human action repertoires. Rather, it is a world parsed according to our organism-specific needs and action repertoire. The world thus revealed may be populated with items such as hidden but tasty prey, poker hands, handwritten digits, and structured, meaningful, sentences.<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
+</blockquote>
+<p>Framing useful knowledge as inherently organism- and environment-dependent means, of course, that the optimal “Truth” may be different for different people in different contexts. Epicurus recognizes this in the case of justice (i.e.&nbsp;optimal norms for mutual protection from turmoil), which may be different in different regions<a href="#fn42" class="footnote-ref" id="fnref42" role="doc-noteref"><sup>42</sup></a>, and Friston likewise states that “the particular minimum free-energy solutions associated with [different organisms] will be unique to each conspecific and its econiche.”<a href="#fn43" class="footnote-ref" id="fnref43" role="doc-noteref"><sup>43</sup></a> The pain-reduction view of Truth also leads to some deeper points about epistemology, most notably the need to avoid ambiguous causality. In his discussion of the motions of heavenly bodies, Epicurus warns:</p>
+<blockquote class="blockquote">
+<p>On such questions we must admit no plurality of causes or alternative explanations… there is nothing in the knowledge of settings, risings, eclipses, and all related phenomena that contributes to our happiness… Accordingly, if we discover multiple causes for solstices, risings, settings, eclipses, and the like… then when we discover that it could occur in many different ways we will be as free of distress as if we knew that it occurred in that particular way.</p>
+</blockquote>
+<p>To an ancient Greek, an eclipse could happen for any number of reasons, and even if some of those reasons might be worth knowing about, observing the eclipse is not going to help you decrease disturbance because it is not going to help you disambiguate. Through my Friston-colored glasses it looks like Epicurus is saying to steer clear of aliased states. Here’s the Friston version:</p>
+<blockquote class="blockquote">
+<p>In artificial intelligence and robotics, states that bring the same observation (e.g., two T-junctions of a maze that look identical) are sometimes called aliased and are generally hard to deal with using simple methods (e.g., stimulus-response, with no inference or memory). The problem is that we cannot know which state we occupy from current observations alone. Active inference avoids getting into such situations in the first place, given their low potential for information gain.<a href="#fn44" class="footnote-ref" id="fnref44" role="doc-noteref"><sup>44</sup></a></p>
+</blockquote>
+<p>This is part of the reason that people don’t spend much time in dark empty rooms, despite the fact that dark empty rooms are very easy to predict (i.e.&nbsp;minimally disturbing) in the moment. Much like observing an eclipse, sitting in a dark empty room doesn’t help resolve important questions about the world. Certain long-term possibilities—starving to death, for example—would be very disturbing indeed for creatures that need to eat regularly, and those things would be hard to keep tabs on from inside a dark empty room.<a href="#fn45" class="footnote-ref" id="fnref45" role="doc-noteref"><sup>45</sup></a></p>
+</section>
+<section id="v---the-core-principles" class="level2">
+<h2 class="anchored" data-anchor-id="v---the-core-principles">V - The Core Principles</h2>
+<p>If the tenets of active inference hold together so nicely then and now, there must be some core insight that leads to them. Like all math, Friston’s formulas start from certain axioms. But since I’m claiming that you don’t need anything so arcane and explicit, I’m going to take a stab at identifying the core premises in a more intuitive way—one that Epicurus might be able to get behind.</p>
+<ol type="1">
+<li>At the level of individual actions, behavior (even the behavior of your favorite humans) is deeply inconsistent and even erratic. Sometimes we have burritos for dinner and sometimes curry. Cognitive psychology experiments that were carefully designed to have perfectly consistent conditions are nonetheless plagued by mysterious fluctuations in participants’ behavior.<a href="#fn46" class="footnote-ref" id="fnref46" role="doc-noteref"><sup>46</sup></a> When repeatedly faced with a particular choice that has a higher probability of reward, people still choose the lower probability option pretty regularly.<a href="#fn47" class="footnote-ref" id="fnref47" role="doc-noteref"><sup>47</sup></a> It turns out that heart-rate variability is a good thing. Etc. So it doesn’t make sense to express behavior in terms of particular actions that are preferred or not.&nbsp;</li>
+<li>On the other hand, behavior clearly has a teleology, at least in that good people (or people who are good at being people) also appear to be stable. Well-adapted people maintain the same friendships for a long time, choose a consistent career, and have a consistent manner of speaking. Taking this a bit further, well-adapted people tend to maintain roughly the same body temperature and heart rate, and don’t stop breathing for more than a minute or two. So where does all this consistency come from?&nbsp;</li>
+<li>It’s not just behavior that’s erratic. Everything else in the world is also constantly in flux, and lots of things that appear stable fall apart sooner or later.&nbsp;</li>
+</ol>
+<p>The third observation is the key to resolving the first two: To remain stable in an ever-changing environment, you have to change along with it. This means settling into the most stable lifestyle possible, building a support network, and learning to rely on nothing more than the types of things that are least likely to disappear suddenly. The drive to remain stable translates into a negative definition of pleasure, since stability is the absence of change. And the short-term inconsistency vs.&nbsp;long-term stability paradox is resolved by a long-term optimization problem. The fact that the world is unpredictable but not entirely random results in the need to learn about it as effectively as possible. This means avoiding things that don’t inform you about the relevant factors, and believing only those beliefs that help you maintain your stability in your environment.</p>
+</section>
+<section id="vi---so-what" class="level2">
+<h2 class="anchored" data-anchor-id="vi---so-what">VI - So What?</h2>
+<p>Epicurean ethics and Fristonian active inference are structurally very similar. Perhaps Friston was influenced by Hellenistic philosophy? As it happens, Friston does occasionally cite a Hellenistic philosophical school as the progenitor of the intellectual tradition on which he is building, but it isn’t Epicureanism. Instead, it is “the students of Plato.”<a href="#fn48" class="footnote-ref" id="fnref48" role="doc-noteref"><sup>48</sup></a> By this I’m pretty sure he means the Academic skeptics, a movement within Plato’s Academy that saw Truth as only indirectly accessible through empirical observation, such that the best a philosopher can hope to do is to live by whatever explanation seems most plausible.<a href="#fn49" class="footnote-ref" id="fnref49" role="doc-noteref"><sup>49</sup></a> Friston’s philosophy is similar to Academic skepticism in that free energy agents perform plausibility–based (i.e.&nbsp;approximately Bayesian) inference on incoming sensory information to try to figure out useful stuff about their world. This is a worthy comparison, and the Academic skeptics certainly deserve their place in the history of philosophy. But in this context I think it’s a red herring. Not only is Epicureanism the clear winner in terms of overall similarity to active inference—Epicureanism is also similar to active inference in particular, and much less similar to the Bayesian brain frameworks that Friston lists as inspirations.<a href="#fn50" class="footnote-ref" id="fnref50" role="doc-noteref"><sup>50</sup></a> These other frameworks are all about passive perception. In Friston’s words, “the free-energy principle brings something else to the table – it says that action should also minimize free energy.”<a href="#fn51" class="footnote-ref" id="fnref51" role="doc-noteref"><sup>51</sup></a> Folding action into the long-term optimization problem is precisely what makes Fristonian active inference so similar to Epicureanism. Both see action and perception as complementary and mutually inextricable ways to minimize disturbance. Both recognize that this entails a delicate balance between increasing discomfort in the short term and decreasing it in the long term, though short-term discomfort is only worthwhile if it resolves some uncertainty down the line. And both understand the implication for epistemology—that the optimal “Truth” is dependent on the organism and environment in question.&nbsp;</p>
+<p>Philosophies can be similar because of direct influence, but they can also be similar because groups of coherent ideas go together. I think this is an example of the latter. Sometimes there are intuitive reasons why these groups of ideas should hang together, but sometimes the connections are not obvious. Peter Adamson, the host of my favorite philosophy podcast, sums up this sentiment nicely:</p>
+<blockquote class="blockquote">
+<p>I see philosophy above all as an exploration of the interrelation between ideas. Philosophy doesn’t directly show us what the Truth is, rather it shows us how ideas and proposals hang together. That if I make a certain assumption, or argument, certain consequences will follow, and that there are certain objections I will have to face.<a href="#fn52" class="footnote-ref" id="fnref52" role="doc-noteref"><sup>52</sup></a></p>
+</blockquote>
+<p>Karl Friston has mathematical proofs for why the various corollaries of the free energy principle must hang together. In some absolute sense, this math must be the true reason why these ideas hang together, whether in Friston or Epicurus or anywhere else. But I’m here to say that you don’t need to understand the full proofs in order to appreciate the unity of the framework, and you don’t need to know much about machine learning or statistical physics either. Epicurus got pretty close without any of this, and so did his followers for centuries afterward. The core ideas are straightforward; Friston just came along to finish the job and formulate them as laws of physics (and algorithms that can be run on a computer).</p>
+<p>This has been a review of Karl Friston’s soul. As a psychology researcher, I have a lot more to say about active inference and the value it may or may not have for the field. But here I’ve tried to focus on the core—to give an account of what Friston is getting at and how he got there, without recourse to arcane mathematics. I’ve posited that his vibes are similar to Epicurus’s, both in his radical parsimony and his particular conclusions. Friston took up Epicurus’s basic train of thought, and took it a bit further until it encompassed just about everything: The world is chaotic, but organisms manage to stay more or less the same thing. This might as well be the definition of an organism: a bit of stuff that controls the chaos so as to stay steady-ish within its boundaries. Anything that does this (i.e.&nbsp;anything that continues to be more or less itself) must be constantly exploring options and taking small risks to figure out how best to stay stable as the world changes around it. This is why Friston says that the free energy principle is “almost tautological”: anything that remains stable must be dealing with external instability somehow, otherwise it wouldn’t remain stable. Recall that the young Friston was “convinced that there should be a singular explanation for the shape of things, just starting from the premise that something existed”. This is precisely what active inference is for living organisms; if an organism exists, it must have a shape that plunges and tacks and veers with its surroundings, explores uncharted territory, minimizes surprise overall, etc. The better it does this, the more it will continue to exist.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Epistemic qualifications: I’m a PhD student in psychology. I’ve been reading Friston on and off for a few years now - I’ve read a number of his papers on topics related to my research, and gotten through most of the recent book that attempts to explain his core ideas, Active Inference: The Free Energy Principle in Mind, Brain, and Behavior, by Thomas Parr, Giovanni Pezzulo, and Karl J. Friston. I’ve also read Andy Clark’s closely related book, Surfing Uncertainty, along with <a href="https://slatestarcodex.com/2017/09/05/book-review-surfing-uncertainty/">Scott Alexander’s review of it</a>. Much like <a href="https://www.tandfonline.com/doi/abs/10.1080/15294145.2010.10773634">nearly everyone else</a> who <a href="https://slatestarcodex.com/2018/03/04/god-help-us-lets-try-to-understand-friston-on-free-energy/">has tried to understand Friston on free energy</a>, I do not claim to have achieved total victory.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>On the date of Metrodorus’s death, see Diogenes Laertius. (2018). <em>Lives of the Eminent Philosophers</em> (J. Miller, Ed.; P. Mensch, Trans.). Oxford University Press. 10:23.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>e.g.&nbsp;Letter to Menoeceus, quoted in Diogenes Laertius 10:135<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Diogenes Laertius 10:23<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Diogenes Laertius 10:19<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Sedley, D. (1976). Epicurus and his professional rivals. In J. Bollack &amp; A. Laks (Eds.), <em>Études sur l’épicurisme antique</em> (pp.&nbsp;119–159). Presses universitaires du Septentrion. https://doi.org/10.4000/books.septentrion.118335<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A2008.01.0397%3Asection%3D3">Plutarch, Adversus Colotem, section 3, 1108e–f.</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Diogenes Laertius 10:23<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Epicurus, <em>Chief Maxims</em> XXXII, quoted in Diogenes Laertius 10:150. See also Berrens, D. (2022). “A Small Mirror of Greater and Nobler Enterprises”—Ants in Greek Imperial Literature. In D. D. Brasi &amp; F. Fronterotta (Eds.), <em>Poikile Physis: Biological Literature in Greek during the Roman Empire: Genres, Scopes, and Problems</em>. Walter de Gruyter GmbH &amp; Co KG.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Letter to Herodotus, quoted in Diogenes Laertius 10:63-66.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Lucretius, <em>De rerum natura</em> II.A.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Epicurus, <em>Chief Maxims</em> I, quoted in Diogenes Laertius 10:139. See also Diogenes Laertius 10:121a<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Cicero, Fam. 7.12. https://topostext.org/work/136<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>See Armstrong, D. (2011). Epicurean virtues, Epicurean friendship: Cicero vs the Herculaneum papyri. In J. Fish &amp; K. R. Sanders (Eds.), <em>Epicurus and the Epicurean Tradition</em> (1st ed., pp.&nbsp;105–128). Cambridge University Press. https://doi.org/10.1017/CBO9780511921704.006<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Mishnah Sanhedrin 10:1. https://www.sefaria.org/Mishnah_Sanhedrin.10.1; Pirkei Avot 2:14. https://www.sefaria.org/Pirkei_Avot.2.14; https://www.sefaria.org/search?q=אפיקורס<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>Letter to Menoeceus, quoted in Diogenes Laertius 10:129-130<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>Epicurus, <em>Chief Maxims</em> XXVII, quoted in Diogenes Laertius 10:148; Diogenes Laertius 10:121b<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Letter to Menoeceus, quoted in Diogenes Laertius 10:130<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>Letter to Herodotus, quoted in Diogenes Laertius 10:30<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>Letter to Herodotus, quoted in Diogenes Laertius 10:51<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>Letter to Herodotus, quoted in Diogenes Laertius 10:54<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>Diogenes Laertius 10:137<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p><a href="https://hebrewbooks.org/pdfpager.aspx?req=30734&amp;st=&amp;pgnum=121">R. Hayyim Vital, Likkutei Torah, Ki Tissa</a>, commentary on Exodus 32:32<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn24"><p>Friston, K. (2012). The history of the future of the Bayesian brain. <em>NeuroImage</em>, 62(2), 1230–1233. https://doi.org/10.1016/j.neuroimage.2011.10.004<a href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn25"><p>Friston, K. (2018). Am I autistic? An intellectual autobiography. <em>ALIUS Bulletin, 2</em>, 45-52.<a href="#fnref25" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn26"><p>ibid.<a href="#fnref26" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn27"><p>Friston, K., Fortier, M. &amp; Friedman, D. A. (2018). Of woodlice and men: A Bayesian account of cognition, life and consciousness. An interview with Karl Friston. <em>ALIUS Bulletin, 2</em>, 17-43.<a href="#fnref27" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn28"><p>Parr, T., Pezzulo, G., &amp; Friston, K. J. (2022). Active Inference: <em>The Free Energy Principle in Mind, Brain, and Behavior</em>. The MIT Press.<a href="#fnref28" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn29"><p>ibid.<a href="#fnref29" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn30"><p>Netz, R. (2015). Were There Epicurean Mathematicians? In B. Inwood (Ed.), <em>Oxford Studies in Ancient Philosophy, Volume 49</em> (p.&nbsp;0). Oxford University Press. https://doi.org/10.1093/acprof:oso/9780198749516.003.0008<a href="#fnref30" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn31"><p>Letter to Menoeceus, quoted in Diogenes Laertius 10:123; 10:131<a href="#fnref31" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn32"><p><em>Chief Maxims</em> III, quoted in Diogenes Laertius 10:139. See Warren, J., &amp; Adamson, P. (2011, December 18). Transcript: 59—James Warren on Epicureanism. <em>History of Philosophy without Any Gaps</em>. https://historyofphilosophy.net/transcript/warren-epicurus<a href="#fnref32" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn33"><p><em>Chief Maxims</em> I, quoted in Diogenes Laertius 10:139<a href="#fnref33" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn34"><p><em>Active Inference</em>, p.&nbsp;28-30<a href="#fnref34" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn35"><p><em>Active Inference</em>, p.&nbsp;60<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn36"><p><em>Chief Maxims</em> XVI, quoted in Diogenes Laertius 10:144<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn37"><p><em>Active Inference</em>, 47<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn38"><p>Kirchhoff, M., Parr, T., Palacios, E., Friston, K., &amp; Kiverstein, J. (2018). The Markov blankets of life: Autonomy, active inference and the free energy principle. <em>Journal of The Royal Society Interface, 15</em>(138), 20170792. https://doi.org/10.1098/rsif.2017.0792<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn39"><p><em>Active Inference</em>, 60<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn40"><p><em>Chief Maxims</em> XI, quoted in Diogenes Laertius 10:142<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn41"><p>Clark, A. (2016). <em>Surfing uncertainty: Prediction, action, and the embodied mind</em> (pp.&nbsp;194–195). Oxford University Press. https://doi.org/10.1093/acprof:oso/9780190217013.001.0001<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn42"><p><em>Chief Maxims</em> XXXVI, quoted in Diogenes Laertius 10:151<a href="#fnref42" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn43"><p>Friston, K., Thornton, C., &amp; Clark, A. (2012). <em>Free-Energy Minimization and the Dark-Room Problem</em>. Frontiers in Psychology, 3. https://doi.org/10.3389/fpsyg.2012.00130<a href="#fnref43" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn44"><p><em>Active Inference</em>, p.&nbsp;34<a href="#fnref44" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn45"><p>Friston et al., (2012)<a href="#fnref45" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn46"><p>Gilden, D. L. (2001). Cognitive emissions of 1/f noise. <em>Psychological Review, 108</em>(1), 33–56. https://doi.org/10.1037/0033-295X.108.1.33<a href="#fnref46" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn47"><p>Vul, E., Goodman, N., Griffiths, T. L., &amp; Tenenbaum, J. B. (2014). One and Done? Optimal Decisions From Very Few Samples. <em>Cognitive Science, 38</em>(4), 599–637. https://doi.org/10.1111/cogs.12101; Shanks, D., Tunney, R. &amp; McCarthy, J. (2002) A re-examination of probability matching and rational choice. Journal of Behavioral Decision Making 15(3):233–50.<a href="#fnref47" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn48"><p>Friston (2012)<a href="#fnref48" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn49"><p>Adamson, P. (2012, March 4). 70—The Know Nothing Party: The Skeptical Academy. <em>History of Philosophy without Any Gaps</em>. https://historyofphilosophy.net/skeptics-academy<a href="#fnref49" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn50"><p>Friston (2012)<a href="#fnref50" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn51"><p>Friston et al., (2012)<a href="#fnref51" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn52"><p>Adamson, P. (2016, March 27). 250. Q&amp;A. <em>History of Philosophy without Any Gaps</em>. https://historyofphilosophy.net/q-and-a<a href="#fnref52" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

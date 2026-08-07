@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  site-url: "https://rimonim.github.io/"
+  site-url: "http://louisteitelbaum.com/"
   favicon: images/rimonim.svg
   title: "Louis Teitelbaum"
   navbar: 
@@ -21,8 +21,10 @@ website:
         text: DS4Psych - Book
       - href: blog.qmd
         text: Blog
+      - href: bookshelf.qmd
+        text: Virtual Bookshelf
       - href: design.qmd
-        text: Art and Design
+        text: Art
       - href: CV/CV.pdf
         text: CV
 format:

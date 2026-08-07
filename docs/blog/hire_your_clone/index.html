@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Do Employees Tend to Have the Same First Name as Their Bosses? – Louis Teitelbaum</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-abdc49e859dd411fdbbbc4b181915f8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,7 +121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Louis Teitelbaum</span>
@@ -151,8 +155,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../design.html"> 
-<span class="menu-text">Art and Design</span></a>
+<span class="menu-text">Art</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../CV/CV.pdf"> 
@@ -269,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Full code for all of this can be found <a href="https://github.com/rimonim/hire_your_clone/blob/main/analysis.R">here</a>.</p>
 <p>The model itself looks like this, as formulated in <code>brms</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mod_america_bayes1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(real <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">+</span> both_uncommon_names <span class="sc">+</span> both_male <span class="sc">+</span> boss_male <span class="sc">+</span> boss_female <span class="sc">+</span> both_female <span class="sc">+</span> both_EastAsian <span class="sc">+</span> both_EastEuropean <span class="sc">+</span> both_Japanese <span class="sc">+</span> both_Indian <span class="sc">+</span> both_African <span class="sc">+</span> both_Muslim <span class="sc">+</span> both_WestEuropean <span class="sc">+</span> WE_Asian <span class="sc">+</span> WE_Indian <span class="sc">+</span> WE_Muslim <span class="sc">+</span> WE_Hispanic <span class="sc">+</span> WE_Jewish <span class="sc">+</span> boss_female<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> both_Jewish <span class="sc">+</span> both_Hispanic <span class="sc">+</span> both_Italian <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Asian <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Indian <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Muslim <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Jewish <span class="sc">+</span> both_female<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> both_female<span class="sc">:</span>WE_Asian <span class="sc">+</span> both_female<span class="sc">:</span>WE_Indian <span class="sc">+</span> both_female<span class="sc">:</span>WE_Muslim <span class="sc">+</span> both_female<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> both_female<span class="sc">:</span>WE_Jewish <span class="sc">+</span> both_male<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> both_male<span class="sc">:</span>WE_Asian <span class="sc">+</span> both_male<span class="sc">:</span>WE_Indian <span class="sc">+</span> both_male<span class="sc">:</span>WE_Muslim <span class="sc">+</span> both_male<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> both_male<span class="sc">:</span>WE_Jewish <span class="sc">+</span> boss_male<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Asian <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Indian <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Muslim <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Jewish <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">+</span> both_uncommon_names <span class="sc">+</span> both_male <span class="sc">+</span> boss_male <span class="sc">+</span> boss_female <span class="sc">+</span> both_female <span class="sc">+</span> both_EastAsian <span class="sc">+</span> both_EastEuropean <span class="sc">+</span> both_Japanese <span class="sc">+</span> both_Indian <span class="sc">+</span> both_African <span class="sc">+</span> both_Muslim <span class="sc">+</span> both_WestEuropean <span class="sc">+</span> both_Jewish <span class="sc">+</span> both_Hispanic <span class="sc">+</span> both_Italian <span class="sc">+</span> WE_Asian <span class="sc">+</span> WE_Indian <span class="sc">+</span> WE_Muslim <span class="sc">+</span> WE_Hispanic <span class="sc">+</span> WE_Jewish <span class="sc">|</span> company_ID),</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mod_america_bayes1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(real <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">+</span> both_uncommon_names <span class="sc">+</span> both_male <span class="sc">+</span> boss_male <span class="sc">+</span> boss_female <span class="sc">+</span> both_female <span class="sc">+</span> both_EastAsian <span class="sc">+</span> both_EastEuropean <span class="sc">+</span> both_Japanese <span class="sc">+</span> both_Indian <span class="sc">+</span> both_African <span class="sc">+</span> both_Muslim <span class="sc">+</span> both_WestEuropean <span class="sc">+</span> WE_Asian <span class="sc">+</span> WE_Indian <span class="sc">+</span> WE_Muslim <span class="sc">+</span> WE_Hispanic <span class="sc">+</span> WE_Jewish <span class="sc">+</span> boss_female<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> both_Jewish <span class="sc">+</span> both_Hispanic <span class="sc">+</span> both_Italian <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Asian <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Indian <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Muslim <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> boss_female<span class="sc">:</span>WE_Jewish <span class="sc">+</span> both_female<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> both_female<span class="sc">:</span>WE_Asian <span class="sc">+</span> both_female<span class="sc">:</span>WE_Indian <span class="sc">+</span> both_female<span class="sc">:</span>WE_Muslim <span class="sc">+</span> both_female<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> both_female<span class="sc">:</span>WE_Jewish <span class="sc">+</span> both_male<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> both_male<span class="sc">:</span>WE_Asian <span class="sc">+</span> both_male<span class="sc">:</span>WE_Indian <span class="sc">+</span> both_male<span class="sc">:</span>WE_Muslim <span class="sc">+</span> both_male<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> both_male<span class="sc">:</span>WE_Jewish <span class="sc">+</span> boss_male<span class="sc">:</span>both_WestEuropean <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Asian <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Indian <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Muslim <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Hispanic <span class="sc">+</span> boss_male<span class="sc">:</span>WE_Jewish <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> same_first_name <span class="sc">+</span> both_uncommon_names <span class="sc">+</span> both_male <span class="sc">+</span> boss_male <span class="sc">+</span> boss_female <span class="sc">+</span> both_female <span class="sc">+</span> both_EastAsian <span class="sc">+</span> both_EastEuropean <span class="sc">+</span> both_Japanese <span class="sc">+</span> both_Indian <span class="sc">+</span> both_African <span class="sc">+</span> both_Muslim <span class="sc">+</span> both_WestEuropean <span class="sc">+</span> both_Jewish <span class="sc">+</span> both_Hispanic <span class="sc">+</span> both_Italian <span class="sc">+</span> WE_Asian <span class="sc">+</span> WE_Indian <span class="sc">+</span> WE_Muslim <span class="sc">+</span> WE_Hispanic <span class="sc">+</span> WE_Jewish <span class="sc">|</span> company_ID),</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> d_america_train,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="fu">bernoulli</span>(),</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">prior =</span> <span class="fu">c</span>(</span>
@@ -278,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                           ),</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">iter =</span> <span class="dv">6000</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">warmup =</span> <span class="dv">2000</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cores =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cores =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>both_EastAsian</code> is the probability that both boss and employee are East Asian, based on their full names. <code>WE_Asian</code> is the probability that the boss is Western European or African American and the employee is East Asian or Japanese.</p>
 <p>In total there are 45 fixed effects: 1. same first name (binary) 2. both uncommon names (binary) 3-6. gender of boss and employee (four categories, one-hot coded) 7-14. both the same ethnicity (7 ethnic categories, continuous probabilities) 15-19. boss is Western European or African American and the employee is a minority (5 minority groups, continuous probabilities) 20-45. interactions between gender and pairs involving Western European or African American bosses</p>
@@ -349,13 +357,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -370,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/rimonim\.github\.io\/");
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

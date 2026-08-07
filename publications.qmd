@@ -13,6 +13,8 @@ For an always-up-to-date list, please visit my [Google Scholar profile](https://
 # Papers
 
 ::: {.hanging-indent}
+**Teitelbaum, L.**, Hajama, A., & Simchon, A. (2026). When do people rely on LLMs as they should? Measuring trust and trustworthiness on asingle scale. *PsyArXiv*. <https://doi.org/10.31234/osf.io/wrh3g_v1>
+
 Simchon, A., Zipori, T., **Teitelbaum, L.**, Lewandowsky, S., & van der Linden, S. (2026). A signal detection theory meta-analysis of psychological inoculation against misinformation. *Current Opinion in Psychology*, 67, 102194. <https://doi.org/10.1016/j.copsyc.2025.102194>
 
 **Teitelbaum, L.**, Saltz, E., Lewandowsky, S., & Simchon, A. (2025). Rhetorical features from social media predict real-world violent outcomes of manifestos. *PsyArXiv*. <https://doi.org/10.31234/osf.io/26q7w_v1>

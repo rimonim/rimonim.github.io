@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>blog – Louis Teitelbaum</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -39,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-abdc49e859dd411fdbbbc4b181915f8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
   </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -114,7 +117,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -141,7 +144,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/rimonim.svg" alt="" class="navbar-logo">
+    <img src="./images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="./images/rimonim.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Louis Teitelbaum</span>
@@ -174,8 +178,12 @@ window.Quarto = {
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./design.html"> 
-<span class="menu-text">Art and Design</span></a>
+<span class="menu-text">Art</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./CV/CV.pdf"> 
@@ -194,7 +202,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="QVBJ">API <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmF5ZXNpYW4lMjBTdGF0aXN0aWNz">Bayesian Statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YnJtcw==">brms <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2x1c3RlcmluZw==">Clustering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29nbml0aXZlJTIwTGluZ3Vpc3RpY3M=">Cognitive Linguistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29nbml0aXZlJTIwU2NpZW5jZQ==">Cognitive Science <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGF0YSUyME1pbmluZw==">Data Mining <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGF0YVZpeg==">DataViz <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGlhbG9ndWU=">Dialogue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RG9jdW1lbnQlMjBFbWJlZGRpbmdz">Document Embeddings <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="R292ZXJubWVudA==">Government <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SGlzdG9yeQ==">History <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFyZ2UlMjBMYW5ndWFnZSUyME1vZGVscw==">Large Language Models <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TXVsdGlsZXZlbCUyME1vZGVsaW5n">Multilevel Modeling <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TkxQ">NLP <span class="quarto-category-count">(3)</span></div><div class="category" data-category="T3BlbiUyMERhdGE=">Open Data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvYmFiaWxpdHklMjB0aGVvcnk=">probability theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(8)</span></div><div class="category" data-category="U2NyYXBpbmc=">Scraping <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VudGltZW50JTIwQW5hbHlzaXM=">Sentiment Analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U29jaWFsJTIwTWVkaWE=">Social Media <span class="quarto-category-count">(1)</span></div><div class="category" data-category="JUQ3JUEyJUQ3JTkxJUQ3JUE4JUQ3JTk5JUQ3JUFB">עברית <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="QWN0aXZlJTIwSW5mZXJlbmNl">Active Inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QVBJ">API <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmF5ZXNpYW4lMjBTdGF0aXN0aWNz">Bayesian Statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YnJtcw==">brms <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2x1c3RlcmluZw==">Clustering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29nbml0aXZlJTIwTGluZ3Vpc3RpY3M=">Cognitive Linguistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29nbml0aXZlJTIwU2NpZW5jZQ==">Cognitive Science <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RGF0YSUyME1pbmluZw==">Data Mining <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGF0YVZpeg==">DataViz <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGlhbG9ndWU=">Dialogue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RG9jdW1lbnQlMjBFbWJlZGRpbmdz">Document Embeddings <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="R292ZXJubWVudA==">Government <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SGlzdG9yeQ==">History <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFyZ2UlMjBMYW5ndWFnZSUyME1vZGVscw==">Large Language Models <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TXVsdGlsZXZlbCUyME1vZGVsaW5n">Multilevel Modeling <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TkxQ">NLP <span class="quarto-category-count">(3)</span></div><div class="category" data-category="T3BlbiUyMERhdGE=">Open Data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGhpbG9zb3BoeQ==">Philosophy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvYmFiaWxpdHklMjB0aGVvcnk=">probability theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(8)</span></div><div class="category" data-category="U2NyYXBpbmc=">Scraping <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VudGltZW50JTIwQW5hbHlzaXM=">Sentiment Analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U29jaWFsJTIwTWVkaWE=">Social Media <span class="quarto-category-count">(1)</span></div><div class="category" data-category="JUQ3JUEyJUQ3JTkxJUQ3JUE4JUQ3JTk5JUQ3JUFB">עברית <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
@@ -207,7 +215,41 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-left" data-index="0" data-categories="UiUyQ0NsdXN0ZXJpbmclMkNPcGVuJTIwRGF0YQ==" data-listing-date-sort="1692738000000" data-listing-file-modified-sort="1768898211216" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6094">
+<div class="quarto-post image-left" data-index="0" data-categories="UGhpbG9zb3BoeSUyQ0NvZ25pdGl2ZSUyMFNjaWVuY2UlMkNBY3RpdmUlMjBJbmZlcmVuY2U=" data-listing-date-sort="1746738000000" data-listing-file-modified-sort="1786103202623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5595">
+<div class="thumbnail"><a href="./blog/friston/index.html" class="no-external">
+
+<img loading="lazy" src="./blog/friston/figures/epicurus.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/friston/index.html" class="no-external">The Soul of Karl Friston</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGhpbG9zb3BoeQ=='); return false;">Philosophy</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29nbml0aXZlJTIwU2NpZW5jZQ=='); return false;">Cognitive Science</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QWN0aXZlJTIwSW5mZXJlbmNl'); return false;">Active Inference</div>
+
+</div>
+<div class="delink listing-description"><a href="./blog/friston/index.html" class="no-external">
+Athens, 277 BCE. Epicurus sat on the ground in a corner of his garden and felt the dust between his toes. He contemplated the events of the day. Metrodorus was dead.<sup>2</sup> Metrodo…<sup></sup><sup></sup><sup></sup><sup></sup><sup></sup><sup></sup>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./blog/friston/index.html" class="no-external">
+<div class="listing-date">
+May 9, 2025
+</div>
+<div class="listing-author">
+Louis Teitelbaum
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-left" data-index="1" data-categories="UiUyQ0NsdXN0ZXJpbmclMkNPcGVuJTIwRGF0YQ==" data-listing-date-sort="1692738000000" data-listing-file-modified-sort="1786105897974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6086">
 <div class="thumbnail"><a href="./blog/time_use/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/time_use/cluster_centers.png" class="thumbnail-image">
@@ -241,7 +283,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="1" data-categories="UiUyQ0RhdGElMjBNaW5pbmclMkNBUEklMkNOTFAlMkNMYXJnZSUyMExhbmd1YWdlJTIwTW9kZWxzJTJDRG9jdW1lbnQlMjBFbWJlZGRpbmdzJTJDU2VudGltZW50JTIwQW5hbHlzaXMlMkNTb2NpYWwlMjBNZWRpYSUyQ011bHRpbGV2ZWwlMjBNb2RlbGluZw==" data-listing-date-sort="1689109200000" data-listing-file-modified-sort="1691914879645" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4343">
+<div class="quarto-post image-left" data-index="2" data-categories="UiUyQ0RhdGElMjBNaW5pbmclMkNBUEklMkNOTFAlMkNMYXJnZSUyMExhbmd1YWdlJTIwTW9kZWxzJTJDRG9jdW1lbnQlMjBFbWJlZGRpbmdzJTJDU2VudGltZW50JTIwQW5hbHlzaXMlMkNTb2NpYWwlMjBNZWRpYSUyQ011bHRpbGV2ZWwlMjBNb2RlbGluZw==" data-listing-date-sort="1689109200000" data-listing-file-modified-sort="1691914879645" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4343">
 <div class="thumbnail"><a href="./blog/reddit_environmentalists/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/reddit_environmentalists/greta_thunberg.jpeg" class="thumbnail-image">
@@ -287,7 +329,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="2" data-categories="UiUyQ2JybXMlMkNCYXllc2lhbiUyMFN0YXRpc3RpY3M=" data-listing-date-sort="1687899600000" data-listing-file-modified-sort="1768898268770" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1997">
+<div class="quarto-post image-left" data-index="3" data-categories="UiUyQ2JybXMlMkNCYXllc2lhbiUyMFN0YXRpc3RpY3M=" data-listing-date-sort="1687899600000" data-listing-file-modified-sort="1768898268770" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1997">
 <div class="thumbnail"><a href="./blog/hire_your_clone/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/hire_your_clone/you_yourboss.png" class="thumbnail-image">
@@ -321,7 +363,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="3" data-categories="UiUyQ2dncGxvdDIlMkNEYXRhVml6" data-listing-date-sort="1683493200000" data-listing-file-modified-sort="1703106044723" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5062">
+<div class="quarto-post image-left" data-index="4" data-categories="UiUyQ2dncGxvdDIlMkNEYXRhVml6" data-listing-date-sort="1683493200000" data-listing-file-modified-sort="1785843171087" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5062">
 <div class="thumbnail"><a href="./blog/medieval_philosophers/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/medieval_philosophers/medieval_islamic_philosophers.svg" class="thumbnail-image">
@@ -355,7 +397,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="4" data-categories="UHl0aG9uJTJDSGlzdG9yeSUyQ0RhdGFWaXolMkNOTFA=" data-listing-date-sort="1673474400000" data-listing-file-modified-sort="1687982217731" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="691" data-listing-word-count-sort="138125">
+<div class="quarto-post image-left" data-index="5" data-categories="UHl0aG9uJTJDSGlzdG9yeSUyQ0RhdGFWaXolMkNOTFA=" data-listing-date-sort="1673474400000" data-listing-file-modified-sort="1687982217731" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="691" data-listing-word-count-sort="138125">
 <div class="thumbnail"><a href="./blog/semantic_history/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/semantic_history/figures/semantic_history_sample.png" class="thumbnail-image">
@@ -391,7 +433,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="5" data-categories="UiUyQ0JheWVzaWFuJTIwU3RhdGlzdGljcyUyQ0RpYWxvZ3VlJTJDQ29nbml0aXZlJTIwU2NpZW5jZSUyQ0NvZ25pdGl2ZSUyMExpbmd1aXN0aWNzJTJDTXVsdGlsZXZlbCUyME1vZGVsaW5nJTJDZ2dwbG90MiUyQ05MUA==" data-listing-date-sort="1648501200000" data-listing-file-modified-sort="1688014787958" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6013">
+<div class="quarto-post image-left" data-index="6" data-categories="UiUyQ0JheWVzaWFuJTIwU3RhdGlzdGljcyUyQ0RpYWxvZ3VlJTJDQ29nbml0aXZlJTIwU2NpZW5jZSUyQ0NvZ25pdGl2ZSUyMExpbmd1aXN0aWNzJTJDTXVsdGlsZXZlbCUyME1vZGVsaW5nJTJDZ2dwbG90MiUyQ05MUA==" data-listing-date-sort="1648501200000" data-listing-file-modified-sort="1688014787958" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6013">
 <div class="thumbnail"><a href="./blog/minecraft_cogsci/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/minecraft_cogsci/figures/minecraft6.png" class="thumbnail-image">
@@ -435,7 +477,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="6" data-categories="UiUyQ0NvZ25pdGl2ZSUyMFNjaWVuY2UlMkNnZ3Bsb3Qy" data-listing-date-sort="1647295200000" data-listing-file-modified-sort="1688014609170" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="948">
+<div class="quarto-post image-left" data-index="7" data-categories="UiUyQ0NvZ25pdGl2ZSUyMFNjaWVuY2UlMkNnZ3Bsb3Qy" data-listing-date-sort="1647295200000" data-listing-file-modified-sort="1786104129665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="948">
 <div class="thumbnail"><a href="./blog/chess_brain/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/chess_brain/figures/cognitivecircadian.jpg" class="thumbnail-image">
@@ -469,7 +511,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="7" data-categories="UiUyQ0RhdGElMjBNaW5pbmclMkNTY3JhcGluZyUyQ0dvdmVybm1lbnQlMkMlRDclQTIlRDclOTElRDclQTglRDclOTklRDclQUE=" data-listing-date-sort="1644876000000" data-listing-file-modified-sort="1687954476438" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4080">
+<div class="quarto-post image-left" data-index="8" data-categories="UiUyQ0RhdGElMjBNaW5pbmclMkNTY3JhcGluZyUyQ0dvdmVybm1lbnQlMkMlRDclQTIlRDclOTElRDclQTglRDclOTklRDclQUE=" data-listing-date-sort="1644876000000" data-listing-file-modified-sort="1786104129665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4071">
 <div class="thumbnail"><a href="./blog/police_exploratory/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/police_exploratory/figures/moked4.png" class="thumbnail-image">
@@ -507,7 +549,7 @@ Louis Teitelbaum
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="8" data-categories="UiUyQ3Byb2JhYmlsaXR5JTIwdGhlb3J5" data-listing-date-sort="1643839200000" data-listing-file-modified-sort="1687951479411" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3929">
+<div class="quarto-post image-left" data-index="9" data-categories="UiUyQ3Byb2JhYmlsaXR5JTIwdGhlb3J5" data-listing-date-sort="1643839200000" data-listing-file-modified-sort="1687951479411" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3929">
 <div class="thumbnail"><a href="./blog/wordle/index.html" class="no-external">
 
 <img loading="lazy" src="./blog/wordle/figures/fig1.png" class="thumbnail-image">
@@ -593,13 +635,14 @@ Louis Teitelbaum
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -614,7 +657,7 @@ Louis Teitelbaum
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/rimonim\.github\.io\/");
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

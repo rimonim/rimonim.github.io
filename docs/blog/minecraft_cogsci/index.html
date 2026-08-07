@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Predicting Questions in Dialogue – Louis Teitelbaum</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-abdc49e859dd411fdbbbc4b181915f8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,7 +121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Louis Teitelbaum</span>
@@ -151,8 +155,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../design.html"> 
-<span class="menu-text">Art and Design</span></a>
+<span class="menu-text">Art</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../CV/CV.pdf"> 
@@ -244,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>All three of the Builder’s turns in this dialogue (lines 2, 5, and 8) are questions. They have some qualities in common: they all request something of the interlocutor, and they all signal their status as questions with a <code>question mark</code> at the end. This latter feature makes them easy to identify with one line of code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>minecraftcorpusdf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">questionmark =</span> <span class="fu">grepl</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">?"</span>, text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>minecraftcorpusdf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">questionmark =</span> <span class="fu">grepl</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">?"</span>, text))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What causes people to ask questions in the Minecraft collaborative building task? Let’s start by thinking about the Builder’s questions from the excerpt above.</p>
 <p>The question on line 2, “Now what?” does not have an obvious antecedent - the Builder seems to have understood and excecuted the previous instruction and is now merely moving the conversation along by asking for another one.</p>
@@ -253,11 +261,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Of course not all questions are repair initiations, and not all repair initiations are presented as questions. Nevertheless, the structure of the Minecraft collaborative building task makes the correlation very high. In the task, the Architect has access to <em>all</em> of the information that the Builder needs to proceed (the design of the target structure) and information is the <em>only</em> thing that the Builder can get from the Architect. This means that pretty much all of the Builder’s questions are aimed at clarifying information coming from the Architect.</p>
 <p>For these reasons, and since I have no way of identifying true repair iniitations other than going through the whole corpus myself, I will operationally define <code>repair</code> as any Builder’s utterance that includes a question mark.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>minecraftcorpusdf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">repair =</span> questionmark <span class="sc">&amp;</span> role <span class="sc">==</span> <span class="st">"B"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>minecraftcorpusdf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">repair =</span> questionmark <span class="sc">&amp;</span> role <span class="sc">==</span> <span class="st">"B"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To convince you that almost all Builder questions in the corpus really are repair initiations, here are 10 randomly selected repairs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>minecraftcorpusdf <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>minecraftcorpusdf <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(repair <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(text) <span class="sc">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">10</span>)</span>
@@ -271,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1571    it might be easier to describe all one color? then build from there?</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 182     is the purple supposed to be on the third level? i think i could make it float..</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12521   Facing towards the middle?</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2951    is this correct?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2951    is this correct?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Even without looking at context, it seems clear at a glance that all but line 1571 here are indeed repairs.</p>
 <section id="how-to-predict-repair" class="level2">
@@ -279,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before I start exploring predictor variables, I need to figure out how to model the probability of repair. My first instinct was use Builder turns as cases and model whether of not they are repairs. There’s a fatal flaw with this plan though: the natural alternative to <em>initiating repair</em> is probably not <em>initiating something other than repair</em>. The alternative is more likely to be <em>not saying anything</em>. In other words, we only have data about whether or not texts the Builder <em>sent</em> were repairs. We have no data about texts the Builder <em>didn’t send</em>.</p>
 <p>I’ll draw that more formally as a DAG:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>shorten_dag_arrows <span class="ot">&lt;-</span> <span class="cf">function</span>(tidy_dag, shorten_distance){</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Update underlying ggdag object</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  tidy_dag<span class="sc">$</span>data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(tidy_dag<span class="sc">$</span>data, </span>
@@ -314,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dag_edges</span>(<span class="fu">aes</span>(<span class="at">x =</span> xstart, <span class="at">y =</span> ystart)) <span class="sc">+</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_dag</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_dag</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -326,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>All of this means that my inital stategy would probably wash out any effect of predictors on repair, since <a href="https://youtu.be/YrwL6t0kW2I?t=864">we would already be stratifying by whether the Builder responds</a>. I think the simplest way to solve this problem is to use Architect turns as cases and predict whether or not the next turn will be a Builder repair. Sometimes the next turn will be another Architect turn (when Builder did not respond), and sometimes it will be a non-repair Builder turn.</p>
 <p>Time to code a few predictor variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Orthographic Length of Previous Turn</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Orthographic Length of Previous Turn</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean TF-IDF of previous turn (word-fanciness? information density?)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum TF-IDF of previous turn (lexical complexity? information?)</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Turns since last question asked</span></span>
@@ -375,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">charssincerepair_log =</span> <span class="fu">log</span>(charssincerepair),</span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>         <span class="at">charssincerepair_log_s =</span> (charssincerepair_log<span class="sc">-</span><span class="fu">mean</span>(charssincerepair_log, <span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(charssincerepair_log, <span class="at">na.rm =</span> T),</span>
 <span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>         <span class="at">tfidfsum_log =</span> <span class="fu">log</span>(tfidfsum),</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>         <span class="at">tfidfsum_log_s =</span> (tfidfsum_log <span class="sc">-</span> <span class="fu">mean</span>(tfidfsum_log, <span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(tfidfsum_log, <span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>         <span class="at">tfidfsum_log_s =</span> (tfidfsum_log <span class="sc">-</span> <span class="fu">mean</span>(tfidfsum_log, <span class="at">na.rm =</span> T))<span class="sc">/</span><span class="fu">sd</span>(tfidfsum_log, <span class="at">na.rm =</span> T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="length-of-previous-turn" class="level2">
@@ -383,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I have already theorized that the likelihood of a given Builder turn being a repair initiation is increased by the need for clarification of previous turns. Are there certain types of instructions that need to be clarified more often? How about long and complicated ones?</p>
 <p>Here’s a quick and dirty graph of repair against <code>length of the previous turn</code>, with <code>repair</code> formatted as numeric and a <a href="https://en.wikipedia.org/wiki/Local_regression">Loess</a> line running between No and Yes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(length, (<span class="fu">as.numeric</span>(repair_next)<span class="sc">-</span><span class="dv">1</span>))) <span class="sc">+</span></span>
@@ -398,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No"</span>, .<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>, <span class="st">"Yes"</span>)) <span class="sc">+</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Length of Turn (characters, log scale)"</span>,</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Probability of Next-Turn Repair"</span>) <span class="sc">+</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -419,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="bayesian-modeling">Bayesian Modeling</h3>
 <p>I’ll start by simulating reasonable priors. I’ll let the slope be positive or negative. Less than 15% of Builder turns are repairs, so I’ll lower the intercepts. After playing around with the parameters a bit, I settled on this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating Reasonable Priors</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating Reasonable Priors</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repair_next) <span class="sc">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">perc =</span> <span class="dv">100</span><span class="sc">*</span><span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(.))   <span class="co"># 14.3% of Architect turns are immediately followed by a Builder repair initiation</span></span>
@@ -434,11 +442,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">factor</span>(n)) </span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>priors <span class="sc">%&gt;%</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, p, <span class="at">group =</span> n)) <span class="sc">+</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s set up the model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>tfidf_mod <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
@@ -447,14 +455,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> bernoulli,</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b)),</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_prior =</span> <span class="st">"yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_prior =</span> <span class="st">"yes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here’s the model summary:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tfidf_mod)<span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tfidf_mod)<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   Links: mu = logit </span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: repair_next ~ 1 + tfidfsum_log_s </span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: d1 (Number of observations: 11754) </span></span>
@@ -468,11 +476,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now I can sample the posteriors and see what the models thinks.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>tfidfsum_log_s[d1<span class="sc">$</span>tfidfsum <span class="sc">==</span> <span class="fu">min</span>(d1<span class="sc">$</span>tfidfsum, <span class="at">na.rm =</span> T)] <span class="co"># -2.87</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>tfidfsum_log_s[d1<span class="sc">$</span>tfidfsum <span class="sc">==</span> <span class="fu">max</span>(d1<span class="sc">$</span>tfidfsum, <span class="at">na.rm =</span> T)] <span class="co"># 2.51</span></span>
@@ -523,7 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Sum TF-IDF (Log Scale)"</span>) <span class="sc">+</span></span>
 <span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
 <span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>tfidf_mod_postpredict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>tfidf_mod_postpredict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The faint grey lines are 100 samples from the prior distribution. In blue are 50 samples from the posterior.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -539,19 +547,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="time-since-last-repair">Time Since Last Repair</h2>
 <p>As described in <a href="https://doi.org/10.1371/journal.pone.0136100.g002">Dingemanse et al.&nbsp;(2015)</a>, another predictor of repair is the time elapsed since the last repair. People don’t tend to initiate repair twice in a row. In lieu of using actual timestamps, I’ll use the total number of characters typed as a proxy for time elapsed. I’ll use the same priors as before.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>charssincerepair_mod <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>charssincerepair_mod <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  repair_next <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> charssincerepair_log_s,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d1,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> bernoulli,</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b)),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_prior =</span> <span class="st">"yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_prior =</span> <span class="st">"yes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(charssincerepair_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(charssincerepair_mod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   Links: mu = logit </span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: repair_next ~ 1 + charssincerepair_log_s </span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: d1 (Number of observations: 11754) </span></span>
@@ -565,10 +573,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>charssincerepair_mod_priors <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(charssincerepair_mod, <span class="fu">c</span>(<span class="st">"prior_Intercept"</span>, <span class="st">"prior_b"</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,] <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>charssincerepair_mod_priors <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(charssincerepair_mod, <span class="fu">c</span>(<span class="st">"prior_Intercept"</span>, <span class="st">"prior_b"</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,] <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand</span>(<span class="fu">nesting</span>(n, prior_Intercept, prior_b), <span class="at">x_log_s  =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span> <span class="fl">2.63</span>, <span class="at">length.out =</span> <span class="dv">200</span>)) <span class="sc">%&gt;%</span></span>
@@ -612,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Characters Since Last Repair (Log Scale)"</span>) <span class="sc">+</span></span>
 <span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>charssincerepair_mod_postpredict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>charssincerepair_mod_postpredict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -625,7 +633,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>What I think is happening is this: most of the variation in likelihood of next-turn repair is between participants. As it happens, pairs of participants in which the Builder is more likely to initiate next-turn repair are also more likely to have short turns and therefore fewer total characters since the last repair. Or something like that.</p>
 <p>Before I get into complicated modeling to test this directly, I’ll drive home the main point with a simple, intercept-only multilevel model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bysubj_mod <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bysubj_mod <span class="ot">&lt;-</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d1, </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> bernoulli,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      repair_next <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> partner),</span>
@@ -666,7 +674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Probability of Next-Turn Repair"</span>) <span class="sc">+</span></span>
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="fu">element_blank</span>(), </span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"orange2"</span>)) <span class="sc">+</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -677,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>As expected, different Builders have vastly different likelihoods of initiating next-turn repair.</p>
 <p>Now for the monster model. I just showed that different Builders have different likelihoods of initiating next-turn repair, but the same is probably true for different Architects. An Architect who likes to type a lot of turns in a row will lower the probability of any given next-turn being a repair, just as a Builder who initiates repair a lot will raise the probability. Clustering by both Architect and Builder <a href="http://davidakenny.net/kkc/kkc.htm">gets complicated</a>, and for now I’m only interested in group-level effects, so I’m just going to cluster by conversation and leave the model agnostic about whether it’s the Builder, the Architect, or some interaction between them that’s causing any difference. I’m also allowing both intercept and slope to vary, and telling the model to estimate the correlation between them.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>charssincerepair_bysubj_mod <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>charssincerepair_bysubj_mod <span class="ot">&lt;-</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d1, </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> bernoulli,</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      repair_next <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> charssincerepair_log_s <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> charssincerepair_log_s <span class="sc">|</span> conversation),</span>
@@ -687,10 +695,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">lkj</span>(<span class="dv">2</span>), <span class="at">class =</span> cor)),</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">5000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(charssincerepair_bysubj_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(charssincerepair_bysubj_mod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   Links: mu = logit </span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: repair_next ~ 1 + charssincerepair_log_s + (1 + charssincerepair_log_s | conversation) </span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: d1 (Number of observations: 11754) </span></span>
@@ -715,7 +723,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="do">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Bingo. The population-level effect of characters since repair is now slightly positive! Let’s visualize that:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -727,7 +735,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The blue line is the model’s estimate of the average effect of characters since last repair on repair probability within groups, with its 95% confidence interval. The grey lines are estimates for each conversation. This time I’m convinced - the effect of content elapsed since the last repair is small if it exists at all. <a href="https://doi.org/10.1371/journal.pone.0136100.g002">The graph I linked to above from Dingemanse et al.&nbsp;(2015)</a> shows the probability that repair will have occured, which of course rapidly approaches 1 as time goes on. The probability that <em>any given turn</em> will be a repair initiation doesn’t seem to change much, at least in the Minecraft corpus.</p>
 <p>All this makes me want to re-do my analysis of TF-IDF Sum as a multilevel model. Here’s what that looks like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tfidfsum_bysubj_mod <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tfidfsum_bysubj_mod <span class="ot">&lt;-</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d1, </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> bernoulli,</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      repair_next <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> tfidfsum_log_s <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> tfidfsum_log_s <span class="sc">|</span> conversation),</span>
@@ -737,10 +745,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">lkj</span>(<span class="dv">2</span>), <span class="at">class =</span> cor)),</span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">5000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tfidfsum_bysubj_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tfidfsum_bysubj_mod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: bernoulli </span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   Links: mu = logit </span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: repair_next ~ 1 + tfidfsum_log_s + (1 + tfidfsum_log_s | conversation) </span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: d1 (Number of observations: 11754) </span></span>
@@ -765,7 +773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="do">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Didn’t change much here, but it does look like the population-level effect is slightly higher than with the fixed-effects model. Interestingly enough, the model estimates that the intercept and beta are slightly negatively correlated. That means that pairs who initiate repair more in general also show less effect of utterance length (or TF-IDF sum, to be exact) on their rates. It seems possible to me that, in highly informational contexts like the Minecraft collaborative building task, some people have a top-down push to just initiate repair as much as possible, regardless of whether or not there’s an obvious need for it. All of this is pretty speculative though, since the estimated error on the correlation parameter is enormous.</p>
 <p>Here’s what the new model looks like as a graph:</p>
@@ -831,13 +839,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -852,7 +861,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/rimonim\.github\.io\/");
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

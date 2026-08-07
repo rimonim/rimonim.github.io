@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/friston/index.html",
       "/blog/time_use/index.html",
       "/blog/reddit_environmentalists/index.html",
       "/blog/hire_your_clone/index.html",
@@ -14,16 +15,16 @@
     ]
   },
   {
+    "listing": "/software.html",
+    "items": [
+      "/software/wormsplot.html"
+    ]
+  },
+  {
     "listing": "/design.html",
     "items": [
       "/design/art/art.html",
       "/design/logos/logos.html"
-    ]
-  },
-  {
-    "listing": "/software.html",
-    "items": [
-      "/software/wormsplot.html"
     ]
   }
 ]

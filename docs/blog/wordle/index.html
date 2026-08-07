@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Statistically Optimal Wordle – Louis Teitelbaum</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-abdc49e859dd411fdbbbc4b181915f8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-99d906ec87a355939fa9bc457bcb2ea8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,7 +121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/rimonim.svg" alt="" class="navbar-logo">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo light-content">
+    <img src="../../images/rimonim.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Louis Teitelbaum</span>
@@ -151,8 +155,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../bookshelf.html"> 
+<span class="menu-text">Virtual Bookshelf</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../design.html"> 
-<span class="menu-text">Art and Design</span></a>
+<span class="menu-text">Art</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../CV/CV.pdf"> 
@@ -226,11 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Pretty much all of these articles are thinking about letter frequency; the best starting word is the one that has all the highest frequency letters in the dictionary. This is a pretty tempting way to go. In fact, if Wordle only told you whether or not each letter was in the target word, it might be pretty close to optimal. The thing is, Wordle also tells you about placement. If a letter is green, you know it’s in that place. If it’s yellow, you know it’s not in that place. This is really valuable information and it would be a shame to throw it out. Unfortunately, it also makes the whole thing a lot more complicated. For example, I bet words with <code>t</code>s in the fifth place are better guesses than words with <code>t</code>s in the third place. Since more words in the dictionary have <code>t</code> in the fifth place, you’ll rule out a lot more if it’s not there, plus you’re more likely to hit the jackpot with a green tile.</p>
 <p>So let’s start by looking at some letter frequencies in the Wordle dictionary of possible answers (as scraped from their website and represented below as “answer_dictionary_vec”). This time though, let’s pay attention to where the letters are in the word.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>places <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letter =</span> answer_dictionary_vec) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>places <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letter =</span> answer_dictionary_vec) <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(letter, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"blank"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>), <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">names_to =</span> <span class="st">"place"</span>, <span class="at">values_to =</span> <span class="st">"letter"</span>) <span class="sc">%&gt;%</span></span>
@@ -248,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">"__.+$"</span>, <span class="st">""</span>, x)) <span class="sc">+</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Letter Frequencies by Place"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Occurences"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Letter Frequencies by Place"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Occurences"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The top ten most common letters in each letter-place: <img src="figures/fig24.png"></p>
 <p>This is interesting. <code>e</code> is the most common (and therefore most useful in a guess) for the last two letters of the word. For the first letter though, we should prefer a consonant like <code>s</code>. <code>s</code> is almost never at the end because Wordle answers are never plurals (even though plurals are allowed in guesses). We could start developing a scoring system to find the words with the most common letters in their rightful places, but I have a better idea. As long as we’re allowing computers to help us with this guessing game, let’s try to get straight to the probabilities involved instead of stopping at frequencies and saying “good enough”.</p>
@@ -258,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>How good a guess is (i.e.&nbsp;how much does it narrow down the remaining possibilities) depends on what the actual answer is. For example, if your first guess is <code>treat</code> and the true answer is <code>tread</code>, you’re only left with one possibility. There is only one word that begins with <code>trea-</code>and does not end in <code>t</code>, and it’s <code>tread</code>. But it your first guess is <code>treat</code> and the true answer is <code>boozy</code>, all you know is that the word doesn’t include <code>a</code>, <code>e</code>, <code>r</code>, or <code>t</code>.</p>
 <p>Here’s a little function that, for a given guess, true answer, and list of currently possible answers, will give you a narrowed-down list of possible answers based on Wordle’s feedback on your guess.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># input guess (5 item vector), answer (5 item vector), and prior dictionary (list of 5 item vectors)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># input guess (5 item vector), answer (5 item vector), and prior dictionary (list of 5 item vectors)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dictionary_update <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, answer, dictionary) {</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
@@ -274,17 +282,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  dictionary</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So now we can give exact numbers. How many possibilities are left if your first guess is <code>treat</code> and the true answer is <code>boozy</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dictionary_update</span>(<span class="at">guess =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"treat"</span>, <span class="st">""</span>)), <span class="at">answer =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"boozy"</span>, <span class="st">""</span>)), <span class="at">dictionary =</span> answer_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dictionary_update</span>(<span class="at">guess =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"treat"</span>, <span class="st">""</span>)), <span class="at">answer =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="st">"boozy"</span>, <span class="st">""</span>)), <span class="at">dictionary =</span> answer_dictionary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The output list is 332 words long, beginning with <code>sissy</code>, <code>humph</code>, and <code>blush</code>. That’s actually not too bad, given that Wordle’s list of possible answers has 2,315 words. Going from 2,315 possible answers before you start to 332 possible answers after the first guess is an 85.6% reduction!</p>
 <p>This is all fine and lovely, but when we’re playing Wordle, we don’t know what the solution is. It could be <code>boozy</code> or <code>tread</code> or any of 2,313 others. So without knowing ahead of time what the solution is, how good of a guess is <code>treat</code>?</p>
 <p>It’s time to look at some probability density plots.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a dataframe with how much the given guess would narrow the possibilities for each possible answer.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a dataframe with how much the given guess would narrow the possibilities for each possible answer.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>guess_quality <span class="ot">&lt;-</span> <span class="cf">function</span>(guess) {</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(guess, <span class="st">""</span>))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  distribution_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">answer =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(answer_dictionary)),</span>
@@ -309,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Expected Reduction in Possible Answers for First Guess 'treat'"</span>,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Percent Reduction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Percent Reduction"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><em>Side note: The fact that all 2,315 possible answers are equally likely to be the true one makes this a whole lot easier. Some might say it means this endeavor is not technically “statistics”. That’s ok with me.</em></p>
 <p><img src="figures/fig2.png"></p>
@@ -343,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now we have our metric: What percentage of possible answers do we expect to rule out with this guess? All we have to do is apply this to every one of 12,972 legal guesses! (Yes, there are way more legal guesses than there are possible answers).</p>
 <p>The problem here is that for each one of those 12,972 legal guesses, the computer will have to test out 2,315 possible answers to see how helpful the guess is in each instance. 12,972 * 2,315 = 30,030,180. Combined with my lack of CS skills and my five-year-old computer, this amounts to a more waiting than I’d like. To speed this up a bit, let’s only look at a random sample of 100 possible answers for each of the 12,972 guesses. It’ll introduce a bit of randomness into the results, but we can fix that later.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Faster guess assessment</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Faster guess assessment</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>guess_quality_minimal_fast <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, <span class="at">dictionary =</span> answer_dictionary) {</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(guess, <span class="st">""</span>))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  answer_sample <span class="ot">&lt;-</span> answer_dictionary[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(answer_dictionary), <span class="dv">100</span>)]</span>
@@ -362,11 +370,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  guess <span class="ot">&lt;-</span> <span class="fu">paste</span>(guess_dictionary[[n]], <span class="at">collapse =</span> <span class="st">""</span>)</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  expected_reduction_table<span class="sc">$</span>guess[n] <span class="ot">&lt;-</span> guess</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  expected_reduction_table<span class="sc">$</span>expected_reduction[n] <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">-</span>(<span class="dv">100</span><span class="sc">*</span>(guess_quality_minimal_fast<span class="sc">/</span><span class="fu">length</span>(answer_dictionary)))</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here are the worst first guesses:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>expected_reduction_table <span class="ot">&lt;-</span> expected_reduction_table <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>expected_reduction_table <span class="ot">&lt;-</span> expected_reduction_table <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(expected_reduction))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(expected_reduction_table)</span>
@@ -377,11 +385,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12969 kudzu           60.28942</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12970 fuffy           57.36328</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12971 jugum           56.97495</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12972 qajaq           56.40821</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12972 qajaq           56.40821</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here are the best first guesses:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expected_reduction_table)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expected_reduction_table)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   guess           expected_reduction</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 roate           97.78920</span></span>
@@ -389,11 +397,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 soare           97.62505</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 later           97.47257</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 ariel           97.42851</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 arise           97.42462</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 arise           97.42462</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Before we discuss these results, though, let’s get rid of that randomness. I’m going to take just the top 200 results of our semi-randomized analysis and rerun it with the full set of possible answers. Unless the very best first guess somehow made it out of the top 200, this should give us the true, statistically optimal best guess.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>guess_dictionary_top <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="fu">head</span>(expected_reduction_table<span class="sc">$</span>guess, <span class="at">n =</span> <span class="dv">200</span>), <span class="st">""</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>guess_dictionary_top <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="fu">head</span>(expected_reduction_table<span class="sc">$</span>guess, <span class="at">n =</span> <span class="dv">200</span>), <span class="st">""</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>expected_reductions_exact <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">guess =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">200</span>),</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">expected_reduction =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">200</span>))</span>
@@ -419,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7  orate           97.24014</span></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8  ariel           97.17980</span></span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9  arose           97.14811</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  10 raine           97.10341</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  10 raine           97.10341</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>There’s been quite a bit of shifting around, but <code>roate</code> is still on top! <a href="https://www.lawinsider.com/dictionary/roate">Roate</a>, the cumulative net earnings after taxes available to common shareholders, adjusted for tax-affected amortization of intangibles, for the calendar quarters in each calendar year in a specified period of time divided by average shareholder’s tangible common equity! Notice also that roate’s expected reduction has gone down since our randomly-sampled round, from 97.79% to 97.39%. This makes sense and is similar to regression toward the mean–the first set had some randomness and the most extreme results of that randomness were selected to be on top. The second set had no randomness and therefore no boost on the top end.</p>
 <p>There you have it. The statistically optimal Wordle starting word is <code>roate</code>.</p>
@@ -428,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Cmon, I wanna see the optimal Wordle playing Bot!</h1>
 <p>Ok fine. Here it is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is the same as dictionary_update, but it prints the outcome of the guess with nice colors</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is the same as dictionary_update, but it prints the outcome of the guess with nice colors</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dictionary_update_printed <span class="ot">&lt;-</span> <span class="cf">function</span>(guess, answer, dictionary) {</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (guess[n] <span class="sc">%in%</span> answer){</span>
@@ -499,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
 <span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Obviously the bot always starts by guessing “roate”. After each new guess, the expected helpfulness of each possible next guess is reassessed based on the shortened list of answer possibilities. Other than that, the whole process is the same one I’ve been working with all along; each guess is the one that is expected to narrow down the remaining possibilities the most.</p>
 <p>Let’s see it play a few games!</p>
@@ -576,13 +584,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -597,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/rimonim\.github\.io\/");
+        var filterRegex = new RegExp("http:\/\/louisteitelbaum\.com\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
