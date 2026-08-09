@@ -1,0 +1,14 @@
+---
+title: "embedplyr"
+author: Louis Teitelbaum
+image: /embedplyr.png
+categories: [Logos]
+date: "2024"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("../embedplyr.png")
+```

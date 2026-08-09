@@ -1,0 +1,14 @@
+---
+title: "Birkat HaBayit"
+author: Louis Teitelbaum
+image: birkathabayit.jpg
+categories: [Papercuts]
+date: "2024"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("birkathabayit.jpg")
+```

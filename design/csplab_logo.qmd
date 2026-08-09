@@ -1,0 +1,14 @@
+---
+title: "CSP Lab"
+author: Louis Teitelbaum
+image: csplab_logo_transparency.png
+categories: [Logos]
+date: "2024"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("csplab_logo_transparency.png")
+```

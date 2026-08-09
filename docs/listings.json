@@ -23,8 +23,25 @@
   {
     "listing": "/design.html",
     "items": [
-      "/design/art/art.html",
-      "/design/logos/logos.html"
+      "/design/embedplyr.html",
+      "/design/csplab_logo.html",
+      "/design/birkathabayit.html",
+      "/design/wormsplot.html",
+      "/design/rimonim.html",
+      "/design/neurosciencelogo.html",
+      "/design/pesach.html",
+      "/design/shaarblat.html",
+      "/design/dovidmecharker.html",
+      "/design/ushpizin.html",
+      "/design/tishabav_devarim.html",
+      "/design/kitavo.html",
+      "/design/shmini.html",
+      "/design/naso.html",
+      "/design/noach.html",
+      "/design/shemot.html",
+      "/design/vayetze.html",
+      "/design/bereishit.html",
+      "/design/vaera.html"
     ]
   }
 ]

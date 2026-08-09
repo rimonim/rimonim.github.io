@@ -1,0 +1,14 @@
+---
+title: "Vayetze"
+author: Louis Teitelbaum
+image: vayetze.jpg
+categories: [Parshah Papercuts, Papercuts]
+date: "2014"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("vayetze.jpg")
+```

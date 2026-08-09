@@ -1,0 +1,14 @@
+---
+title: "Yeshiva University Neuroscience Club"
+author: Louis Teitelbaum
+image: neurosciencelogo.svg
+categories: [Logos]
+date: "2019"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("neurosciencelogo.svg")
+```

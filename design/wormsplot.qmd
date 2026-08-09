@@ -1,0 +1,14 @@
+---
+title: "wormsplot"
+author: Louis Teitelbaum
+image: /software/wormsplot.svg
+categories: [Logos]
+date: "2023"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("../software/wormsplot.svg")
+```

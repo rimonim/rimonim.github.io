@@ -1,0 +1,14 @@
+---
+title: "Devarim / Tisha B'Av"
+author: Louis Teitelbaum
+image: tishabav_devarim.jpg
+categories: [Parshah Papercuts, Papercuts]
+date: "2016"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("tishabav_devarim.jpg")
+```

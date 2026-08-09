@@ -1,0 +1,20 @@
+---
+title: "Bereishit"
+author: Louis Teitelbaum
+image: bereishit.png
+categories: [Parshah Papercuts, Papercuts]
+date: "2014"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("bereishit.png")
+```
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("bereishit.jpg")
+```

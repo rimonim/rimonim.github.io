@@ -1,0 +1,14 @@
+---
+title: "Shmini"
+author: Louis Teitelbaum
+image: shmini.jpg
+categories: [Parshah Papercuts, Papercuts]
+date: "2015"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("shmini.jpg")
+```

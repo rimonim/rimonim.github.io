@@ -3,13 +3,16 @@ listing:
   contents: design
   type: grid
   grid-columns: 3
-  image-height: 75%
-  grid-item-border: true
+  image-height: 100%
+  page-size: 20
+  grid-item-border: false
   grid-item-align: left
   max-description-length: 0
   categories: true
   fields: [image, title, description]
-  sort-ui: false
+  sort-ui: [date,categories]
+  sort: 
+    - "date desc"
   filter-ui: false
 page-layout: full
 ---

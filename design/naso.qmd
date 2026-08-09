@@ -1,0 +1,14 @@
+---
+title: "Naso"
+author: Louis Teitelbaum
+image: naso.jpg
+categories: [Parshah Papercuts, Papercuts]
+date: "2014"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("naso.jpg")
+```

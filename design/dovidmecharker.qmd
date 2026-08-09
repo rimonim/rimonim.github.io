@@ -1,0 +1,20 @@
+---
+title: "Dovid Mecharker"
+author: Louis Teitelbaum
+image: dovidmecharkerblue.jpg
+categories: [Papercuts]
+date: "2017"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("dovidmecharker.jpg")
+```
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("dovidmecharkerblue.jpg")
+```

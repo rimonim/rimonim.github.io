@@ -1,0 +1,14 @@
+---
+title: "Pesach"
+author: Louis Teitelbaum
+image: pesach.jpg
+categories: [Papercuts]
+date: "2018"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("pesach.jpg")
+```

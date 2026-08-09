@@ -1,0 +1,14 @@
+---
+title: "Rimonim"
+author: Louis Teitelbaum
+categories: [Logos]
+date: "2023"
+date-format: "YYYY"
+image: /images/rimonim.svg
+---
+
+```{r}
+#| echo: false
+#| out-width: 50%
+knitr::include_graphics("../images/rimonim.svg")
+```

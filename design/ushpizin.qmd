@@ -1,0 +1,14 @@
+---
+title: "Ushpizin"
+author: Louis Teitelbaum
+image: ushpizin.jpg
+categories: [Papercuts]
+date: "2016"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("ushpizin.jpg")
+```

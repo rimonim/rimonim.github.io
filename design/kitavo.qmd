@@ -1,0 +1,14 @@
+---
+title: "Ki Tavo"
+author: Louis Teitelbaum
+image: kitavo.jpg
+categories: [Parshah Papercuts, Papercuts]
+date: "2016"
+date-format: "YYYY"
+---
+
+```{r}
+#| echo: false
+#| out-width: 100%
+knitr::include_graphics("kitavo.jpg")
+```
